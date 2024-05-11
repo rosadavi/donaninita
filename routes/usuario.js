@@ -17,6 +17,22 @@ const Funcionarios = require('../models/Funcionarios');
 
 const asyncHandler = require('express-async-handler');
 
+const fs = require('fs');
+
+const directory = '/localstorage';
+
+// Verifica se o diretório existe, senão, o cria
+if (!fs.existsSync(directory)) {
+    try {
+        fs.mkdirSync(directory);
+        console.log('Diretório criado com sucesso:', directory);
+    } catch (err) {
+        console.error('Erro ao criar diretório:', err);
+    }
+} else {
+    console.log('O diretório', directory, 'já existe.');
+}
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({

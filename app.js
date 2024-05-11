@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
+const MemoryStore = require('session-memory-store')(session);
+
 
 // Configuracoes
 
@@ -14,7 +16,8 @@ const flash = require('connect-flash');
     app.use(session({
         secret: "cursodenode",
         resave: true,
-        saveUninitialized: true
+        saveUninitialized: true,
+        store: new MemoryStore()
     }));
     app.use(flash());
 
