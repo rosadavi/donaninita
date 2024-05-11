@@ -6,7 +6,7 @@ const app = express();
 
 const bcrypt = require('bcrypt');
 
-const bd = require('../app');
+const bd = require('..');
 
 const Localstorage = require('node-localstorage').LocalStorage;
 const localstorage = new Localstorage('/localstorage');

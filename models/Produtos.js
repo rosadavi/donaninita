@@ -1,4 +1,4 @@
-const bd = require('../app');
+const bd = require('..');
 
 const Produtos = bd.sequelize.define('Produtos', {
     idProduto: {
