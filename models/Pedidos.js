@@ -1,0 +1,64 @@
+const bd = require('../app');
+
+const Pedidos = bd.sequelize.define('Pedidos', {
+    idPedido: {
+        type: bd.Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    idPedidoStatus: {
+        type: bd.Sequelize.INTEGER,
+        references: {
+            model: 'PedidoStatus',
+            key: 'id'
+        }
+    },
+    dataHoraCadastro: {
+        type: bd.Sequelize.DATE
+    },
+    dataHoraEntrega: {
+        type: bd.Sequelize.DATE
+    },
+    valorFrete: {
+        type: bd.Sequelize.DECIMAL(10,2)
+    },
+    valorTotal: {
+        type: bd.Sequelize.DECIMAL(10,2)
+    },
+    valorDesconto: {
+        type: bd.Sequelize.DECIMAL(10,2)
+    },
+    valorAcrescimo: {
+        type: bd.Sequelize.DECIMAL(10,2)
+    },
+    valorPago: {
+        type: bd.Sequelize.DECIMAL(10,2)
+    },
+    tipoPagamento: {
+        type: bd.Sequelize.STRING(40)
+    },
+    statusPedido: {
+        type: bd.Sequelize.STRING(40)
+    },
+    idCliente: {
+        type: bd.Sequelize.INTEGER,
+        references: {
+            model: 'Cliente',
+            key: 'id'
+        }
+    },
+    idFuncionario: {
+        type: bd.Sequelize.INTEGER,
+        references: {
+            model: 'Funcionarios',
+            key: 'id'
+        }
+    }
+}, {
+    timestamps: false,
+    createdAt: false,
+    updatedAt: false
+});
+
+module.exports = Pedidos;

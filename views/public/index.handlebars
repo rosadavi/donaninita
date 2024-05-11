@@ -1,0 +1,253 @@
+{{#if user.loggedIn}}
+<div id="carrinhoFide" class="hide"></div>
+<div id="carrinho" class="hide">
+    <section class="secaoCarrinho">
+      <div class="title">
+        <div class="titleCarrinho">
+          <i class="bi bi-bag"></i>
+          <p>Meus Produtos</p>
+        </div>
+        <div class="sairCarrinho">
+          <i class="bi bi-x-lg sairB"></i>
+        </div>
+      </div>
+      <div class="mensagemCarrinho">
+        <h4>Seu carrinho ainda esta vazio</h4>
+        <i class="bi bi-cake2-fill"></i>
+      </div>
+      <form action="/comprar" method="POST" id="comprar">
+        <div class="produtos">
+          {{#each carrinho}}
+            <div class="container">
+                <div class="imagemProduto">
+                    <img src="{{img}}" alt="{{nome}}">
+                </div>
+                <span class="descProduto">
+                    <p class="nomeProdutoCarrinho">{{nome}}</p>
+                    <p class="precoProduto">R$ {{valor}}</p>
+                    <div class="qtdProdutosCarrinho">
+                        <span><i class="bi bi-dash menos"></i></span>
+                        <input type="number" disabled name="qtdN" class="qtdN" value="{{qtd}}">
+                        <span><i class="bi bi-plus mais"></i></span>
+                    </div>
+                </span>
+                <div class="removeItem">
+                    <i class="bi bi-trash3 lixo"></i>
+                </div>
+            </div>
+          {{else}}
+            <!-- no index.js -->
+          {{/each}}
+        </div>
+        <div class="total hide">
+          <p>Total:</p>
+          <p class="totalN">R$ 0.00</p>
+        </div>
+        <button id="fazerPedido" class="hide" type="submit">Finalizar</button>
+      </form>
+    </section>
+</div>
+
+<header>
+    <div class="logo">
+        <img src="/img/logos/logoHead.png" alt="Logo Dona Ninita">
+    </div>
+    <div class="nomeEmpresa">
+        <h3>Dona Ninita</h3>
+    </div>
+    <div class="funcoesHeader">
+        <a href="/logout">Logout</i></a>
+        <div class="divCarrinho">
+            <i class="bi bi-bag carrinhoIcon"></i>
+            <section class="qtd">0</section>
+        </div>
+    </div>
+    <div class="burger">
+        <i class="bi bi-list"></i>
+    </div>
+</header>
+
+<nav>
+    <img src="/img/logos/logoHead.png" alt="Logo Dona Ninita" class="navImg navHide">
+    <a href="#maisVendidos" class="categoriaBtn">MAIS VENDIDOS</a>
+    <a href="#bolos" class="categoriaBtn">BOLOS</a>
+    <a href="#biscoitos" class="categoriaBtn">BISCOITOS</a>
+    <a href="#rabanadas" class="categoriaBtn">RABANADAS</a>
+    <section class="carrinhoNav navHide">
+        <div class="divCarrinho">
+            <i class="bi bi-bag carrinhoIcon"></i>
+            <section class="qtd" id="quantidade">0</section>
+        </div>
+    </section>
+</nav>
+
+<div class="bemVindo">
+    <p>Um lugar onde os sentidos se encontram para experimentar uma variedade de doces e sobremesas deliciosas.</p>
+    <p>Faça seu pedido agora e descubra um <strong>outro mundo de sabor.</strong></p>
+</div>
+
+<section class="espaco1" id="maisVendidos"></section>
+
+<h3 class="categoria">Mais Vendidos</h3>
+<section class="cards">
+  {{#each produtos}}
+    {{#ifCond idCategoria 1 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+  {{/each}}
+</section>
+
+<section class="espaco" id="bolos"></section>
+
+<h3 class="categoria">Bolos</h3>
+<section class="cards">
+  {{#each produtos}}
+    {{#ifCond idCategoria 2 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+  {{/each}}
+</section>
+
+<section class="espaco" id="biscoitos"></section>
+
+<h3 class="categoria">Biscoitos</h3>
+<section class="cards">
+  {{#each produtos}}
+    {{#ifCond idCategoria 3 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+  {{/each}}
+</section>
+
+<section class="espaco" id="rabanadas"></section>
+
+<h3 class="categoria">Rabanadas</h3>
+<section class="cards">
+  {{#each produtos}}
+    {{#ifCond idCategoria 4 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+  {{/each}}
+</section>
+
+<a href="https://wa.me/+5561994300862" target="_blank" class="zapFloat"><i class="bi bi-whatsapp"></i></a>
+
+{{else}}
+
+<div id="carrinhoFide" class="hide"></div>
+<div id="carrinho" class="hide">
+    <section class="secaoCarrinho">
+      <div class="title">
+        <div class="titleCarrinho">
+          <i class="bi bi-bag"></i>
+          <p>Meus Produtos</p>
+        </div>
+        <div class="sairCarrinho">
+          <i class="bi bi-x-lg sairB"></i>
+        </div>
+      </div>
+      <div class="mensagemCarrinho">
+        <h4>Seu carrinho ainda esta vazio</h4>
+        <i class="bi bi-cake2-fill"></i>
+      </div>
+      <form action="/comprar" method="POST" id="comprar">
+        <div class="produtos">
+          {{#each carrinho}}
+            <div class="container">
+                <div class="imagemProduto">
+                    <img src="{{img}}" alt="{{nome}}">
+                </div>
+                <span class="descProduto">
+                    <p class="nomeProdutoCarrinho">{{nome}}</p>
+                    <p class="precoProduto">R$ {{valor}}</p>
+                    <div class="qtdProdutosCarrinho">
+                        <span><i class="bi bi-dash menos"></i></span>
+                        <input type="number" disabled name="qtdN" class="qtdN" value="{{qtd}}">
+                        <span><i class="bi bi-plus mais"></i></span>
+                    </div>
+                </span>
+                <div class="removeItem">
+                    <i class="bi bi-trash3 lixo"></i>
+                </div>
+            </div>
+          {{else}}
+            <!-- no index.js -->
+          {{/each}}
+        </div>
+        <div class="total hide">
+          <p>Total:</p>
+          <p class="totalN">R$ 0.00</p>
+        </div>
+        <button id="fazerPedido" class="hide" type="submit">Finalizar</button>
+      </form>
+    </section>
+</div>
+
+<header>
+    <div class="logo">
+        <img src="/img/logos/logoHead.png" alt="Logo Dona Ninita">
+    </div>
+    <div class="nomeEmpresa">
+        <h3>Dona Ninita</h3>
+    </div>
+    <div class="funcoesHeader">
+        <a href="/login"><i class="bi bi-person-circle"></i></i></a>
+        <div class="divCarrinho">
+            <i class="bi bi-bag carrinhoIcon"></i>
+            <section class="qtd">0</section>
+        </div>
+    </div>
+    <div class="burger">
+        <i class="bi bi-list"></i>
+    </div>
+</header>
+
+<nav>
+    <img src="/img/logos/logoHead.png" alt="Logo Dona Ninita" class="navImg navHide">
+    <a href="#maisVendidos" class="categoriaBtn">MAIS VENDIDOS</a>
+    <a href="#bolos" class="categoriaBtn">BOLOS</a>
+    <a href="#biscoitos" class="categoriaBtn">BISCOITOS</a>
+    <a href="#rabanadas" class="categoriaBtn">RABANADAS</a>
+    <section class="carrinhoNav navHide">
+        <div class="divCarrinho">
+            <i class="bi bi-bag carrinhoIcon"></i>
+            <section class="qtd" id="quantidade">0</section>
+        </div>
+    </section>
+</nav>
+
+<div class="bemVindo">
+    <p>Um lugar onde os sentidos se encontram para experimentar uma variedade de doces e sobremesas deliciosas.</p>
+    <p>Faça seu pedido agora e descubra um <strong>outro mundo de sabor.</strong></p>
+</div>
+
+<section class="espaco1" id="maisVendidos"></section>
+
+<h3 class="categoria">Mais Vendidos</h3>
+<section class="cards">
+  {{#each produtos}}
+    {{#ifCond idCategoria 1 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+  {{/each}}
+</section>
+
+<section class="espaco" id="bolos"></section>
+
+<h3 class="categoria">Bolos</h3>
+<section class="cards">
+  {{#each produtos}}
+    {{#ifCond idCategoria 2 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+  {{/each}}
+</section>
+
+<section class="espaco" id="biscoitos"></section>
+
+<h3 class="categoria">Biscoitos</h3>
+<section class="cards">
+  {{#each produtos}}
+    {{#ifCond idCategoria 3 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+  {{/each}}
+</section>
+
+<section class="espaco" id="rabanadas"></section>
+
+<h3 class="categoria">Rabanadas</h3>
+<section class="cards">
+  {{#each produtos}}
+    {{#ifCond idCategoria 4 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+  {{/each}}
+</section>
+
+<a href="https://wa.me/+5561994300862" target="_blank" class="zapFloat"><i class="bi bi-whatsapp"></i></a>
+{{/if}}

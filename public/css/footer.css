@@ -1,0 +1,60 @@
+@media screen and (min-width: 715px) {
+    .secoesFooter {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 30px 5px;
+    }
+    .contato h4 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width: 714px) {
+    .secoesFooter * {
+        text-align: center;
+    }
+
+    .local {
+        margin-top: 60px;
+    }
+
+    .horario {
+        margin-top: 80px;
+    }
+}
+
+.footer {
+    background-color: var(--corAzul);
+    margin: 100px 0px -10px 0px;
+}
+
+.footer h5 {
+    font-size: max(3vw, 40px);
+    font-family: var(--fontTitulo);
+    width: 100%;
+    text-align: center;
+}
+
+.secoesFooter section {
+    height: 198px;
+}
+
+.contato {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contato a {
+    color: var(--corMarrom);
+}
+
+.direito h4 {
+    text-align: center;
+    padding: 20px 0px;
+    font-size: max(20px, .8vw);
+}
