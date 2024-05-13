@@ -169,7 +169,7 @@ function removerProduto(container) {
     });
     container.remove();
     diminuirQuantidadeProduto();
-    removerItem('/carrinho/remover', {nomeProduto});
+    // removerItem('/carrinho/remover', {nomeProduto});
 }
 
 function adicionarQuantidade(quantidade) {
@@ -181,21 +181,19 @@ function adicionarQuantidade(quantidade) {
     total.children[1].innerText = `R$ ${(Number(total.children[1].textContent.replace('R$', '')) + valorProduto).toFixed(2)}`;
 }
 
-
-
-async function removerItem(url, data) {
-    try {
-        const response = await fetch (url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-        if(!response.ok) {
-            throw new Error();
-        }
-    } catch(e) {
-        console.log('erro aqui ' + e);
-    }
-}
+// async function removerItem(url, data) {
+//     try {
+//         const response = await fetch (url, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify(data)
+//         });
+//         if(!response.ok) {
+//             throw new Error();
+//         }
+//     } catch(e) {
+//         console.log('erro aqui ' + e);
+//     }
+// }
