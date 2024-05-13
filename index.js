@@ -97,8 +97,10 @@ const MemoryStore = require('session-memory-store')(session);
     const index = require('./routes/usuario');
     app.use('/', index);
 
+const PORT = process.env.PORT || 3333;
+
 // Conexao/testes de conexao
     sequelize.authenticate().then(()=>{console.log('Banco de dados conectado.');});
-    app.listen(3333, ()=>{
+    app.listen(PORT, ()=>{
         console.log('Site rodando na porta "http://localhost:3333"');
     });
