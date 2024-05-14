@@ -78,9 +78,9 @@ const MemoryStore = require('session-memory-store')(session);
 // Sequelize
     const Sequelize = require('sequelize');
     const sequelize = new Sequelize('dona-ninita', 'root', 'root', {
-        host: '0.0.0.0',
-        dialect: 'mysql', 
-        port: 3308
+        host: '127.0.0.1',
+        port: 3308,
+        dialect: 'mysql',
     });
 
     module.exports = {
