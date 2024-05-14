@@ -8,10 +8,10 @@ const Categorias = bd.sequelize.define('Categorias', {
         autoIncrement: true
     },
     nomeCategoria: {
-        type: bd.Sequelize.STRING(45),
+        type: bd.Sequelize.STRING(50),
     },
-    ativo: {
-        type: bd.Sequelize.BOOLEAN
+    bolAtivo: {
+        type: bd.Sequelize.TINYINT
     }
 }, {
     timestamps: false,
@@ -22,25 +22,25 @@ const Categorias = bd.sequelize.define('Categorias', {
 // Categorias.create({
 //     idCategoria: 1,
 //     nomeCategoria: "Mais Vendidos",
-//     ativo: 1
+//     bolAtivo: 1
 // });
 
 // Categorias.create({
 //     idCategoria: 2,
 //     nomeCategoria: "Bolos",
-//     ativo: 1
+//     bolAtivo: 1
 // });
 
 // Categorias.create({
 //     idCategoria: 3,
 //     nomeCategoria: "Biscoitos",
-//     ativo: 1
+//     bolAtivo: 1
 // });
 
 // Categorias.create({
 //     idCategoria: 4,
 //     nomeCategoria: "Rabanadas",
-//     ativo: 0
+//     bolAtivo: 0
 // });
 
 
