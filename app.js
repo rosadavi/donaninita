@@ -73,11 +73,12 @@ const MemoryStore = require('session-memory-store')(session);
             }
         }
     }));
+    app.set('view engine', 'handlebars');
 
 // Sequelize
     const Sequelize = require('sequelize');
     const sequelize = new Sequelize('dona-ninita', 'root', 'root', {
-        host: 'localhost',
+        host: '172.17.0.1',
         dialect: 'mysql', 
         port: 3308
     });
