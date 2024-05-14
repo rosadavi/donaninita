@@ -11,7 +11,7 @@ const Clientes = bd.sequelize.define('Clientes', {
         type: bd.Sequelize.STRING(100)
     },
     telefoneCliente: {
-        type: bd.Sequelize.INTEGER
+        type: bd.Sequelize.STRING(55)
     },
     endereco: {
         type: bd.Sequelize.STRING(100)

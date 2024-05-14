@@ -91,7 +91,7 @@
 <h3 class="categoria">Mais Vendidos</h3>
 <section class="cards">
   {{#each produtos}}
-    {{#ifCond idCategoriaFK 1 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+    {{#ifCondUsuario idCategoriaFK 1 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCondUsuario}}
   {{/each}}
 </section>
 
@@ -100,7 +100,7 @@
 <h3 class="categoria">Bolos</h3>
 <section class="cards">
   {{#each produtos}}
-    {{#ifCond idCategoriaFK 2 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+    {{#ifCondUsuario idCategoriaFK 2 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCondUsuario}}
   {{/each}}
 </section>
 
@@ -109,7 +109,7 @@
 <h3 class="categoria">Biscoitos</h3>
 <section class="cards">
   {{#each produtos}}
-    {{#ifCond idCategoriaFK 3 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+    {{#ifCondUsuario idCategoriaFK 3 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCondUsuario}}
   {{/each}}
 </section>
 
@@ -118,7 +118,7 @@
 <h3 class="categoria">Rabanadas</h3>
 <section class="cards">
   {{#each produtos}}
-    {{#ifCond idCategoriaFK 4 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+    {{#ifCondUsuario idCategoriaFK 4 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCondUsuario}}
   {{/each}}
 </section>
 
@@ -144,7 +144,7 @@
       </div>
       <form action="/comprar" method="POST" id="comprar">
         <div class="produtos">
-          {{#each carrinho}}
+          {{#each parse}}
             <div class="container">
                 <div class="imagemProduto">
                     <img src="{{img}}" alt="{{nome}}">

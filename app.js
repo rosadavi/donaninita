@@ -1,7 +1,6 @@
 // Carregando modulos
 const express = require('express');
 const app = express();
-const asyncHandler = require('express-async-handler');
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -70,6 +69,36 @@ const MemoryStore = require('session-memory-store')(session);
                 </div>
                     `;
                 }
+            },
+            ifCondUsuario:(valor1, valor2, img, nome, idP, valor) => {
+                if(valor1 == valor2) {
+                    return `
+                <div class="card">
+                    <form action="/carrinho/add/cliente" method="POST" class="cardFCliente">
+                        <img src="${img}" alt="${nome}" class="imgProduto">
+                        <input type="hidden" name="id" value="${idP}">
+                        <input type="hidden" name="nome" value="${nome}">
+                        <input type="hidden" name="valor" value="${valor}">
+                        <input type="hidden" name="img" value="${img}">
+                        <section class="descricaoProdutos">
+                            <p class="nomeProduto">${nome}</p>
+                            <p class="valorProduto">${valor}</p>
+                        </section>
+                        <p class="textQtd">
+                            Quantidade: 
+                            <select name="qtd" class="qtdCard">
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </p>
+                        <button type="submit" class="adicionarProduto">Adicionar</button>
+                    </form>
+                </div>
+                    `;
+                }
             }
         }
     }));
@@ -78,7 +107,7 @@ const MemoryStore = require('session-memory-store')(session);
 // Sequelize
     const Sequelize = require('sequelize');
     const sequelize = new Sequelize('dona-ninita', 'root', 'root', {
-        host: '127.0.0.1',
+        host: '172.17.0.1',
         port: 3308,
         dialect: 'mysql',
     });

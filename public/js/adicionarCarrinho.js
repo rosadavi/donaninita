@@ -4,33 +4,18 @@ window.addEventListener('load', ()=> {
     const carrinho = document.querySelector('.produtos');
     if(carrinho.children.length !== 0) {
         const qtdProduto = document.querySelectorAll('.qtd');
+        const valorProduto = document.querySelectorAll('.precoProduto');
+        const qtdProdutoN = document.querySelectorAll('.qtdN');
+        const totalN = document.querySelector('.totalN');
         qtdProduto.forEach(e => {
             e.textContent = carrinho.children.length;
             if(e.textContent > 0) {
                 const total = document.querySelector('.total');
                 const fazrPedido = document.querySelector('#fazerPedido');
                 const mensagemCarrinho = document.querySelector('.mensagemCarrinho');
-                const preco = document.querySelectorAll('.precoProduto');
-                const qtdN = document.querySelectorAll('.qtdN');
-                const qtd = document.querySelector('#quantidade');
                 total.classList.remove('hide');
                 fazrPedido.classList.remove('hide');
                 mensagemCarrinho.classList.add('hide');
-
-                let dataQtd = 0;
-                let dataValor = 0;
-                for(let i = 0; i < Number(qtd.textContent); i++) {
-                    dataValor += Number(preco[i].textContent.replace('R$', ''));
-                    dataQtd += Number(qtdN[i].value);
-                } 
-
-                const totalRec = (Number(total.children[1].textContent.replace('R$', '')) + dataQtd * dataValor).toFixed(2);
-
-                // console.log(Number(total.children[1].textContent.replace('R$', '')))
-                // total.children[1].innerText = '';
-
-                // total.children[1].innerText = `R$ ${(totalRec/2).toFixed(2)}`;
-                // console.log((totalRec/2).toFixed(2));
             }
         });
         arrCards.forEach(e => {
@@ -47,6 +32,11 @@ window.addEventListener('load', ()=> {
                 });
             });
         });
+        let total = 0;
+        for(let i = 0; i < carrinho.children.length; i++) {
+            total =+ Number(valorProduto[i].textContent.replace('R$', '')) * Number(qtdProdutoN[i].value) + total;
+        }
+        totalN.innerHTML = `R$ ${total.toFixed(2)}`;
     } 
 });
 
@@ -169,7 +159,7 @@ function removerProduto(container) {
     });
     container.remove();
     diminuirQuantidadeProduto();
-    // removerItem('/carrinho/remover', {nomeProduto});
+    removerItem('/carrinho/remover', {nomeProduto});
 }
 
 function adicionarQuantidade(quantidade) {
@@ -181,19 +171,36 @@ function adicionarQuantidade(quantidade) {
     total.children[1].innerText = `R$ ${(Number(total.children[1].textContent.replace('R$', '')) + valorProduto).toFixed(2)}`;
 }
 
-// async function removerItem(url, data) {
-//     try {
-//         const response = await fetch (url, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(data)
-//         });
-//         if(!response.ok) {
-//             throw new Error();
-//         }
-//     } catch(e) {
-//         console.log('erro aqui ' + e);
-//     }
-// }
+async function removerItem(url, data) {
+    try {
+        const response = await fetch (url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        if(!response.ok) {
+            throw new Error();
+        }
+    } catch(e) {
+        console.log('erro aqui ' + e);
+    }
+}
+
+async function alterarQtd(url, data) {
+    try {
+        const response = await fetch (url, {
+            method: 'POST',
+            header: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        if(!response.ok) {
+            console.log('erro aqui ' + e);
+        }
+    } catch(error) {
+        console.log('erro ao alterar a quantidade de produtos ', error);
+    }
+}
