@@ -44,15 +44,15 @@ const Pedidos = bd.sequelize.define('Pedidos', {
     idCliente: {
         type: bd.Sequelize.INTEGER,
         references: {
-            model: 'Cliente',
-            key: 'id'
+            model: 'Clientes',
+            key: 'idCliente'
         }
     },
     idFuncionario: {
         type: bd.Sequelize.INTEGER,
         references: {
             model: 'Funcionarios',
-            key: 'id'
+            key: 'idFuncionario'
         }
     }
 }, {

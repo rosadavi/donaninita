@@ -1,4 +1,4 @@
-const bd = require('..');
+const bd = require('../app');
 
 const Funcionarios = bd.sequelize.define('Funcionarios', {
     idFuncionario: {
@@ -13,10 +13,10 @@ const Funcionarios = bd.sequelize.define('Funcionarios', {
     cpf: {
         type: bd.Sequelize.STRING(11)
     },
-    dataNascimento: {
+    dataNasc: {
         type: bd.Sequelize.STRING(13)
     },
-    telefone: {
+    telefoneFuncionario: {
         type: bd.Sequelize.STRING(20)
     },
     email: {
@@ -25,7 +25,7 @@ const Funcionarios = bd.sequelize.define('Funcionarios', {
     senha: {
         type: bd.Sequelize.STRING
     },
-    ativo: {
+    bolAtivo: {
         type: bd.Sequelize.TINYINT
     }
 }, {

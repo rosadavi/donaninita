@@ -1,4 +1,4 @@
-const bd = require('..');
+const bd = require('../app');
 
 const Clientes = bd.sequelize.define('Clientes', {
     idCliente: {
@@ -25,7 +25,7 @@ const Clientes = bd.sequelize.define('Clientes', {
     senha: {
         type: bd.Sequelize.STRING(100)
     },
-    ativo: {
+    bolAtivo: {
         type: bd.Sequelize.TINYINT
     },
     pontosFidelidade: {

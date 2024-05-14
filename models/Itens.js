@@ -6,8 +6,16 @@ const Itens = bd.sequelize.define('Itens', {
         allowNull: false,
         primaryKey: true
     },
-    qtd: {
+    idPedido: {
+        type: bd.Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true
+    },
+    qtdItem: {
         type: bd.Sequelize.INTEGER
+    },
+    valorItem: {
+        type: bd.Sequelize.DECIMAL(10, 2)
     }
 },  {
     timestamps: false,

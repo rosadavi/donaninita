@@ -1,4 +1,4 @@
-const bd = require('..');
+const bd = require('../app');
 
 const PedidoStatus = bd.sequelize.define('PedidoStatus', {
     idPedidoStatus: {
@@ -13,7 +13,7 @@ const PedidoStatus = bd.sequelize.define('PedidoStatus', {
     descStatus: {
         type: bd.Sequelize.STRING
     },
-    ativo: {
+    bolAtivo: {
         type: bd.Sequelize.TINYINT
     }
 }, {
