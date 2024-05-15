@@ -104,19 +104,6 @@ const MemoryStore = require('session-memory-store')(session);
     }));
     app.set('view engine', 'handlebars');
 
-// Sequelize
-    const Sequelize = require('sequelize');
-    const sequelize = new Sequelize('dona-ninita', 'root', 'root', {
-        host: '172.17.0.1',
-        port: 3308,
-        dialect: 'mysql',
-    });
-
-    module.exports = {
-        Sequelize: Sequelize,
-        sequelize: sequelize
-    };
-
 // Public
     app.use(express.static(path.join(__dirname, "/public")));
     app.use((req, res, next) =>{
@@ -127,10 +114,11 @@ const MemoryStore = require('session-memory-store')(session);
     const index = require('./routes/usuario');
     app.use('/', index);
 
-const PORT = process.env.PORT || 3333;
+    const PORT = process.env.PORT || 3333;
 
 // Conexao/testes de conexao
-    sequelize.authenticate().then(()=>{console.log('Banco de dados conectado.');});
+    const bd = require('./config/conexao');
+    bd.sequelize.authenticate().then(()=>{console.log('Banco de dados conectado.');});
     app.listen(PORT, ()=>{
         console.log('Site rodando na porta "http://localhost:3333"');
     });

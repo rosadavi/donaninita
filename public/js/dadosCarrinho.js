@@ -13,6 +13,21 @@ cards.forEach(form => {
   });
 });
 
+const cardsCliente = document.querySelectorAll('.cardFCliente');
+cardsCliente.forEach(form => {
+  form.addEventListener('submit', async function(event) {
+    event.preventDefault();
+    const img = form.querySelector('input[name="img"]').value;
+    const valor = form.querySelector('input[name="valor"]').value;
+    const nome = form.querySelector('input[name="nome"]').value;
+    const id = form.querySelector('input[name="id"]').value;
+    const qtd = form.querySelector('.qtdCard').value;
+    const btn = form.querySelector('button');
+
+    await enviarDados('/carrinho/addCliente', { img, valor, nome, id, qtd, btn });
+  });
+});
+
 async function enviarDados(url, data) {
   try {
     const response = await fetch(url, {

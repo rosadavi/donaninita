@@ -1,4 +1,5 @@
-const bd = require('../app');
+const bd = require('../config/conexao');
+
 
 const Clientes = bd.sequelize.define('Clientes', {
     idCliente: {

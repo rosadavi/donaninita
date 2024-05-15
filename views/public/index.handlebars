@@ -20,14 +20,14 @@
           {{#each carrinho}}
             <div class="container">
                 <div class="imagemProduto">
-                    <img src="{{img}}" alt="{{nome}}">
+                    <img src="{{imgProduto}}" alt="{{nomeProduto}}">
                 </div>
                 <span class="descProduto">
-                    <p class="nomeProdutoCarrinho">{{nome}}</p>
-                    <p class="precoProduto">R$ {{valor}}</p>
+                    <p class="nomeProdutoCarrinho">{{nomeProduto}}</p>
+                    <p class="precoProduto">R$ {{valorProduto}}</p>
                     <div class="qtdProdutosCarrinho">
                         <span><i class="bi bi-dash menos"></i></span>
-                        <input type="number" disabled name="qtdN" class="qtdN" value="{{qtd}}">
+                        <input type="number" disabled name="qtdN" class="qtdN" value="{{qtdProduto}}">
                         <span><i class="bi bi-plus mais"></i></span>
                     </div>
                 </span>

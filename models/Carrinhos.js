@@ -1,11 +1,23 @@
-const bd = require('../app');
+const bd = require('../config/conexao');
 
 const Carrinhos = bd.sequelize.define('Carrinhos', {
     idProduto: {
         type: bd.Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true, 
-        autoIncrement: true
+        primaryKey: true,
+        references: {
+            model: 'Produtos',
+            key: 'idProduto'
+        }
+    },
+    idCliente: {
+        type: bd.Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+            model: 'Clientes',
+            key: 'idCliente'
+        }
     },
     imgProduto: {
         type: bd.Sequelize.STRING
