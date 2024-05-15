@@ -170,6 +170,7 @@
         color: var(--corBranco);
         border-radius: 10px;
         text-align: center;
+        padding: 2px;
     }
 }
 @media screen and (max-width: 640px) {
