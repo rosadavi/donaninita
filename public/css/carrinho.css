@@ -31,7 +31,6 @@
     }
 
     .total {
-        margin-top: 100px;
         width: 100%;
         display: flex;
         align-items: center;
@@ -148,8 +147,31 @@
         color: var(--corMarrom);
         font-weight: bolder;
     }
-}
 
+    .frete {
+        margin-top: 70px;
+        margin-bottom: 40px;
+    }
+
+    .sInput {
+        max-width: 400px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .inputs input {
+        min-width: 20px;
+        cursor: pointer;
+    }
+
+    .freteS {
+        background-color: var(--corAzul);
+        color: var(--corBranco);
+        border-radius: 10px;
+        text-align: center;
+    }
+}
 @media screen and (max-width: 640px) {
     
 }
@@ -177,6 +199,6 @@
     border-radius: 10px;
 }
 
-#carrinho.hide, #carrinhoFide.hide {
+#carrinho.hide, #carrinhoFide.hide, .frete.hide  {
     display: none;
 }

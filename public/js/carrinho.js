@@ -25,8 +25,3 @@ fecharCarrinho.addEventListener('click', () => {
         e.classList.toggle('hide');
     });
 });
-
-form.addEventListener('submit', async e => {
-    e.preventDefault();
-    
-});

@@ -13,9 +13,11 @@ window.addEventListener('load', ()=> {
                 const total = document.querySelector('.total');
                 const fazrPedido = document.querySelector('#fazerPedido');
                 const mensagemCarrinho = document.querySelector('.mensagemCarrinho');
+                const frete = document.querySelector('.frete');
                 total.classList.remove('hide');
                 fazrPedido.classList.remove('hide');
                 mensagemCarrinho.classList.add('hide');
+                frete.classList.remove('hide');
             }
         });
         arrCards.forEach(e => {
@@ -42,6 +44,7 @@ window.addEventListener('load', ()=> {
 
 function adicionarCarrinho(data) {
     const btn = data.btn;
+    const frete = document.querySelector('.frete');
     const carrinho = document.querySelector('.produtos');
     const qtdProduto = document.querySelectorAll('.qtd');
     const total = document.querySelector('.total');
@@ -58,6 +61,7 @@ function adicionarCarrinho(data) {
             total.classList.remove('hide');
             fazrPedido.classList.remove('hide');
             mensagemCarrinho.classList.add('hide');
+            frete.classList.remove('hide');
         }
     });
     carrinho.innerHTML += `
@@ -83,14 +87,35 @@ function adicionarCarrinho(data) {
     
     `;
 
-    total.children[1].innerText = `R$ ${(Number(total.children[1].textContent.replace('R$', '')) + data.qtd * data.valor).toFixed(2)}`;
+    total.children[1].innerHTML = `R$ ${(Number(total.children[1].textContent.replace('R$', '')) + data.qtd * data.valor).toFixed(2)}`;
+
 }
+
+const frete = document.querySelectorAll('input[name="frete"]');
+frete.forEach(e => {
+    e.addEventListener('click', () => {
+        const total = document.querySelector('.total');
+        if(e.value == 'entregar') {
+            if(!total.classList.contains('aplicado')) {
+                total.children[1].innerHTML = `R$ ${(Number(total.children[1].textContent.replace('R$', '')) + 10.50).toFixed(2)}`;
+                total.classList.add('aplicado');
+            }
+        }
+        if(e.value == 'buscar') {
+            if(total.classList.contains('aplicado')) {
+                total.children[1].innerHTML = `R$ ${(Number(total.children[1].textContent.replace('R$', '')) - 10.50).toFixed(2)}`;
+                total.classList.remove('aplicado');
+            }
+        }
+    });
+});
 
 function diminuirQuantidadeProduto() {
     const total = document.querySelector('.total');
     const fazrPedido = document.querySelector('#fazerPedido');
     const mensagemCarrinho = document.querySelector('.mensagemCarrinho');
     const qtdProduto = document.querySelectorAll('.qtd');
+    const frete = document.querySelector('.frete');
     
     qtdProduto.forEach(e => {
         e.textContent--;
@@ -98,10 +123,12 @@ function diminuirQuantidadeProduto() {
             total.classList.remove('hide');
             fazrPedido.classList.remove('hide');
             mensagemCarrinho.classList.add('hide');
+            frete.classList.remove('hide');
         } else {
             total.classList.add('hide');
             fazrPedido.classList.add('hide');
             mensagemCarrinho.classList.remove('hide');
+            frete.classList.add('hide');
         }
     });
 }
