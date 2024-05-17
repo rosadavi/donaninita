@@ -211,6 +211,44 @@
     
     }
 
+    .padrao {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .padrao label{
+        width: 10%;
+        max-width: 100px;
+        min-width: 80px;
+        font-size: max(20px, 1vw);
+    }
+
+    .padrao input {
+        padding: 5px;
+        outline: none;
+        border: 2px solid black;
+        border-radius: 4px;
+        transition: all .5s;
+        appearance: textfield;
+    }
+
+    .padrao input:focus {
+        border-radius: 10px;
+    }
+
+    .padrao input[type=number]::-webkit-inner-spin-button { 
+        -webkit-appearance: none;
+        
+    }
+
+    .padrao input[type=number] { 
+       -moz-appearance: textfield;
+       appearance: textfield;
+    
+    }
+
 }
 @media screen and (max-width: 640px) {
     
@@ -239,6 +277,6 @@
     border-radius: 10px;
 }
 
-#carrinho.hide, #carrinhoFide.hide, .frete.hide, .endereco.hide  {
+#carrinho.hide, #carrinhoFide.hide, .frete.hide, .padrao.hide {
     display: none;
 }

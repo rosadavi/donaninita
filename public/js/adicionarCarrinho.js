@@ -19,6 +19,7 @@ window.addEventListener('load', ()=> {
         const valorProduto = document.querySelectorAll('.precoProduto');
         const qtdProdutoN = document.querySelectorAll('.qtdN');
         const totalN = document.querySelector('.totalN');
+        const padrao = document.querySelector('.padrao');
         qtdProduto.forEach(e => {
             e.textContent = carrinho.children.length;
             if(e.textContent > 0) {
@@ -30,6 +31,7 @@ window.addEventListener('load', ()=> {
                 fazrPedido.classList.remove('hide');
                 mensagemCarrinho.classList.add('hide');
                 frete.classList.remove('hide');
+                padrao.classList.remove('hide');
             }
         });
         arrCards.forEach(e => {
@@ -63,8 +65,10 @@ function adicionarCarrinho(data) {
     const fazrPedido = document.querySelector('#fazerPedido');
     const mensagemCarrinho = document.querySelector('.mensagemCarrinho');
     const endereco = document.querySelector('.endereco');
+    const padrao = document.querySelector('.padrao');
 
     endereco.classList.remove('hide');
+    padrao.classList.remove('hide');
 
 
     btn.textContent = 'Adicionado';
@@ -130,14 +134,6 @@ frete.forEach(e => {
                     <section>
                         <label for="rua">Rua: </label>
                         <input required type="text" name="rua" id="rua">
-                    </section>
-                    <section>
-                        <label for="nome">Nome: </label>
-                        <input required type="text" name="nome" id="nome">
-                    </section>
-                    <section>
-                        <label for="telefone">Telefone: </label>
-                        <input required type="number" name="telefone" id="telefone" placeholder="(00) 0 0000-0000">
                     </section>
                 `;
     
@@ -222,6 +218,7 @@ function diminuirQuantidadeProduto() {
     const qtdProduto = document.querySelectorAll('.qtd');
     const frete = document.querySelector('.frete');
     const endereco = document.querySelector('.endereco');
+    const padrao = document.querySelector('.padrao');
     
     qtdProduto.forEach(e => {
         e.textContent--;
@@ -231,12 +228,14 @@ function diminuirQuantidadeProduto() {
             mensagemCarrinho.classList.add('hide');
             frete.classList.remove('hide');
             endereco.classList.remove('hide');
+            padrao.classList.remove('hide');
         } else {
             total.classList.add('hide');
             fazrPedido.classList.add('hide');
             mensagemCarrinho.classList.remove('hide');
             frete.classList.add('hide');
             endereco.classList.add('hide');
+            padrao.classList.add('hide');
         }
     });
 }
