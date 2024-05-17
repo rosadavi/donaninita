@@ -16,17 +16,17 @@
       </div>
       <form action="/comprar" method="POST" id="comprar">
         <div class="produtos">
-          {{#each parse}}
+          {{#each carrinhos}}
             <div class="container">
                 <div class="imagemProduto">
-                    <img src="{{img}}" alt="{{nome}}">
+                    <img src="{{imgProduto}}" alt="{{nomeProduto}}">
                 </div>
                 <span class="descProduto">
-                    <p class="nomeProdutoCarrinho">{{nome}}</p>
-                    <p class="precoProduto">R$ {{valor}}</p>
+                    <p class="nomeProdutoCarrinho">{{nomeProduto}}</p>
+                    <p class="precoProduto">R$ {{valorProduto}}</p>
                     <div class="qtdProdutosCarrinho">
                         <span><i class="bi bi-dash menos"></i></span>
-                        <input type="number" name="qtdN" class="qtdN" value="{{qtd}}" disabled>
+                        <input type="number" name="qtdN" class="qtdN" value="{{qtdProduto}}" disabled>
                         <span><i class="bi bi-plus mais"></i></span>
                     </div>
                 </span>
@@ -47,20 +47,14 @@
             <strong class="sInput">Eu irei buscar no establecimento <input type="radio" name="frete" value="buscar"></strong>
           </div>
         </div>
-        <div class="padrao hide">
-          <section>
-              <label for="nome">Nome: </label>
-              <input required type="text" name="nome" id="nome" autocomplete="off">
-          </section>
-          <section>
-              <label for="telefone">Telefone: </label>
-              <input required type="number" name="telefone" id="telefone" placeholder="00 0 00000000" autocomplete="off">
-          </section>
-        </div>
-        <div class="endereco"></div>
+        <div class="padrao logado"></div>
+        <div class="endereco logado"></div>
+        {{#each clientes}}
+            <input type="hidden" name="idCliente" value="{{idCliente}}">
+        {{/each}}
         <div class="total hide">
           <p>Total:</p>
-          <input type="text" name="totalN" class="totalN" readonly value="R$ 0.00">
+          <input type="text" name="valorPago" class="totalN" readonly value="R$ 0.00">
         </div>
         <button id="fazerPedido" class="hide" type="submit">Finalizar</button>
         <input type="text" name="produtos" id="produtos">
@@ -76,7 +70,7 @@
         <h3>Dona Ninita</h3>
     </div>
     <div class="funcoesHeader">
-        <a href="/login"><i class="bi bi-person-circle"></i></i></a>
+        <a href="/logout" id="logout"><i class="bi bi-box-arrow-right"></i></i></a>
         <div class="divCarrinho">
             <i class="bi bi-bag carrinhoIcon"></i>
             <section class="qtd">0</section>
@@ -111,7 +105,7 @@
 <h3 class="categoria">Mais Vendidos</h3>
 <section class="cards">
   {{#each produtos}}
-    {{#ifCond idCategoriaFK 1 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+    {{#ifCondUsuario idCategoriaFK 1 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCondUsuario}}
   {{/each}}
 </section>
 
@@ -120,7 +114,7 @@
 <h3 class="categoria">Bolos</h3>
 <section class="cards">
   {{#each produtos}}
-    {{#ifCond idCategoriaFK 2 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+    {{#ifCondUsuario idCategoriaFK 2 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCondUsuario}}
   {{/each}}
 </section>
 
@@ -129,7 +123,7 @@
 <h3 class="categoria">Biscoitos</h3>
 <section class="cards">
   {{#each produtos}}
-    {{#ifCond idCategoriaFK 3 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+    {{#ifCondUsuario idCategoriaFK 3 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCondUsuario}}
   {{/each}}
 </section>
 
@@ -138,7 +132,7 @@
 <h3 class="categoria">Rabanadas</h3>
 <section class="cards">
   {{#each produtos}}
-    {{#ifCond idCategoriaFK 4 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+    {{#ifCondUsuario idCategoriaFK 4 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCondUsuario}}
   {{/each}}
 </section>
 

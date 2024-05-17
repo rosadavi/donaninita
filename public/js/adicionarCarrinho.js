@@ -1,4 +1,6 @@
 const arrCards = document.querySelectorAll('.card');
+const inputProdutos = document.querySelector('#produtos');
+let produtosNoCarrinho = [];
 
 window.addEventListener('load', ()=> {
     const carrinho = document.querySelector('.produtos');
@@ -20,6 +22,8 @@ window.addEventListener('load', ()=> {
         const qtdProdutoN = document.querySelectorAll('.qtdN');
         const totalN = document.querySelector('.totalN');
         const padrao = document.querySelector('.padrao');
+        const nomeProduto = document.querySelectorAll('.nomeProdutoCarrinho');
+
         qtdProduto.forEach(e => {
             e.textContent = carrinho.children.length;
             if(e.textContent > 0) {
@@ -36,7 +40,6 @@ window.addEventListener('load', ()=> {
         });
         arrCards.forEach(e => {
             const nome = e.querySelectorAll('.nomeProduto');
-            const nomeProduto = document.querySelectorAll('.nomeProdutoCarrinho');
             nome.forEach(e => {
                 nomeProduto.forEach(nome => {
                     if(e.textContent == nome.textContent) {
@@ -50,9 +53,14 @@ window.addEventListener('load', ()=> {
         });
         let total = 0;
         for(let i = 0; i < carrinho.children.length; i++) {
+            produtosNoCarrinho.push({produto: nomeProduto[i].textContent, qtdProduto: qtdProdutoN[i].value});
+            let dados = JSON.stringify(produtosNoCarrinho);
+            inputProdutos.value = dados;
+        }
+        for(let i = 0; i < carrinho.children.length; i++) {
             total =+ Number(valorProduto[i].textContent.replace('R$', '')) * Number(qtdProdutoN[i].value) + total;
         }
-        totalN.innerHTML = `R$ ${total.toFixed(2)}`;
+        totalN.value = `R$ ${total.toFixed(2)}`;
     } 
 });
 
@@ -70,6 +78,9 @@ function adicionarCarrinho(data) {
     endereco.classList.remove('hide');
     padrao.classList.remove('hide');
 
+    produtosNoCarrinho.push({produto: data.nome, qtdProduto: data.qtd});
+    const dados = JSON.stringify(produtosNoCarrinho);
+    inputProdutos.value = dados;
 
     btn.textContent = 'Adicionado';
     btn.setAttribute('disabled', 'disabled');
@@ -106,7 +117,7 @@ function adicionarCarrinho(data) {
     
     `;
 
-    total.children[1].innerHTML = `R$ ${(Number(total.children[1].textContent.replace('R$', '')) + data.qtd * data.valor).toFixed(2)}`;
+    total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) + data.qtd * data.valor).toFixed(2)}`;
 
 }
 
@@ -121,19 +132,19 @@ frete.forEach(e => {
                     endereco.innerHTML = `
                     <section>
                         <label for="cep">CEP: </label>
-                        <input type="number" name="cep" id="cep" placeholder="Apenas numeros">
+                        <input type="number" name="cep" id="cep" placeholder="Apenas numeros" autocomplete="off">
                     </section>
                     <section>
                         <label for="cidade">Cidade: </label>
-                        <input required type="text" name="cidade" id="cidade">
+                        <input required type="text" name="cidade" id="cidade" autocomplete="off">
                     </section>
                     <section>
                         <label for="bairro">Bairro: </label>
-                        <input required type="text" name="bairro" id="bairro">
+                        <input required type="text" name="bairro" id="bairro" autocomplete="off">
                     </section>
                     <section>
                         <label for="rua">Rua: </label>
-                        <input required type="text" name="rua" id="rua">
+                        <input required type="text" name="rua" id="rua" autocomplete="off">
                     </section>
                 `;
     
@@ -198,13 +209,13 @@ frete.forEach(e => {
         }
         if(e.value == 'entregar') {
             if(!total.classList.contains('aplicado')) {
-                total.children[1].innerHTML = `R$ ${(Number(total.children[1].textContent.replace('R$', '')) + 10.50).toFixed(2)}`;
+                total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) + 10.50).toFixed(2)}`;
                 total.classList.add('aplicado');
             }
         }
         if(e.value == 'buscar') {
             if(total.classList.contains('aplicado')) {
-                total.children[1].innerHTML = `R$ ${(Number(total.children[1].textContent.replace('R$', '')) - 10.50).toFixed(2)}`;
+                total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) - 10.50).toFixed(2)}`;
                 total.classList.remove('aplicado');
             }
         }
@@ -258,9 +269,14 @@ function remover(container) {
     const valor = Number(container.children[1].children[1].textContent.replace('R$', ''));
     const qtd = Number(container.children[1].children[2].children[1].value);
     const novoTot = valor * qtd;
-    const total = document.querySelector('.totalN') ;
+    const total = document.querySelector('.totalN');
+    const produto = container.children[1].children[0].textContent;
+    const produtosAtualizados = produtosNoCarrinho.filter(produtos => produtos.produto != produto);
+    produtosNoCarrinho = produtosAtualizados;
+    const dados = JSON.stringify(produtosAtualizados);
 
-    total.innerText = `R$ ${(Number(total.textContent.replace('R$', '')) - novoTot).toFixed(2)}`;
+    inputProdutos.value = dados;
+    total.value = `R$ ${(Number(total.value.replace('R$', '')) - novoTot).toFixed(2)}`;
     removerProduto(container);
 }
 
@@ -268,7 +284,7 @@ function diminuirQuantidade(quantidade) {
     const total = document.querySelector('.total');
     const valorProduto = Number(quantidade.parentElement.parentElement.children[1].textContent.replace('R$', ''));
 
-    total.children[1].innerText = `R$ ${(Number(total.children[1].textContent.replace('R$', '')) - valorProduto).toFixed(2)}`;
+    total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) - valorProduto).toFixed(2)}`;
     if(quantidade.value > 1) {
         const qtd = Number(quantidade.value);
         quantidade.value = qtd - 1;
@@ -302,7 +318,7 @@ function adicionarQuantidade(quantidade) {
     const qtd = Number(quantidade.value);
 
     quantidade.value = qtd + 1;
-    total.children[1].innerText = `R$ ${(Number(total.children[1].textContent.replace('R$', '')) + valorProduto).toFixed(2)}`;
+    total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) + valorProduto).toFixed(2)}`;
 }
 
 async function removerItem(url, data) {
@@ -317,7 +333,7 @@ async function removerItem(url, data) {
         if(!response.ok) {
             throw new Error();
         }
-    } catch(e) {
+    } catch(e) {    
         console.log('erro aqui ' + e);
     }
 }

@@ -249,6 +249,10 @@
     
     }
 
+    .qtdN:focus {
+        outline: none;
+    }
+
 }
 @media screen and (max-width: 640px) {
     
@@ -277,6 +281,6 @@
     border-radius: 10px;
 }
 
-#carrinho.hide, #carrinhoFide.hide, .frete.hide, .padrao.hide {
+#carrinho.hide, #carrinhoFide.hide, .frete.hide, .padrao.hide, .endereco.hide {
     display: none;
 }

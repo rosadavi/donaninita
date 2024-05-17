@@ -8,13 +8,14 @@ const Localstorage = require('node-localstorage').LocalStorage;
 const localstorage = new Localstorage('/localstorage');
 
 const Produtos = require('../models/Produtos');
-const Cliente = require('../models/Clientes');
+const Clientes = require('../models/Clientes');
 const Funcionarios = require('../models/Funcionarios');
 const Carrinhos = require('../models/Carrinhos');
 
 const asyncHandler = require('express-async-handler');
 
 const fs = require('fs');
+const { where } = require('sequelize');
 
 const directory = '/localstorage';
 
@@ -42,12 +43,10 @@ router.get('/', async (req, res) => {
     const Produto = localstorage.getItem('carrinho');
     const parse = JSON.parse(Produto);
     const produtos = await Produtos.findAll();
-    const carrinho = await Carrinhos.findAll();
     if(req.session.dominio == 'donaninita.com') {
         res.render('private/funcionario.handlebars');
     } else {
-        const user = req.session.userId ? { loggedIn: true } : { loggedIn: false };
-        res.render('public/index.handlebars', {produtos, user, parse, carrinho});
+        res.render('public/index.handlebars', {produtos, parse});
     }
 });
 
@@ -134,7 +133,7 @@ router.post('/cadastrado', (req, res) => {
         });
         res.redirect('/login');
     } else {
-        Cliente.create({
+        Clientes.create({
             nomeCliente: req.body.nome,
             telefoneCliente: req.body.telefone,
             endereco: req.body.endereco,
@@ -171,7 +170,7 @@ router.post('/login', async(req, res) => {
         }
     } else {
         try {
-            const user = await Cliente.findOne({where: {email}});
+            const user = await Clientes.findOne({where: {email}});
     
             if(user) {
                 if(senha === user.senha) {
@@ -207,10 +206,14 @@ router.get('/logado', async (req, res) => {
     } else {
         try {
             if(req.session && req.session.userId) {
-                const user = await Cliente.findByPk(req.session.userId);
+                const user = await Clientes.findByPk(req.session.userId);
     
                 if(user) {
-                    return res.redirect('/');
+                    const produtos = await Produtos.findAll();
+                    const carrinhos = await Carrinhos.findAll({where: {idCliente: req.session.userId}});
+                    const clientes = await Clientes.findAll({where: {idCliente: req.session.userId}});
+
+                    return res.render('private/cliente.handlebars', {produtos, carrinhos, clientes});
                 }
             } else {
                 res.redirect('/');
@@ -234,8 +237,8 @@ router.get('/logout', (req, res) => {
     });
 });
 
-// router.post('/comprar', (req, res) => {
-//     res.send(req.body.);
-// });
+router.post('/comprar', (req, res) => {
+    res.send(req.body);
+});
 
 module.exports = router;
