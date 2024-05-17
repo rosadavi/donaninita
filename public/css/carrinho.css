@@ -47,6 +47,12 @@
     .totalN {
         font-size: max(30px, 2.5vw);
         font-family: var(--fontTexto);
+        border: none;
+        outline: none;
+    }
+
+    .totalN:hover {
+        cursor: default;
     }
 
     #fazerPedido {
@@ -148,16 +154,30 @@
         font-weight: bolder;
     }
 
-    .frete {
+    .formRadios {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
         margin-top: 70px;
         margin-bottom: 40px;
     }
 
-    .sInput {
+    .frete .sInput {
         max-width: 400px;
         display: flex;
         justify-content: space-between;
         gap: 20px;
+    }
+
+    .pagamento, .frete {
+        height: 250px;
+    }
+
+    .pagamento .sInput {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        width: 200px;
     }
 
     .inputs input {
@@ -165,12 +185,21 @@
         cursor: pointer;
     }
 
-    .freteS {
+    .frete .freteS {
         background-color: var(--corAzul);
         color: var(--corBranco);
         border-radius: 10px;
         text-align: center;
         padding: 2px;
+    }
+
+    .pagamento .freteS {
+        background-color: var(--corAzul);
+        color: var(--corBranco);
+        border-radius: 10px;
+        text-align: center;
+        padding: 10px 20px;   
+        width: 100px;
     }
 
     .endereco {
@@ -212,6 +241,7 @@
     }
 
     .padrao {
+        margin-top: 100px;
         margin-bottom: 20px;
         display: flex;
         flex-direction: column;

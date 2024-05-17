@@ -129,7 +129,7 @@ frete.forEach(e => {
         if(!endereco.classList.contains('logado')) {
             if(e.value == 'entregar') {
                 if(endereco.children.length == 0) {
-                    endereco.innerHTML = `
+                    endereco.innerHTML = `  
                     <section>
                         <label for="cep">CEP: </label>
                         <input type="number" name="cep" id="cep" placeholder="Apenas numeros" autocomplete="off">

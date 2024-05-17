@@ -11,6 +11,8 @@ const Produtos = require('../models/Produtos');
 const Clientes = require('../models/Clientes');
 const Funcionarios = require('../models/Funcionarios');
 const Carrinhos = require('../models/Carrinhos');
+const Pedidos = require('../models/Pedidos');
+const PedidoStatus = require('../models/PedidoStatus');
 
 const asyncHandler = require('express-async-handler');
 
@@ -129,7 +131,7 @@ router.post('/cadastrado', (req, res) => {
             telefone: req.body.telefone,
             email: req.body.email,
             senha: req.body.senha,
-            ativo: 1
+            boltAtivo: 1
         });
         res.redirect('/login');
     } else {
@@ -140,7 +142,7 @@ router.post('/cadastrado', (req, res) => {
             cpf: req.body.cpf,
             email: req.body.email,
             senha: req.body.senha,
-            ativo: 1,
+            boltAtivo: 1,
             pontosFidelidade: 0
         });
         res.redirect('/login');
@@ -237,8 +239,30 @@ router.get('/logout', (req, res) => {
     });
 });
 
-router.post('/comprar', (req, res) => {
-    res.send(req.body);
+router.post('/comprar', async (req, res) => {
+    const dataHoraCadastro = new Date();
+    await PedidoStatus.create({
+        nomeStatus: 'Na empresa',
+        descStatus: 'Pedido chegou para a Dona Ninita',
+        boltAtivo: 1
+    });
+
+    const {valorPago, tipoPagamento, idCliente} = req.body;
+
+    if(req.body.frete == 'entregar') {
+        await Pedidos.create({
+            dataHoraCadastro,
+            valorFrete: 10.50,
+            valorTotal: valorPago - 10.50,
+            valorDesconto: 0.00,
+            valorAcrescimo: 10.50,
+            valorPago,
+            tipoPagamento,
+            statusPedido: 'Em andamento',
+            idCliente
+        });
+    }
+
 });
 
 module.exports = router;

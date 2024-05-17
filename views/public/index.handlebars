@@ -38,15 +38,30 @@
             <!-- no index.js -->
           {{/each}}
         </div>
-        <div class="frete hide">
-          <h3>Como deseja receber seu pedido?</h3>
-          <br>
-          <div class="inputs">
-            <strong class="sInput">Entregue no meu endereco <strong class="freteS">(Frete de R$10,50)</strong> <input type="radio" name="frete" value="entregar" required> </strong>
+        <section class="formRadios">
+          <div class="frete hide">
+            <h3>Como deseja receber seu pedido?</h3>
             <br>
-            <strong class="sInput">Eu irei buscar no establecimento <input type="radio" name="frete" value="buscar"></strong>
+            <div class="inputs">
+              <strong class="sInput">Entregue no meu endereco <strong class="freteS">(Frete de R$10,50)</strong> <input type="radio" name="frete" value="entregar" required> </strong>
+              <br>
+              <strong class="sInput">Eu irei buscar no establecimento <input type="radio" name="frete" value="buscar"></strong>
+            </div>
           </div>
-        </div>
+          <div class="pagamento">
+            <h3>Qual sera o tipo de pagamento?</h3>
+            <br>
+            <div class="inputs">
+              <strong class="sInput"><strong class="freteS">Debito</strong><input type="radio" name="tipoPagamento" value="1" required></strong>
+              <br>
+              <strong class="sInput"><strong class="freteS">Credito</strong><input type="radio" name="tipoPagamento" value="2"></strong>
+              <br>
+              <strong class="sInput"><strong class="freteS">PIX</strong><input type="radio" name="tipoPagamento" value="3"></strong>
+              <br>
+              <strong class="sInput"><strong class="freteS">DINHEIRO</strong><input type="radio" name="tipoPagamento" value="4"></strong>
+            </div>
+          </div>
+        </section>
         <div class="padrao hide">
           <section>
               <label for="nome">Nome: </label>
@@ -63,7 +78,7 @@
           <input type="text" name="totalN" class="totalN" readonly value="R$ 0.00">
         </div>
         <button id="fazerPedido" class="hide" type="submit">Finalizar</button>
-        <input type="text" name="produtos" id="produtos">
+        <input type="hidden" name="produtos" id="produtos">
       </form>
     </section>
 </div>
