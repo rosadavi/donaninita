@@ -23,7 +23,7 @@ cardsCliente.forEach(form => {
     const id = form.querySelector('input[name="id"]').value;
     const qtd = form.querySelector('.qtdCard').value;
     const btn = form.querySelector('button');
-
+    
     await enviarDados('/carrinho/addCliente', { img, valor, nome, id, qtd, btn });
   });
 });
