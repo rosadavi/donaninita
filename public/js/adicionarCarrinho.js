@@ -50,6 +50,9 @@ function adicionarCarrinho(data) {
     const total = document.querySelector('.total');
     const fazrPedido = document.querySelector('#fazerPedido');
     const mensagemCarrinho = document.querySelector('.mensagemCarrinho');
+    const endereco = document.querySelector('.endereco');
+
+    endereco.classList.remove('hide');
 
 
     btn.textContent = 'Adicionado';
@@ -95,13 +98,97 @@ const frete = document.querySelectorAll('input[name="frete"]');
 frete.forEach(e => {
     e.addEventListener('click', () => {
         const total = document.querySelector('.total');
+        const endereco = document.querySelector('.endereco');
         if(e.value == 'entregar') {
+            if(endereco.children.length == 0) {
+                endereco.innerHTML = `
+                <section>
+                    <label for="cep">CEP: </label>
+                    <input type="number" name="cep" id="cep" placeholder="Apenas numeros">
+                </section>
+                <section>
+                    <label for="cidade">Cidade: </label>
+                    <input required type="text" name="cidade" id="cidade">
+                </section>
+                <section>
+                    <label for="bairro">Bairro: </label>
+                    <input required type="text" name="bairro" id="bairro">
+                </section>
+                <section>
+                    <label for="rua">Rua: </label>
+                    <input required type="text" name="rua" id="rua">
+                </section>
+                <section>
+                    <label for="nome">Nome: </label>
+                    <input required type="text" name="nome" id="nome">
+                </section>
+                <section>
+                    <label for="telefone">Telefone: </label>
+                    <input required type="number" name="telefone" id="telefone" placeholder="(00) 0 0000-0000">
+                </section>
+            `;
+
+            const cep = document.querySelector('#cep');
+            cep.addEventListener('focusout', async () => {
+                if (cep.value.length == 0) {
+
+                } else if(cep.value.length < 8 ) {
+                    alert('CEP muito pequeno, verifique e tente novamente.');
+                } else if(cep.value.length > 8){
+                    alert('CEP muito grande, verifique e tente novamente.');
+                } else {
+                    const localidade = document.querySelector('#cidade');
+                    const bairro = document.querySelector('#bairro');
+                    const logradouro = document.querySelector('#rua');
+              
+                    const url = `https://viacep.com.br/ws/${cep.value}/json/`;
+                
+                    try {
+                    const response = await fetch(url);
+            
+                    if(!response.ok) {
+                        throw new Error(response.status);
+                    }
+            
+                    const dados = await response.json();
+            
+                    if(dados.erro) {
+                        alert('CEP nao encontrado.');
+                        logradouro.value = '';
+                        localidade.value = '';
+                        bairro.value = '';
+                    } else {
+                        logradouro.value = dados.logradouro;
+                        localidade.value = dados.localidade;
+                        bairro.value = dados.bairro;
+                    }
+            
+                    } catch(e) {
+                        if(TypeError == 'Failed to Fetch') {
+                            alert(e);
+                        }
+                    }
+                }
+            });
+            }
+
             if(!total.classList.contains('aplicado')) {
                 total.children[1].innerHTML = `R$ ${(Number(total.children[1].textContent.replace('R$', '')) + 10.50).toFixed(2)}`;
                 total.classList.add('aplicado');
             }
         }
         if(e.value == 'buscar') {
+            if(endereco.children.length != 0) {
+                for(let i = 0; i < endereco.children.length; i++) {
+                    endereco.children[i].remove();
+                }
+                for(let i = 0; i < endereco.children.length; i++) {
+                    endereco.children[i].remove();
+                }
+                for(let i = 0; i < endereco.children.length; i++) {
+                    endereco.children[i].remove();
+                }
+            }
             if(total.classList.contains('aplicado')) {
                 total.children[1].innerHTML = `R$ ${(Number(total.children[1].textContent.replace('R$', '')) - 10.50).toFixed(2)}`;
                 total.classList.remove('aplicado');
@@ -116,6 +203,7 @@ function diminuirQuantidadeProduto() {
     const mensagemCarrinho = document.querySelector('.mensagemCarrinho');
     const qtdProduto = document.querySelectorAll('.qtd');
     const frete = document.querySelector('.frete');
+    const endereco = document.querySelector('.endereco');
     
     qtdProduto.forEach(e => {
         e.textContent--;
@@ -124,11 +212,13 @@ function diminuirQuantidadeProduto() {
             fazrPedido.classList.remove('hide');
             mensagemCarrinho.classList.add('hide');
             frete.classList.remove('hide');
+            endereco.classList.remove('hide');
         } else {
             total.classList.add('hide');
             fazrPedido.classList.add('hide');
             mensagemCarrinho.classList.remove('hide');
             frete.classList.add('hide');
+            endereco.classList.add('hide');
         }
     });
 }
