@@ -17,7 +17,6 @@ const PedidoStatus = require('../models/PedidoStatus');
 const asyncHandler = require('express-async-handler');
 
 const fs = require('fs');
-const { where } = require('sequelize');
 
 const directory = '/localstorage';
 
@@ -45,6 +44,7 @@ router.get('/', async (req, res) => {
     const Produto = localstorage.getItem('carrinho');
     const parse = JSON.parse(Produto);
     const produtos = await Produtos.findAll();
+
     if(req.session.dominio == 'donaninita.com') {
         res.render('private/funcionario.handlebars');
     } else {
@@ -215,7 +215,7 @@ router.get('/logado', async (req, res) => {
                     const carrinhos = await Carrinhos.findAll({where: {idCliente: req.session.userId}});
                     const clientes = await Clientes.findAll({where: {idCliente: req.session.userId}});
 
-                    return res.render('private/cliente.handlebars', {produtos, carrinhos, clientes});
+                    return res.render('private/cliente.handlebars', {produtos, carrinhos, clientes, user});
                 }
             } else {
                 res.redirect('/');
@@ -240,29 +240,104 @@ router.get('/logout', (req, res) => {
 });
 
 router.post('/comprar', async (req, res) => {
-    const dataHoraCadastro = new Date();
-    await PedidoStatus.create({
-        nomeStatus: 'Na empresa',
-        descStatus: 'Pedido chegou para a Dona Ninita',
-        boltAtivo: 1
-    });
+    const dataHoraCadastro = new Date().toLocaleString();
+    const {valorPago, tipoPagamento, nome, telefone, rua} = req.body;
 
-    const {valorPago, tipoPagamento, idCliente} = req.body;
+    try {
 
-    if(req.body.frete == 'entregar') {
-        await Pedidos.create({
-            dataHoraCadastro,
-            valorFrete: 10.50,
-            valorTotal: valorPago - 10.50,
-            valorDesconto: 0.00,
-            valorAcrescimo: 10.50,
-            valorPago,
-            tipoPagamento,
-            statusPedido: 'Em andamento',
-            idCliente
-        });
+        if(!req.session.userId) {
+            if(req.body.frete = 'entregar') {
+                const clientes = await Clientes.create({
+                    nomeCliente: nome,
+                    telefoneCliente: telefone,
+                    endereco: rua,
+                    pontosFidelidade: 1
+                });
+                req.session.userId = clientes.idCliente;
+
+                const pedidoStatus = await PedidoStatus.create({
+                    nomeStatus: 'Na empresa',
+                    descStatus: 'Pedido chegou para a Dona Ninita',
+                    bolAtivo: 1
+                });
+
+                const pedidos = await Pedidos.create({
+                    dataHoraCadastro,
+                    valorFrete: 10.50,
+                    idPedidoStatus: pedidoStatus.idPedidoStatus,
+                    valorDesconto: 0.00,
+                    valorAcrescimo: 10.50,
+                    valorPago: Number(valorPago.replace('R$', '')),
+                    tipoPagamento,
+                    statusPedido: 'Em andamento',
+                    idCliente: req.session.userId
+                });
+
+            } else {
+                const clientes = await Clientes.create({
+                    nomeCliente: nome,
+                    telefoneCliente: telefone,
+                    pontosFidelidade: 1
+                });
+                req.session.userId = clientes.idCliente;
+
+                const pedidoStatus = await PedidoStatus.create({
+                    nomeStatus: 'Na empresa',
+                    descStatus: 'Pedido chegou para a Dona Ninita',
+                    bolAtivo: 1
+                });
+
+                const pedidos = await Pedidos.create({
+                    dataHoraCadastro,
+                    valorFrete: 0.00,
+                    idPedidoStatus: pedidoStatus.idPedidoStatus,
+                    valorDesconto: 0.00,
+                    valorAcrescimo: 0.00,
+                    valorPago: Number(valorPago.replace('R$', '')),
+                    tipoPagamento,
+                    statusPedido: 'Em andamento',
+                    idCliente: req.session.userId
+                });
+            }
+
+        } else {
+            const pedidoStatus = await PedidoStatus.create({
+                nomeStatus: 'Na empresa',
+                descStatus: 'Pedido chegou para a Dona Ninita',
+                bolAtivo: 1
+            });
+    
+            if(req.body.frete == 'entregar') {
+                const pedidos = await Pedidos.create({
+                    dataHoraCadastro,
+                    valorFrete: 10.50,
+                    idPedidoStatus: pedidoStatus.idPedidoStatus,
+                    valorDesconto: 0.00,
+                    valorAcrescimo: 10.50,
+                    valorPago: Number(valorPago.replace('R$', '')),
+                    tipoPagamento,
+                    statusPedido: 'Em andamento',
+                    idCliente: req.session.userId
+                });
+                
+            } else {
+                const pedidos = await Pedidos.create({
+                    dataHoraCadastro,
+                    valorFrete: 0.00,
+                    idPedidoStatus: pedidoStatus.idPedidoStatus,
+                    valorDesconto: 0.00,
+                    valorAcrescimo: 0.00,
+                    valorPago: Number(valorPago.replace('R$', '')),
+                    tipoPagamento,
+                    statusPedido: 'Em andamento',
+                    idCliente: req.session.userId
+                });
+            }
+        }
+    
+      } catch (error) {
+        console.error('Erro ao criar PedidoStatus e Pedido:', error);
     }
-
 });
 
 module.exports = router;

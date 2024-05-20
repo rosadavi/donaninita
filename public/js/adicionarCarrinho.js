@@ -23,6 +23,7 @@ window.addEventListener('load', ()=> {
         const totalN = document.querySelector('.totalN');
         const padrao = document.querySelector('.padrao');
         const nomeProduto = document.querySelectorAll('.nomeProdutoCarrinho');
+        const pagamento = document.querySelector('.pagamento');
 
         qtdProduto.forEach(e => {
             e.textContent = carrinho.children.length;
@@ -36,6 +37,7 @@ window.addEventListener('load', ()=> {
                 mensagemCarrinho.classList.add('hide');
                 frete.classList.remove('hide');
                 padrao.classList.remove('hide');
+                pagamento.classList.remove('hide');
             }
         });
         arrCards.forEach(e => {
@@ -74,9 +76,11 @@ function adicionarCarrinho(data) {
     const mensagemCarrinho = document.querySelector('.mensagemCarrinho');
     const endereco = document.querySelector('.endereco');
     const padrao = document.querySelector('.padrao');
+    const pagamento = document.querySelector('.pagamento');
 
     endereco.classList.remove('hide');
     padrao.classList.remove('hide');
+    pagamento.classList.remove('hide');
 
     produtosNoCarrinho.push({produto: data.nome, qtdProduto: data.qtd});
     const dados = JSON.stringify(produtosNoCarrinho);
@@ -116,7 +120,6 @@ function adicionarCarrinho(data) {
     </div>
     
     `;
-
     total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) + data.qtd * data.valor).toFixed(2)}`;
 
 }
@@ -230,6 +233,7 @@ function diminuirQuantidadeProduto() {
     const frete = document.querySelector('.frete');
     const endereco = document.querySelector('.endereco');
     const padrao = document.querySelector('.padrao');
+    const pagamento = document.querySelector('.pagamento');
     
     qtdProduto.forEach(e => {
         e.textContent--;
@@ -240,6 +244,7 @@ function diminuirQuantidadeProduto() {
             frete.classList.remove('hide');
             endereco.classList.remove('hide');
             padrao.classList.remove('hide');
+            pagamento.classList.remove('hide');
         } else {
             total.classList.add('hide');
             fazrPedido.classList.add('hide');
@@ -247,6 +252,7 @@ function diminuirQuantidadeProduto() {
             frete.classList.add('hide');
             endereco.classList.add('hide');
             padrao.classList.add('hide');
+            pagamento.classList.add('hide');
         }
     });
 }

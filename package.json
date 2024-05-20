@@ -24,7 +24,8 @@
     "mysql2": "^3.9.7",
     "node-localstorage": "^3.0.5",
     "sequelize": "^6.37.3",
-    "session-memory-store": "^1.0.0"
+    "session-memory-store": "^1.0.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "prisma": "^5.13.0"

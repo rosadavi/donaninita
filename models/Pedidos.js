@@ -15,10 +15,10 @@ const Pedidos = bd.sequelize.define('Pedidos', {
         }
     },
     dataHoraCadastro: {
-        type: bd.Sequelize.DATE
+        type: bd.Sequelize.STRING(20)
     },
     dataHoraEntrega: {
-        type: bd.Sequelize.DATE
+        type: bd.Sequelize.STRING(20)
     },
     valorFrete: {
         type: bd.Sequelize.DECIMAL(10,2)

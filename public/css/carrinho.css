@@ -311,6 +311,6 @@
     border-radius: 10px;
 }
 
-#carrinho.hide, #carrinhoFide.hide, .frete.hide, .padrao.hide, .endereco.hide {
+#carrinho.hide, #carrinhoFide.hide, .frete.hide, .padrao.hide, .endereco.hide, .pagamento.hide {
     display: none;
 }
