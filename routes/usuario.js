@@ -131,7 +131,7 @@ router.post('/cadastrado', (req, res) => {
             telefone: req.body.telefone,
             email: req.body.email,
             senha: req.body.senha,
-            boltAtivo: 1
+            bolAtivo: 1
         });
         res.redirect('/login');
     } else {
@@ -142,7 +142,7 @@ router.post('/cadastrado', (req, res) => {
             cpf: req.body.cpf,
             email: req.body.email,
             senha: req.body.senha,
-            boltAtivo: 1,
+            bolAtivo: 1,
             pontosFidelidade: 0
         });
         res.redirect('/login');
