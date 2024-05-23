@@ -23,9 +23,6 @@ const Pedidos = bd.sequelize.define('Pedidos', {
     valorFrete: {
         type: bd.Sequelize.DECIMAL(10,2)
     },
-    valorTotal: {
-        type: bd.Sequelize.DECIMAL(10,2)
-    },
     valorDesconto: {
         type: bd.Sequelize.DECIMAL(10,2)
     },
@@ -46,13 +43,6 @@ const Pedidos = bd.sequelize.define('Pedidos', {
         references: {
             model: 'Clientes',
             key: 'idCliente'
-        }
-    },
-    idFuncionario: {
-        type: bd.Sequelize.INTEGER,
-        references: {
-            model: 'Funcionarios',
-            key: 'idFuncionario'
         }
     }
 }, {

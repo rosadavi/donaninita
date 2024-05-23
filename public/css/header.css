@@ -49,7 +49,7 @@
     .funcoesHeader .qtd {
         position: relative;
         right: 50%;
-        padding-top: 15%;
+        padding-bottom: 70%;
         font-size: max(15px, 1.3vw);
     }
 

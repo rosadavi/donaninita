@@ -13,6 +13,7 @@ const Funcionarios = require('../models/Funcionarios');
 const Carrinhos = require('../models/Carrinhos');
 const Pedidos = require('../models/Pedidos');
 const PedidoStatus = require('../models/PedidoStatus');
+const Itens = require('../models/Itens');
 
 const asyncHandler = require('express-async-handler');
 
@@ -41,13 +42,14 @@ app.use(session({
 }));
 
 router.get('/', async (req, res) => {
-    const Produto = localstorage.getItem('carrinho');
-    const parse = JSON.parse(Produto);
-    const produtos = await Produtos.findAll();
 
     if(req.session.dominio == 'donaninita.com') {
-        res.render('private/funcionario.handlebars');
+        const pedidos = await Pedidos.findAll();
+        res.render('private/funcionario.handlebars', {pedidos});
     } else {
+        const Produto = localstorage.getItem('carrinho');
+        const parse = JSON.parse(Produto);
+        const produtos = await Produtos.findAll();
         res.render('public/index.handlebars', {produtos, parse});
     }
 });
@@ -241,7 +243,7 @@ router.get('/logout', (req, res) => {
 
 router.post('/comprar', async (req, res) => {
     const dataHoraCadastro = new Date().toLocaleString();
-    const {valorPago, tipoPagamento, nome, telefone, rua} = req.body;
+    const {valorPago, tipoPagamento, nome, telefone, rua, qtd, valorProduto} = req.body;
 
     try {
 
@@ -273,6 +275,19 @@ router.post('/comprar', async (req, res) => {
                     idCliente: req.session.userId
                 });
 
+                for (let i = 0; i < req.body.idProduto.length; i++) {
+                    const idProduto = req.body.idProduto[i];
+                    const qtdItem = req.body.qtd[i];
+                    const valorProduto = req.body.valorProduto[i];
+        
+                    await Itens.create( {
+                        idProduto,
+                        idPedido: pedidos.idPedido,
+                        qtdItem,
+                        valorItem: valorProduto
+                    });
+                }
+
             } else {
                 const clientes = await Clientes.create({
                     nomeCliente: nome,
@@ -298,6 +313,19 @@ router.post('/comprar', async (req, res) => {
                     statusPedido: 'Em andamento',
                     idCliente: req.session.userId
                 });
+
+                for (let i = 0; i < req.body.idProduto.length; i++) {
+                    const idProduto = req.body.idProduto[i];
+                    const qtdItem = req.body.qtd[i];
+                    const valorProduto = req.body.valorProduto[i];
+        
+                    await Itens.create( {
+                        idProduto,
+                        idPedido: pedidos.idPedido,
+                        qtdItem,
+                        valorItem: valorProduto
+                    });
+                }
             }
 
         } else {
@@ -319,6 +347,19 @@ router.post('/comprar', async (req, res) => {
                     statusPedido: 'Em andamento',
                     idCliente: req.session.userId
                 });
+
+                for (let i = 0; i < req.body.idProduto.length; i++) {
+                    const idProduto = req.body.idProduto[i];
+                    const qtdItem = req.body.qtd[i];
+                    const valorProduto = req.body.valorProduto[i];
+        
+                    await Itens.create( {
+                        idProduto,
+                        idPedido: pedidos.idPedido,
+                        qtdItem,
+                        valorItem: valorProduto
+                    });
+                }
                 
             } else {
                 const pedidos = await Pedidos.create({
@@ -332,11 +373,26 @@ router.post('/comprar', async (req, res) => {
                     statusPedido: 'Em andamento',
                     idCliente: req.session.userId
                 });
+
+                for (let i = 0; i < req.body.idProduto.length; i++) {
+                    const idProduto = req.body.idProduto[i];
+                    const qtdItem = req.body.qtd[i];
+                    const valorProduto = req.body.valorProduto[i];
+        
+                    await Itens.create( {
+                        idProduto,
+                        idPedido: pedidos.idPedido,
+                        qtdItem,
+                        valorItem: valorProduto
+                    });
+                }
             }
         }
     
       } catch (error) {
         console.error('Erro ao criar PedidoStatus e Pedido:', error);
+    } finally {
+        res.redirect('/logado');
     }
 });
 

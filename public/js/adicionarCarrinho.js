@@ -101,7 +101,8 @@ function adicionarCarrinho(data) {
     carrinho.innerHTML += `
 
     <div class="container">
-    
+        <input type="hidden" name="idProduto" value="${data.id}">
+
         <div class="imagemProduto">
             <img src="${data.img}" alt="${data.nome}">
         </div>
@@ -110,7 +111,7 @@ function adicionarCarrinho(data) {
             <p class="precoProduto">R$ ${data.valor}</p>
             <div class="qtdProdutosCarrinho">
                 <span><i class="bi bi-dash menos"></i></span>
-                <input type="number" disabled name="qtdN" class="qtdN" value="${data.qtd}">
+                <input type="number" disabled name="qtd" class="qtdN" value="${data.qtd}">
                 <span><i class="bi bi-plus mais"></i></span>
             </div>
         </span>

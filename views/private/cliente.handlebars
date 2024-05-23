@@ -15,6 +15,11 @@
         <i class="bi bi-cake2-fill"></i>
       </div>
       <form action="/comprar" method="POST" id="comprar">
+      {{#each carrinhos}}
+        <input type="hidden" name="idProduto" value="{{idProduto}}">
+        <input type="hidden" name="qtd" value="{{qtdProduto}}">
+        <input type="hidden" name="valorProduto" value="{{valorProduto}}">
+      {{/each}}
         <div class="produtos">
           {{#each carrinhos}}
             <div class="container">
@@ -26,7 +31,7 @@
                     <p class="precoProduto">R$ {{valorProduto}}</p>
                     <div class="qtdProdutosCarrinho">
                         <span><i class="bi bi-dash menos"></i></span>
-                        <input type="number" name="qtdN" class="qtdN" value="{{qtdProduto}}" disabled>
+                        <input type="number" name="qtd" class="qtdN" value="{{qtdProduto}}" disabled>
                         <span><i class="bi bi-plus mais"></i></span>
                     </div>
                 </span>
@@ -88,7 +93,7 @@
     <div class="funcoesHeader">
         <a href="/logout" id="logout"><i class="bi bi-box-arrow-right"></i></i></a>
         <div class="divCarrinho">
-            <i class="bi bi-bag carrinhoIcon"></i>
+            <i class="bi bi-cart carrinhoIcon"></i>
             <section class="qtd">0</section>
         </div>
     </div>
@@ -105,7 +110,7 @@
     <a href="#rabanadas" class="categoriaBtn">RABANADAS</a>
     <section class="carrinhoNav navHide">
         <div class="divCarrinho">
-            <i class="bi bi-bag carrinhoIcon"></i>
+            <i class="bi bi-cart carrinhoIcon"></i>
             <section class="qtd" id="quantidade">0</section>
         </div>
     </section>

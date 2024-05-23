@@ -40,7 +40,7 @@ const MemoryStore = require('session-memory-store')(session);
             allowProtoMethodsByDefault: true
         }, 
         helpers: {
-            ifCond:(valor1, valor2, img, nome, idP, valor) => {
+            ifCond:(valor1, valor2, img, nome, idP, valor, qtd) => {
                 if(valor1 == valor2) {
                     return `
                 <div class="card">
@@ -50,6 +50,8 @@ const MemoryStore = require('session-memory-store')(session);
                         <input type="hidden" name="nome" value="${nome}">
                         <input type="hidden" name="valor" value="${valor}">
                         <input type="hidden" name="img" value="${img}">
+                        <input type="hidden" name="qtd" value="${qtd}">
+
                         <section class="descricaoProdutos">
                             <p class="nomeProduto">${nome}</p>
                             <p class="valorProduto">${valor}</p>
@@ -70,7 +72,7 @@ const MemoryStore = require('session-memory-store')(session);
                     `;
                 }
             },
-            ifCondUsuario:(valor1, valor2, img, nome, idP, valor) => {
+            ifCondUsuario:(valor1, valor2, img, nome, idP, valor, qtd) => {
                 if(valor1 == valor2) {
                     return `
                 <div class="card">
@@ -80,6 +82,8 @@ const MemoryStore = require('session-memory-store')(session);
                         <input type="hidden" name="nome" value="${nome}">
                         <input type="hidden" name="valor" value="${valor}">
                         <input type="hidden" name="img" value="${img}">
+                        <input type="hidden" name="qtd" value="${qtd}">
+
                         <section class="descricaoProdutos">
                             <p class="nomeProduto">${nome}</p>
                             <p class="valorProduto">${valor}</p>
