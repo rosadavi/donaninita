@@ -45,7 +45,8 @@ router.get('/', async (req, res) => {
 
     if(req.session.dominio == 'donaninita.com') {
         const pedidos = await Pedidos.findAll();
-        res.render('private/funcionario.handlebars', {pedidos});
+        const itens = await Itens.findAll();
+        res.render('private/funcionario.handlebars', {pedidos, itens});
     } else {
         const Produto = localstorage.getItem('carrinho');
         const parse = JSON.parse(Produto);
@@ -244,9 +245,15 @@ router.get('/logout', (req, res) => {
 router.post('/comprar', async (req, res) => {
     const dataHoraCadastro = new Date().toLocaleString();
     const {valorPago, tipoPagamento, nome, telefone, rua, qtd, valorProduto} = req.body;
+    let arr = [];
+    if(Array.isArray(req.body.idProduto)) {
+        arr = req.body.idProduto;
+    } else {
+        arr.push(req.body.idProduto);
+    }
 
     try {
-
+                    
         if(!req.session.userId) {
             if(req.body.frete = 'entregar') {
                 const clientes = await Clientes.create({
@@ -275,7 +282,7 @@ router.post('/comprar', async (req, res) => {
                     idCliente: req.session.userId
                 });
 
-                for (let i = 0; i < req.body.idProduto.length; i++) {
+                for (let i = 0; i < arr.length; i++) {
                     const idProduto = req.body.idProduto[i];
                     const qtdItem = req.body.qtd[i];
                     const valorProduto = req.body.valorProduto[i];
@@ -314,7 +321,7 @@ router.post('/comprar', async (req, res) => {
                     idCliente: req.session.userId
                 });
 
-                for (let i = 0; i < req.body.idProduto.length; i++) {
+                for (let i = 0; i < arr.length; i++) {
                     const idProduto = req.body.idProduto[i];
                     const qtdItem = req.body.qtd[i];
                     const valorProduto = req.body.valorProduto[i];
@@ -327,7 +334,7 @@ router.post('/comprar', async (req, res) => {
                     });
                 }
             }
-
+            res.redirect('/');
         } else {
             const pedidoStatus = await PedidoStatus.create({
                 nomeStatus: 'Na empresa',
@@ -348,7 +355,7 @@ router.post('/comprar', async (req, res) => {
                     idCliente: req.session.userId
                 });
 
-                for (let i = 0; i < req.body.idProduto.length; i++) {
+                for (let i = 0; i < arr.length; i++) {
                     const idProduto = req.body.idProduto[i];
                     const qtdItem = req.body.qtd[i];
                     const valorProduto = req.body.valorProduto[i];
@@ -374,7 +381,7 @@ router.post('/comprar', async (req, res) => {
                     idCliente: req.session.userId
                 });
 
-                for (let i = 0; i < req.body.idProduto.length; i++) {
+                for (let i = 0; i < arr.length; i++) {
                     const idProduto = req.body.idProduto[i];
                     const qtdItem = req.body.qtd[i];
                     const valorProduto = req.body.valorProduto[i];
@@ -387,12 +394,11 @@ router.post('/comprar', async (req, res) => {
                     });
                 }
             }
+            res.redirect('/logado');
         }
     
       } catch (error) {
         console.error('Erro ao criar PedidoStatus e Pedido:', error);
-    } finally {
-        res.redirect('/logado');
     }
 });
 

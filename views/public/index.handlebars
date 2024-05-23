@@ -15,6 +15,11 @@
         <i class="bi bi-cake2-fill"></i>
       </div>
       <form action="/comprar" method="POST" id="comprar">
+        {{#each parse}}
+          <input type="hidden" name="idProduto" value="{{id}}">
+          <input type="hidden" name="qtd" value="{{qtd}}">
+          <input type="hidden" name="valorProduto" value="{{valor}}">
+        {{/each}}
         <div class="produtos">
           {{#each parse}}
             <div class="container">
