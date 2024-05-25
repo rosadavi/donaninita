@@ -108,7 +108,7 @@ const MemoryStore = require('session-memory-store')(session);
     app.set('view engine', 'handlebars');
 
 // Public
-    app.use(express.static(path.join(__dirname + '../../' + '/public')));
+    app.use(express.static(path.join(__dirname, '/public')));
     app.use((req, res, next) =>{
         next();
     });
