@@ -35,7 +35,6 @@ const MemoryStore = require('session-memory-store')(session);
     app.engine('handlebars', handlebars.engine({
         defaultLayout: 'main',
         runtimeOptions: {
-            useMongoClient: true,
             allowProtoPropertiesByDefault: true,
             allowProtoMethodsByDefault: true
         }, 
