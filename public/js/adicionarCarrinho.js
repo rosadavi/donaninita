@@ -100,9 +100,11 @@ function adicionarCarrinho(data) {
     });
     carrinho.innerHTML += `
 
+    <input type="hidden" name="idProduto" value="${data.id}">
+    <input type="hidden" name="qtd" value="${data.qtd}">
+    <input type="hidden" name="valorProduto" value="${data.valor}">
+    
     <div class="container">
-        <input type="hidden" name="idProduto" value="${data.id}">
-
         <div class="imagemProduto">
             <img src="${data.img}" alt="${data.nome}">
         </div>
@@ -280,7 +282,7 @@ function remover(container) {
     const produto = container.children[1].children[0].textContent;
     const produtosAtualizados = produtosNoCarrinho.filter(produtos => produtos.produto != produto);
     produtosNoCarrinho = produtosAtualizados;
-    const dados = JSON.stringify(produtosAtualizados);
+    const dados = JSON.stringify(produtosNoCarrinho);
 
     inputProdutos.value = dados;
     total.value = `R$ ${(Number(total.value.replace('R$', '')) - novoTot).toFixed(2)}`;
@@ -307,7 +309,7 @@ function removerProduto(container) {
         const nome = e.querySelectorAll('.nomeProduto')
         nome.forEach(nome => {
             if(nome.textContent == nomeProduto) {
-                const btn = nome.parentElement.parentElement.children[7];
+                const btn = nome.parentElement.parentElement.children[8];
                 btn.classList.remove('adicionadoCor');
                 btn.textContent = 'Adicionar';
                 btn.removeAttribute('disabled', 'disabled');

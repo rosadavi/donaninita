@@ -14,6 +14,4 @@ app.use(session({
     saveUninitialized: true
 }));
 
-
-
 module.exports = router;

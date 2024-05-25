@@ -19,6 +19,7 @@
           <input type="hidden" name="idProduto" value="{{id}}">
           <input type="hidden" name="qtd" value="{{qtd}}">
           <input type="hidden" name="valorProduto" value="{{valor}}">
+          {{else}}
         {{/each}}
         <div class="produtos">
           {{#each parse}}

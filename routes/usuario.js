@@ -262,7 +262,6 @@ router.post('/comprar', async (req, res) => {
                     endereco: rua,
                     pontosFidelidade: 1
                 });
-                req.session.userId = clientes.idCliente;
 
                 const pedidoStatus = await PedidoStatus.create({
                     nomeStatus: 'Na empresa',
@@ -279,7 +278,7 @@ router.post('/comprar', async (req, res) => {
                     valorPago: Number(valorPago.replace('R$', '')),
                     tipoPagamento,
                     statusPedido: 'Em andamento',
-                    idCliente: req.session.userId
+                    idCliente: clientes.idCliente
                 });
 
                 for (let i = 0; i < arr.length; i++) {
@@ -290,7 +289,7 @@ router.post('/comprar', async (req, res) => {
                     await Itens.create( {
                         idProduto,
                         idPedido: pedidos.idPedido,
-                        qtdItem,
+                        qtdItem: qtdItem,
                         valorItem: valorProduto
                     });
                 }
@@ -301,7 +300,6 @@ router.post('/comprar', async (req, res) => {
                     telefoneCliente: telefone,
                     pontosFidelidade: 1
                 });
-                req.session.userId = clientes.idCliente;
 
                 const pedidoStatus = await PedidoStatus.create({
                     nomeStatus: 'Na empresa',
@@ -318,7 +316,7 @@ router.post('/comprar', async (req, res) => {
                     valorPago: Number(valorPago.replace('R$', '')),
                     tipoPagamento,
                     statusPedido: 'Em andamento',
-                    idCliente: req.session.userId
+                    idCliente: clientes.idCliente
                 });
 
                 for (let i = 0; i < arr.length; i++) {
@@ -399,6 +397,9 @@ router.post('/comprar', async (req, res) => {
     
       } catch (error) {
         console.error('Erro ao criar PedidoStatus e Pedido:', error);
+    } finally {
+        arr = [];
+        // localstorage.clear();
     }
 });
 

@@ -28,7 +28,7 @@
         flex-direction: column;
         width: 90%;
         margin: 20px auto;
-        gap: 5px;
+        gap: 10px;
     }
     
     form > span, .span0 {
@@ -48,7 +48,7 @@
         transition: all .3s ease-in-out;
     }
     
-    #nome:focus, #sobrenome:focus, #email:focus, #senha:focus, #confirmeSenha:focus, #endereco:focus, #telefone:focus, #cpf:focus {
+    #nome:focus, #sobrenome:focus, #email:focus, #senha:focus, #confirmeSenha:focus, #endereco:focus, #telefone:focus, #cpf:focus, #cep:focus, #cidade:focus, #rua:focus {
         border-radius: 15px;
     }
     
@@ -159,7 +159,7 @@
         font-weight: bolder;
     }
 
-    #nome, #sobrenome, #email, #senha, #confirmeSenha, #endereco, #telefone, #cpf {
+    #nome, #sobrenome, #email, #senha, #confirmeSenha, #endereco, #telefone, #cpf, #cep, #cidade, #rua {
         border: none;
         border-radius: 2px;
         outline: none;
@@ -170,7 +170,7 @@
         width: 100%;
     }
     
-    #nome:focus, #sobrenome:focus, #email:focus, #senha:focus, #confirmeSenha:focus, #endereco:focus, #telefone:focus, #cpf:focus {
+    #nome:focus, #sobrenome:focus, #email:focus, #senha:focus, #confirmeSenha:focus, #endereco:focus, #telefone:focus, #cpf:focus, #cep:focus, #cidade:focus, #rua:focus {
         border-radius: 15px;
     }
 
