@@ -4,8 +4,8 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const app = express();
 
-// const Localstorage = require('node-localstorage').LocalStorage;
-// const localstorage = new Localstorage('/localstorage');
+const Localstorage = require('node-localstorage').LocalStorage;
+const localstorage = new Localstorage('/localstorage');
 
 const Produtos = require('../models/Produtos');
 const Clientes = require('../models/Clientes');
@@ -17,21 +17,20 @@ const Itens = require('../models/Itens');
 
 const asyncHandler = require('express-async-handler');
 
-// const fs = require('fs');
+const fs = require('fs');
 
-// const directory = '/localstorage';
+const directory = '/localstorage';
 
-// Verifica se o diretório existe, senão, o cria
-// if (!fs.existsSync(directory)) {
-//     try {
-//         fs.mkdirSync(directory);
-//         console.log('Diretório criado com sucesso:', directory);
-//     } catch (err) {
-//         console.error('Erro ao criar diretório:', err);
-//     }
-// } else {
-//     console.log('O diretório', directory, 'já existe.');
-// }
+if (!fs.existsSync(directory)) {
+    try {
+        fs.mkdirSync(directory);
+        console.log('Diretório criado com sucesso:', directory);
+    } catch (err) {
+        console.error('Erro ao criar diretório:', err);
+    }
+} else {
+    console.log('O diretório', directory, 'já existe.');
+}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -48,35 +47,35 @@ router.get('/', async (req, res) => {
         const itens = await Itens.findAll();
         res.render('private/funcionario.handlebars', {pedidos, itens});
     } else {
-        // const Produto = localstorage.getItem('carrinho');
-        // const parse = JSON.parse(Produto);
+        const Produto = localstorage.getItem('carrinho');
+        const parse = JSON.parse(Produto);
         const produtos = await Produtos.findAll();
-        // res.render('public/index.handlebars', {produtos, parse});
-        res.render('public/index.handlebars', {produtos});
+        res.render('public/index.handlebars', {produtos, parse});
+        // res.render('public/index.handlebars', {produtos});
     }
 });
 
-// router.post('/carrinho/add', (req, res) => {
-//     const img = req.body.img;
-//     const id = req.body.id;
-//     const nome = req.body.nome;
-//     const valor = req.body.valor;
-//     const qtd = req.body.qtd;
+router.post('/carrinho/add', (req, res) => {
+    const img = req.body.img;
+    const id = req.body.id;
+    const nome = req.body.nome;
+    const valor = req.body.valor;
+    const qtd = req.body.qtd;
 
-//     const produtosData = {
-//         img: img, 
-//         id: id,
-//         nome: nome,
-//         valor: valor,
-//         qtd: qtd
-//     };
+    const produtosData = {
+        img: img, 
+        id: id,
+        nome: nome,
+        valor: valor,
+        qtd: qtd
+    };
 
-//     let carrinho = JSON.parse(localstorage.getItem('carrinho')) || [];
-//     carrinho.push(produtosData);
-//     localstorage.setItem('carrinho', JSON.stringify(carrinho));
+    let carrinho = JSON.parse(localstorage.getItem('carrinho')) || [];
+    carrinho.push(produtosData);
+    localstorage.setItem('carrinho', JSON.stringify(carrinho));
 
-//     res.send('Produto adicionado com sucesso.');
-// });
+    res.send('Produto adicionado com sucesso.');
+});
 
 router.post('/carrinho/addCliente', (req, res) => {
     const img = req.body.img;
@@ -103,18 +102,18 @@ router.post('/carrinho/remover', asyncHandler(async (req, res) => {
     if(user) {
         Carrinhos.destroy({where: {nomeProduto: req.body.nomeProduto}}).then(() => console.log('Produto removido')).catch(e => console.log('Erro ao remover o produto' + e));
     } else {
-        // let novosProdutos = JSON.parse(localstorage.getItem('carrinho'));
-        // novosProdutos = novosProdutos.filter(obj => obj.nome !== req.body.nomeProduto);
-        // localstorage.setItem('carrinho', JSON.stringify(novosProdutos));
+        let novosProdutos = JSON.parse(localstorage.getItem('carrinho'));
+        novosProdutos = novosProdutos.filter(obj => obj.nome !== req.body.nomeProduto);
+        localstorage.setItem('carrinho', JSON.stringify(novosProdutos));
     }
     res.send('Produto removido.');
 }));
 
-// router.get('/localstorage', (req, res) => {
-//     const Produto = localstorage.getItem('carrinho');
-//     const parse = JSON.parse(Produto);
-//     res.send(parse);
-// });
+router.get('/localstorage', (req, res) => {
+    const Produto = localstorage.getItem('carrinho');
+    const parse = JSON.parse(Produto);
+    res.send(parse);
+});
 
 router.get('/login', (req, res) => {
     res.render('log/login.handlebars');
@@ -232,13 +231,11 @@ router.get('/logado', async (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    // Limpe a sessão do usuário
     req.session.destroy((err) => {
         if (err) {
             console.error('Erro ao fazer logout:', err);
             return res.status(500).send('Erro interno do servidor');
         }
-        // Redirecione o usuário de volta para a página principal após o logout
         res.redirect('/');
     });
 });
@@ -398,9 +395,6 @@ router.post('/comprar', async (req, res) => {
     
       } catch (error) {
         console.error('Erro ao criar PedidoStatus e Pedido:', error);
-    } finally {
-        arr = [];
-        // localstorage.clear();
     }
 });
 
