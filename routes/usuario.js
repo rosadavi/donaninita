@@ -4,9 +4,6 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const app = express();
 
-const Localstorage = require('node-localstorage').LocalStorage;
-const localstorage = new Localstorage('/localstorage');
-
 const Produtos = require('../models/Produtos');
 const Clientes = require('../models/Clientes');
 const Funcionarios = require('../models/Funcionarios');
@@ -16,22 +13,6 @@ const PedidoStatus = require('../models/PedidoStatus');
 const Itens = require('../models/Itens');
 
 const asyncHandler = require('express-async-handler');
-
-const fs = require('fs');
-const path = require('path');
-
-const directory = path.resolve(__dirname, '/localstorage');
-
-if (!fs.existsSync(directory)) {
-    try {
-        fs.mkdirSync(directory);
-        console.log('Diretório criado com sucesso:', directory);
-    } catch (err) {
-        console.error('Erro ao criar diretório:', err);
-    }
-} else {
-    console.log('O diretório', directory, 'já existe.');
-}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -48,11 +29,8 @@ router.get('/', async (req, res) => {
         const itens = await Itens.findAll();
         res.render('private/funcionario.handlebars', {pedidos, itens});
     } else {
-        const Produto = localstorage.getItem('carrinho');
-        const parse = JSON.parse(Produto);
         const produtos = await Produtos.findAll();
-        res.render('public/index.handlebars', {produtos, parse});
-        // res.render('public/index.handlebars', {produtos});
+        res.render('public/index.handlebars', {produtos});
     }
 });
 
@@ -71,9 +49,9 @@ router.post('/carrinho/add', (req, res) => {
         qtd: qtd
     };
 
-    let carrinho = JSON.parse(localstorage.getItem('carrinho')) || [];
-    carrinho.push(produtosData);
-    localstorage.setItem('carrinho', JSON.stringify(carrinho));
+    // let carrinho = JSON.parse(localstorage.getItem('carrinho')) || [];
+    // carrinho.push(produtosData);
+    // localstorage.setItem('carrinho', JSON.stringify(carrinho));
 
     res.send('Produto adicionado com sucesso.');
 });
@@ -103,18 +81,12 @@ router.post('/carrinho/remover', asyncHandler(async (req, res) => {
     if(user) {
         Carrinhos.destroy({where: {nomeProduto: req.body.nomeProduto}}).then(() => console.log('Produto removido')).catch(e => console.log('Erro ao remover o produto' + e));
     } else {
-        let novosProdutos = JSON.parse(localstorage.getItem('carrinho'));
-        novosProdutos = novosProdutos.filter(obj => obj.nome !== req.body.nomeProduto);
-        localstorage.setItem('carrinho', JSON.stringify(novosProdutos));
+        // let novosProdutos = JSON.parse(localstorage.getItem('carrinho'));
+        // novosProdutos = novosProdutos.filter(obj => obj.nome !== req.body.nomeProduto);
+        // localstorage.setItem('carrinho', JSON.stringify(novosProdutos));
     }
     res.send('Produto removido.');
 }));
-
-router.get('/localstorage', (req, res) => {
-    const Produto = localstorage.getItem('carrinho');
-    const parse = JSON.parse(Produto);
-    res.send(parse);
-});
 
 router.get('/login', (req, res) => {
     res.render('log/login.handlebars');
