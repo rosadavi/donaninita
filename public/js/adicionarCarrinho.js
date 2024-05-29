@@ -45,7 +45,7 @@ window.addEventListener('load', ()=> {
             nome.forEach(e => {
                 nomeProduto.forEach(nome => {
                     if(e.textContent == nome.textContent) {
-                        const btn = e.parentElement.parentElement.children[7];
+                        const btn = e.parentElement.parentElement.children[8];
                         btn.classList.add('adicionadoCor');
                         btn.textContent = 'Adicionado';
                         btn.setAttribute('disabled', 'disabled');

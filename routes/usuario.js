@@ -18,8 +18,9 @@ const Itens = require('../models/Itens');
 const asyncHandler = require('express-async-handler');
 
 const fs = require('fs');
+const path = require('path');
 
-const directory = '/localstorage';
+const directory = path.resolve(__dirname, '/localstorage');
 
 if (!fs.existsSync(directory)) {
     try {
