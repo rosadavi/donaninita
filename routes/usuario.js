@@ -13,6 +13,7 @@ const PedidoStatus = require('../models/PedidoStatus');
 const Itens = require('../models/Itens');
 
 const asyncHandler = require('express-async-handler');
+const { where } = require('sequelize');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -22,14 +23,30 @@ app.use(session({
     saveUninitialized: true
 }));
 
+router.get('/query', (req, res) => {
+    res.render('public/query.handlebars');
+});
+
+router.post('/query', async(req, res) => {
+    try {
+        const status = await Pedidos.findAll({
+            attributes: ['statusPedido'],
+            where: {idPedido: req.body.cod}
+        });
+        res.render('public/response.handlebars', {status});
+    } catch(e) {
+        console.log('Algo deu errado' + e);
+    }
+});
+
 router.get('/', async (req, res) => {
 
     if(req.session.dominio == 'donaninita.com') {
         const pedidos = await Pedidos.findAll();
-        const itens = await Itens.findAll();
-        res.render('private/funcionario.handlebars', {pedidos, itens});
+        res.render('private/funcionario.handlebars', {pedidos});
     } else {
         const produtos = await Produtos.findAll();
+
         res.render('public/index.handlebars', {produtos});
     }
 });
@@ -103,8 +120,8 @@ router.post('/cadastrado', (req, res) => {
         Funcionarios.create({
             nomeFuncionario: req.body.nome,
             cpf: req.body.cpf,
-            dataNascimento: req.body.dataNasc,
-            telefone: req.body.telefone,
+            dataNasc: req.body.dataNasc,
+            telefoneFuncionario: req.body.telefone,
             email: req.body.email,
             senha: req.body.senha,
             bolAtivo: 1
@@ -248,7 +265,7 @@ router.post('/comprar', async (req, res) => {
                     valorAcrescimo: 10.50,
                     valorPago: Number(valorPago.replace('R$', '')),
                     tipoPagamento,
-                    statusPedido: 'Em andamento',
+                    statusPedido: 'Chegou para Dona Ninita',
                     idCliente: clientes.idCliente
                 });
 
@@ -286,7 +303,7 @@ router.post('/comprar', async (req, res) => {
                     valorAcrescimo: 0.00,
                     valorPago: Number(valorPago.replace('R$', '')),
                     tipoPagamento,
-                    statusPedido: 'Em andamento',
+                    statusPedido: 'Chegou para Dona Ninita',
                     idCliente: clientes.idCliente
                 });
 
@@ -320,7 +337,7 @@ router.post('/comprar', async (req, res) => {
                     valorAcrescimo: 10.50,
                     valorPago: Number(valorPago.replace('R$', '')),
                     tipoPagamento,
-                    statusPedido: 'Em andamento',
+                    statusPedido: 'Chegou para Dona Ninita',
                     idCliente: req.session.userId
                 });
 
@@ -346,7 +363,7 @@ router.post('/comprar', async (req, res) => {
                     valorAcrescimo: 0.00,
                     valorPago: Number(valorPago.replace('R$', '')),
                     tipoPagamento,
-                    statusPedido: 'Em andamento',
+                    statusPedido: 'Chegou para Dona Ninita',
                     idCliente: req.session.userId
                 });
 

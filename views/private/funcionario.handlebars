@@ -1,16 +1,28 @@
+<h3>Pagina de funcionario</h3>
+<a href="/logout">Logout</a>
+
 <div class="pedidos">
     <h3>Pedidos</h3>
-    <table>
+    <table border="1">
         <tr>
-            <th>Nome Cliente</th>
             <th>Id Cliente</th>
             <th>Data Hora Cadastrado</th>
             <th>Data Hora Entrega</th>
             <th>Valor Frete</th>
-            <th></th>
+            <th>Tipo de Pagamento</th>
+            <th>Status Pedido</th>
         </tr>
+        {{#each pedidos}}
+        <tr>
+            <td>{{idCliente}}</td>
+            <td>{{dataHoraCadastro}}</td>
+            <td>{{dataHoraEntrega}}</td>
+            <td>{{valorFrete}}</td>
+            <td>{{tipoPagamento}}</td>
+            <td>{{statusPedido}}</td>
+        </tr>
+        {{else}}
+        <p>Sem Pedidos</p>
+        {{/each}}
     </table>
 </div>
-
-<h3>Pagina de funcionario</h3>
-<a href="/logout">Logout</a>
