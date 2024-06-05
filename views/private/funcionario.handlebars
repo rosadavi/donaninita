@@ -3,22 +3,59 @@
 
 <div class="pedidos">
     <h3>Pedidos</h3>
+    <form action="/alterarStatus" method="POST" id="alterarStatusForm">
+        <label for="idPedido">Digite o ID do pedido que deseja alterar os status do pedido:</label>
+        <input type="number" name="idPedido">
+        <button type="submit">Salvar</button>
+    </form>
     <table border="1">
         <tr>
-            <th>Id Cliente</th>
+            <th>ID Cliente</th>
+            <th>ID Pedido</th>
             <th>Data Hora Cadastrado</th>
-            <th>Data Hora Entrega</th>
             <th>Valor Frete</th>
             <th>Tipo de Pagamento</th>
+            <th>Valor Pago</th>
             <th>Status Pedido</th>
         </tr>
         {{#each pedidos}}
         <tr>
             <td>{{idCliente}}</td>
+            <td>{{idPedido}}</td>
+            <td>{{dataHoraCadastro}}</td>
+            <td>{{valorFrete}}</td>
+            <td>{{tipoPagamento}}</td>
+            <td>{{valorPago}}</td>
+            <td>{{statusPedido}}</td>
+        </tr>
+        {{else}}
+        <p>Sem Pedidos</p>
+        {{/each}}
+    </table>
+</div>
+
+<div class="entregues">
+    <h3>Pedidos Entregues</h3>
+    <table border="1">
+        <tr>
+            <th>ID Cliente</th>
+            <th>ID Pedido</th>
+            <th>Data Hora Cadastrado</th>
+            <th>Data Hora Entrega</th>
+            <th>Valor Frete</th>
+            <th>Tipo de Pagamento</th>
+            <th>Valor Pago</th>
+            <th>Status Pedido</th>
+        </tr>
+        {{#each entregue}}
+        <tr>
+            <td>{{idCliente}}</td>
+            <td>{{idPedido}}</td>
             <td>{{dataHoraCadastro}}</td>
             <td>{{dataHoraEntrega}}</td>
             <td>{{valorFrete}}</td>
             <td>{{tipoPagamento}}</td>
+            <td>{{valorPago}}</td>
             <td>{{statusPedido}}</td>
         </tr>
         {{else}}

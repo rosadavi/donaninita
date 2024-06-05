@@ -43,7 +43,8 @@ router.get('/', async (req, res) => {
 
     if(req.session.dominio == 'donaninita.com') {
         const pedidos = await Pedidos.findAll();
-        res.render('private/funcionario.handlebars', {pedidos});
+        const entregue = await Pedidos.findAll({where: {statusPedido: 'Entregue'}});
+        res.render('private/funcionario.handlebars', {pedidos, entregue});
     } else {
         const produtos = await Produtos.findAll();
 
@@ -382,7 +383,7 @@ router.post('/comprar', async (req, res) => {
             }
             res.redirect('/logado');
         }
-    
+        
       } catch (error) {
         console.error('Erro ao criar PedidoStatus e Pedido:', error);
     }

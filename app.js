@@ -115,7 +115,10 @@ const MemoryStore = require('session-memory-store')(session);
 
 // Rotas
     const index = require('./routes/usuario');
+    const funcionario = require('./routes/funcionario');
+    
     app.use('/', index);
+    app.use('/', funcionario);
 
     const PORT = process.env.PORT || 3333;
 
