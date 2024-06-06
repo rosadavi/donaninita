@@ -6,6 +6,12 @@
     <form action="/alterarStatus" method="POST" id="alterarStatusForm">
         <label for="idPedido">Digite o ID do pedido que deseja alterar os status do pedido:</label>
         <input type="number" name="idPedido">
+        <div class="inputs">
+            <strong class="sInput"><strong class="freteS">Confirmado</strong><input type="radio" name="status" value="Confirmado" required></strong>
+            <strong class="sInput"><strong class="freteS">Em Preparo</strong><input type="radio" name="status" value="Em Preparo"></strong>
+            <strong class="sInput"><strong class="freteS">Saiu para entrega</strong><input type="radio" name="status" value="Saiu para entrega"></strong>
+            <strong class="sInput"><strong class="freteS">Entregue</strong><input type="radio" name="status" value="Entregue"></strong>
+        </div>
         <button type="submit">Salvar</button>
     </form>
     <table border="1">

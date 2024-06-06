@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         e.preventDefault();
         const formData = new FormData(alterarStatusForm);
         const data = {
-            idPedido: formData.get('idPedido')
+            idPedido: formData.get('idPedido'),
+            statusPedido: formData.get('status')
         };
         try {
             const response = await fetch('/alterarStatus', {

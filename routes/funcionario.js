@@ -25,14 +25,13 @@ router.post('/alterarStatus', async(req, res) => {
         const dia = data.getDay();
         const cliente = await Pedidos.update(
             {
-                statusPedido: 'Entregue',
+                statusPedido: req.body.statusPedido,
                 dataHoraEntrega: `${dia}/${mes}/${ano} ${horas}:${minutos}`
             }, 
             {where: {
                 idPedido: req.body.idPedido
             }}
         );
-
         res.json({ success: true, message: 'Status atualizado com sucesso' });
     } catch(e) {
         console.log('erro' + e);
