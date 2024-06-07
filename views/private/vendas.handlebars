@@ -1,0 +1,34 @@
+<h3>Pagina de funcionario</h3>
+<a href="/logout">Logout</a>
+<a href="/funcionarios">Funcionarios</a>
+<a href="/pedidos">Pedidos</a>
+
+<div class="entregues">
+    <h3>Pedidos Entregues</h3>
+    <table border="1">
+        <tr>
+            <th>ID Cliente</th>
+            <th>ID Pedido</th>
+            <th>Data Hora Cadastrado</th>
+            <th>Data Hora Entrega</th>
+            <th>Valor Frete</th>
+            <th>Tipo de Pagamento</th>
+            <th>Valor Pago</th>
+            <th>Status Pedido</th>
+        </tr>
+        {{#each vendas}}
+        <tr>
+            <td>{{idCliente}}</td>
+            <td>{{idPedido}}</td>
+            <td>{{dataHoraCadastro}}</td>
+            <td>{{dataHoraEntrega}}</td>
+            <td>{{valorFrete}}</td>
+            <td>{{tipoPagamento}}</td>
+            <td>{{valorPago}}</td>
+            <td>{{statusPedido}}</td>
+        </tr>
+        {{else}}
+        <p>Sem Pedidos</p>
+        {{/each}}
+    </table>
+</div>

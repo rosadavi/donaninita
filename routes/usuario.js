@@ -23,6 +23,18 @@ app.use(session({
     saveUninitialized: true
 }));
 
+router.get('/', async (req, res) => {
+
+    if(req.session.dominio == 'donaninita.com') {
+        const pedidos = await Pedidos.findAll();
+        res.render('private/pedidos.handlebars', {pedidos});
+    } else {
+        const produtos = await Produtos.findAll();
+
+        res.render('public/index.handlebars', {produtos});
+    }
+});
+
 router.get('/query', (req, res) => {
     res.render('public/query.handlebars');
 });
@@ -36,19 +48,6 @@ router.post('/query', async(req, res) => {
         res.render('public/response.handlebars', {status});
     } catch(e) {
         console.log('Algo deu errado' + e);
-    }
-});
-
-router.get('/', async (req, res) => {
-
-    if(req.session.dominio == 'donaninita.com') {
-        const pedidos = await Pedidos.findAll();
-        const entregue = await Pedidos.findAll({where: {statusPedido: 'Entregue'}});
-        res.render('private/funcionario.handlebars', {pedidos, entregue});
-    } else {
-        const produtos = await Produtos.findAll();
-
-        res.render('public/index.handlebars', {produtos});
     }
 });
 

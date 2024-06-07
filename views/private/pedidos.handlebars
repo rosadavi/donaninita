@@ -1,11 +1,13 @@
 <h3>Pagina de funcionario</h3>
 <a href="/logout">Logout</a>
+<a href="/vendas">Vendas</a>
+<a href="/funcionarios">Funcionarios</a>
 
 <div class="pedidos">
     <h3>Pedidos</h3>
     <form action="/alterarStatus" method="POST" id="alterarStatusForm">
         <label for="idPedido">Digite o ID do pedido que deseja alterar os status do pedido:</label>
-        <input type="number" name="idPedido">
+        <input type="number" name="idPedido" required>
         <div class="inputs">
             <strong class="sInput"><strong class="freteS">Confirmado</strong><input type="radio" name="status" value="Confirmado" required></strong>
             <strong class="sInput"><strong class="freteS">Em Preparo</strong><input type="radio" name="status" value="Em Preparo"></strong>
@@ -14,9 +16,31 @@
         </div>
         <button type="submit">Salvar</button>
     </form>
+        <form action="/descpedido" method="POST" id="descpedido">
+        <label for="idPedido">Digite o ID do pedido que deseja vizualizar o pedido</label>
+        <input type="number" name="idPedido" required>
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    {{#if itens}}
+        <table border="1">
+            <tr>
+                <th>Pedido</th>
+                <th>Produto</th>
+                <th>Quantidade</th>
+            </tr>
+        {{#each itens}}
+            <tr>
+                <td>{{idPedido}}</td>
+                <td>{{idProduto}}</td>
+                <td>{{qtdItem}}</td>
+            </tr>
+        {{/each}}
+        </table>
+    {{/if}}
+
     <table border="1">
         <tr>
-            <th>ID Cliente</th>
             <th>ID Pedido</th>
             <th>Data Hora Cadastrado</th>
             <th>Valor Frete</th>
@@ -26,39 +50,8 @@
         </tr>
         {{#each pedidos}}
         <tr>
-            <td>{{idCliente}}</td>
             <td>{{idPedido}}</td>
             <td>{{dataHoraCadastro}}</td>
-            <td>{{valorFrete}}</td>
-            <td>{{tipoPagamento}}</td>
-            <td>{{valorPago}}</td>
-            <td>{{statusPedido}}</td>
-        </tr>
-        {{else}}
-        <p>Sem Pedidos</p>
-        {{/each}}
-    </table>
-</div>
-
-<div class="entregues">
-    <h3>Pedidos Entregues</h3>
-    <table border="1">
-        <tr>
-            <th>ID Cliente</th>
-            <th>ID Pedido</th>
-            <th>Data Hora Cadastrado</th>
-            <th>Data Hora Entrega</th>
-            <th>Valor Frete</th>
-            <th>Tipo de Pagamento</th>
-            <th>Valor Pago</th>
-            <th>Status Pedido</th>
-        </tr>
-        {{#each entregue}}
-        <tr>
-            <td>{{idCliente}}</td>
-            <td>{{idPedido}}</td>
-            <td>{{dataHoraCadastro}}</td>
-            <td>{{dataHoraEntrega}}</td>
             <td>{{valorFrete}}</td>
             <td>{{tipoPagamento}}</td>
             <td>{{valorPago}}</td>
