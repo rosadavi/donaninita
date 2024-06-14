@@ -16,6 +16,9 @@ const PedidoStatus = bd.sequelize.define('PedidoStatus', {
     },
     bolAtivo: {
         type: bd.Sequelize.TINYINT
+    },
+    idCliente: {
+        type: bd.Sequelize.INTEGER
     }
 }, {
     freezeTableName: true,

@@ -14,7 +14,7 @@ const MemoryStore = require('session-memory-store')(session);
     // Sessao
     app.use(session({
         secret: "cursodenode",
-        resave: true,
+        resave: false,
         saveUninitialized: true,
         store: new MemoryStore()
     }));

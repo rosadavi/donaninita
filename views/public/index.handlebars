@@ -1,3 +1,17 @@
+<div id="rastrearFade" class="hide"></div>
+<div id="rastrear" class="hide">
+  {{#if arrPedidos}}
+    <p>{{arrPedidos}}</p>
+    {{else}}
+    <p>ainda nao ha pedidos</p>
+  {{/if}}
+  <form action="/query" method="POST" class="rastrearForm">
+    <label for="cod">Codigo do Pedido</label>
+    <input type="text" name="cod" class="cod" placeholder="codigo">
+  </form>
+  <p class="descStatus"></p>
+</div>
+
 <div id="carrinhoFide" class="hide"></div>
 <div id="carrinho" class="hide">
     <section class="secaoCarrinho">
@@ -15,6 +29,7 @@
         <i class="bi bi-cake2-fill"></i>
       </div>
       <form action="/comprar" method="POST" id="comprar">
+      <input type="hidden" name="cadastro" value="false">
         {{#each parse}}
           <input type="hidden" name="idProduto" value="{{id}}">
           <input type="hidden" name="qtd" value="{{qtd}}">
@@ -114,7 +129,7 @@
     <a href="#bolos" class="categoriaBtn">BOLOS</a>
     <a href="#biscoitos" class="categoriaBtn">BISCOITOS</a>
     <a href="#rabanadas" class="categoriaBtn">RABANADAS</a>
-    <a href="/query" target="_blank" class="categoriaBtn">RASTREAR</a>
+    <a href="#" class="categoriaBtn rastrearBtn">RASTREAR</a>
     <section class="carrinhoNav navHide">
         <div class="divCarrinho">
             <i class="bi bi-cart carrinhoIcon"></i>

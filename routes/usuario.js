@@ -15,6 +15,8 @@ const Itens = require('../models/Itens');
 const asyncHandler = require('express-async-handler');
 const { where } = require('sequelize');
 
+let arrPedidos = [];
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
@@ -31,23 +33,25 @@ router.get('/', async (req, res) => {
     } else {
         const produtos = await Produtos.findAll();
 
-        res.render('public/index.handlebars', {produtos});
+        res.render('public/index.handlebars', {produtos, arrPedidos});
     }
-});
-
-router.get('/query', (req, res) => {
-    res.render('public/query.handlebars');
 });
 
 router.post('/query', async(req, res) => {
     try {
         const status = await Pedidos.findAll({
             attributes: ['statusPedido'],
-            where: {idPedido: req.body.cod}
+            where: { idPedido: req.body.cod }
         });
-        res.render('public/response.handlebars', {status});
-    } catch(e) {
-        console.log('Algo deu errado' + e);
+
+        if (status.length === 0) {
+            return res.status(404).json({ error: 'Pedido não encontrado' });
+        }
+
+        res.json({ status: status[0].statusPedido });
+    } catch (error) {
+        console.error('Erro ao buscar pedido:', error);
+        res.status(500).json({ error: 'Erro ao buscar pedido' });
     }
 });
 
@@ -207,8 +211,9 @@ router.get('/logado', async (req, res) => {
                     const produtos = await Produtos.findAll();
                     const carrinhos = await Carrinhos.findAll({where: {idCliente: req.session.userId}});
                     const clientes = await Clientes.findAll({where: {idCliente: req.session.userId}});
+                    const pedidos = await Pedidos.findAll({where: {idCliente: req.session.userId}});
 
-                    return res.render('private/cliente.handlebars', {produtos, carrinhos, clientes, user});
+                    return res.render('private/cliente.handlebars', {produtos, carrinhos, clientes, user, pedidos});
                 }
             } else {
                 res.redirect('/');
@@ -232,7 +237,7 @@ router.get('/logout', (req, res) => {
 
 router.post('/comprar', async (req, res) => {
     const dataHoraCadastro = new Date().toLocaleString();
-    const {valorPago, tipoPagamento, nome, telefone, rua, qtd, valorProduto} = req.body;
+    const {valorPago, tipoPagamento, nome, telefone, rua, qtd, valorProduto, login} = req.body;
     let arr = [];
     if(Array.isArray(req.body.idProduto)) {
         arr = req.body.idProduto;
@@ -241,7 +246,7 @@ router.post('/comprar', async (req, res) => {
     }
 
     try {
-                    
+
         if(!req.session.userId) {
             if(req.body.frete = 'entregar') {
                 const clientes = await Clientes.create({
@@ -282,6 +287,8 @@ router.post('/comprar', async (req, res) => {
                     });
                 }
 
+                arrPedidos.push(pedidos.idPedido);
+
             } else {
                 const clientes = await Clientes.create({
                     nomeCliente: nome,
@@ -319,13 +326,16 @@ router.post('/comprar', async (req, res) => {
                         valorItem: valorProduto
                     });
                 }
+
+                arrPedidos.push(pedidos.idPedido);
             }
             res.redirect('/');
         } else {
             const pedidoStatus = await PedidoStatus.create({
                 nomeStatus: 'Na empresa',
                 descStatus: 'Pedido chegou para a Dona Ninita',
-                bolAtivo: 1
+                bolAtivo: 1,
+                idCliente: req.session.userId
             });
     
             if(req.body.frete == 'entregar') {
@@ -353,7 +363,7 @@ router.post('/comprar', async (req, res) => {
                         valorItem: valorProduto
                     });
                 }
-                
+
             } else {
                 const pedidos = await Pedidos.create({
                     dataHoraCadastro,
