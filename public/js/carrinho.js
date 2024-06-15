@@ -6,6 +6,7 @@ const form = document.querySelector('#comprar');
 const rastrearBtn = document.querySelector('.rastrearBtn');
 const rastrear = document.querySelector('#rastrear');
 const rastrearFade = document.querySelector('#rastrearFade');
+const sairR = document.querySelector('.sairR');
 
 const arr2 = [rastrear, rastrearFade];
 const arr = [carrinho, carrinhoFide];
@@ -33,11 +34,17 @@ fecharCarrinho.addEventListener('click', () => {
 rastrearBtn.addEventListener('click', ()=>{
     arr2.forEach(e => {
         e.classList.toggle('hide');
-    })
+    });
 });
 
 rastrearFade.addEventListener('click', ()=>{
     arr2.forEach(e => {
         e.classList.toggle('hide');
-    })
+    });
+});
+
+sairR.addEventListener('click', ()=>{
+    arr2.forEach(e => {
+        e.classList.toggle('hide');
+    });
 });

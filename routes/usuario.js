@@ -44,11 +44,31 @@ router.post('/query', async(req, res) => {
             where: { idPedido: req.body.cod }
         });
 
-        if (status.length === 0) {
-            return res.status(404).json({ error: 'Pedido não encontrado' });
-        }
+        const itens = await Itens.findAll({
+            where: { idPedido: req.body.cod}
+        });
 
-        res.json({ status: status[0].statusPedido });
+        const idProduto = itens.map(item => item.idProduto);
+        
+        const produtos = await Produtos.findAll({
+            where: {idProduto: idProduto}
+        });
+
+        const nomeProduto = produtos.map(item => item.nomeProduto);
+        const stringNomeProduto = nomeProduto.join(' --- ');
+        
+        const qtdItem = itens.map(item => item.qtdItem);
+        const stringQtdItem = qtdItem.join(' --- ');
+
+        const valorItem = itens.map(item => item.valorItem);
+        const stringValorItem = valorItem.join(' --- ');
+
+        res.json({ 
+            status: status[0].statusPedido,
+            nomeProduto: stringNomeProduto,
+            qtdItem: stringQtdItem,
+            valorItem: stringValorItem
+        });
     } catch (error) {
         console.error('Erro ao buscar pedido:', error);
         res.status(500).json({ error: 'Erro ao buscar pedido' });
