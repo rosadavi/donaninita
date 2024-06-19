@@ -102,6 +102,18 @@ const MemoryStore = require('session-memory-store')(session);
                 </div>
                     `;
                 }
+            },
+            ifTipoPagamento: (valor) => {
+                if(valor == 1) {
+                    return `<td>Debito</td>`;
+                } else if(valor == 2) {
+                    return `<td>Credito</td>`;
+                }
+            },
+            ifProduto: (valor) => {
+                if(valor == 1) {
+                    return `<td>Bolo de Chocolate com Ninho</td>`;
+                }
             }
         }
     }));

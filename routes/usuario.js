@@ -173,16 +173,19 @@ router.post('/login', async(req, res) => {
     if(dominio == 'donaninita.com') {
         try {
             const user = await Funcionarios.findOne({where: {email}});
+            
 
             if(user) {
                 if(senha === user.senha) {
                     req.session.userId = user.idFuncionario;
                     req.session.dominio = dominio;
                     return res.redirect('/logado');
+                } else {
+                    res.status(400).json({error: 'Credenciais invalidas.'});
                 }
-            }
-            res.send(user);
-    
+            } else {
+                res.status(400).json({error: 'Credenciais invalidas.'});
+            }    
         } catch(e) {
             console.error('Erro ao autenticar usuário:', error);
             res.status(500).send('Erro interno do servidor');
@@ -196,9 +199,12 @@ router.post('/login', async(req, res) => {
                     req.session.userId = user.idCliente;
                     req.session.userEmail = user.email;
                     return res.redirect('/logado');
+                } else {
+                    res.status(400).json({error: 'Credenciais invalidas.'});
                 }
+            } else {
+                res.status(400).json({error: 'Credenciais invalidas.'});
             }
-            res.send('Credenciais invalidas');
     
         } catch(e) {
             console.error('Erro ao autenticar usuário:', error);

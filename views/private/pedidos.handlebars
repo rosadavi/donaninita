@@ -32,7 +32,7 @@
         {{#each itens}}
             <tr>
                 <td>{{idPedido}}</td>
-                <td>{{idProduto}}</td>
+                {{#ifProduto idProduto}}{{/ifProduto}}
                 <td>{{qtdItem}}</td>
             </tr>
         {{/each}}
@@ -53,7 +53,8 @@
             <td>{{idPedido}}</td>
             <td>{{dataHoraCadastro}}</td>
             <td>{{valorFrete}}</td>
-            <td>{{tipoPagamento}}</td>
+            {{#ifTipoPagamento tipoPagamento}}{{/ifTipoPagamento}}
+            {{!-- <td>{{tipoPagamento}}</td> --}}
             <td>{{valorPago}}</td>
             <td>{{statusPedido}}</td>
         </tr>
