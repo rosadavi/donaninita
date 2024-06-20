@@ -135,7 +135,7 @@ function adicionarCarrinho(data) {
         if(carrinho.children[i].classList.contains('container')) {
             totalCarregado += Number(carrinho.children[i].children[1].children[1].textContent.replace('R$', '')) * Number(carrinho.children[i].children[1].children[2].children[1].value);
         } else {
-            totalAtual += Number(carrinho.children[i].children[3].children[1].children[1].textContent.replace('R$', '')) * Number(carrinho.children[i].children[3].children[1].children[2].children[1].value);
+            totalAtual += Number(carrinho.children[i].children[1].children[1].children[1].textContent.replace('R$', '')) * Number(carrinho.children[i].children[1].children[1].children[2].children[1].value);
         }
     }
     let totalInput = totalCarregado + totalAtual;
