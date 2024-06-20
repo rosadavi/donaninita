@@ -35,13 +35,15 @@
         <i class="bi bi-cake2-fill"></i>
       </div>
       <form action="/comprar" method="POST" id="comprar">
-      <input type="hidden" name="cadastro" value="false">
+      <div>
         {{#each parse}}
-          <input type="hidden" name="idProduto" value="{{id}}">
-          <input type="hidden" name="qtd" value="{{qtd}}">
-          <input type="hidden" name="valorProduto" value="{{valor}}">
+          <input type="hidden" name="idProduto" value="{{id}}" id="{{id}}">
+          <input type="hidden" name="qtd" value="{{qtd}}" id="{{id}}">
+          <input type="hidden" name="valorProduto" value="{{valor}}" id="{{id}}">
           {{else}}
         {{/each}}
+      </div>
+      <input type="hidden" name="cadastro" value="false">
         <div class="produtos">
           {{#each parse}}
             <div class="container">
@@ -53,7 +55,7 @@
                     <p class="precoProduto">R$ {{valor}}</p>
                     <div class="qtdProdutosCarrinho">
                         <span><i class="bi bi-dash menos"></i></span>
-                        <input type="number" name="qtdN" class="qtdN" value="{{qtd}}" disabled>
+                        <input type="number" name="qtdN" class="qtdN" value="{{qtd}}" disabled id="{{id}}">
                         <span><i class="bi bi-plus mais"></i></span>
                     </div>
                 </span>

@@ -102,9 +102,11 @@ function adicionarCarrinho(data) {
     carrinho.innerHTML += `
 
     <div>
-    <input type="hidden" name="idProduto" value="${data.id}">
-    <input type="hidden" name="qtd" value="${data.qtd}">
-    <input type="hidden" name="valorProduto" value="${data.valor}">
+    <div>
+    <input type="hidden" name="idProduto" value="${data.id}" id="${data.id}">
+    <input type="hidden" name="qtd" value="${data.qtd}" id="${data.id}">
+    <input type="hidden" name="valorProduto" value="${data.valor}" id="${data.id}">
+    </div>
     
     <div class="container">
         <div class="imagemProduto">
@@ -115,7 +117,7 @@ function adicionarCarrinho(data) {
             <p class="precoProduto">R$ ${data.valor}</p>
             <div class="qtdProdutosCarrinho">
                 <span><i class="bi bi-dash menos"></i></span>
-                <input type="number" disabled name="qtd" class="qtdN" value="${data.qtd}">
+                <input type="number" disabled name="qtd" class="qtdN" value="${data.qtd}" id="${data.id}">
                 <span><i class="bi bi-plus mais"></i></span>
             </div>
         </span>
@@ -330,12 +332,22 @@ function removerProduto(container) {
         });
     });
     if(container.parentElement.classList.contains('produtos')) {
+        removerCarregado(container, container.children[1].children[2].children[1].id);
         container.remove();
     } else {
         container.parentElement.remove();
     }
     diminuirQuantidadeProduto();
     removerItem('/carrinho/remover', {nomeProduto});
+}
+
+function removerCarregado(container, id) {
+    const div = container.parentElement.parentElement.children[0];
+    for(let i = 0; i < div.children.length; i++) {
+        if(div.children[i].id == id) {
+            div.children[i].remove();
+        }
+    }
 }
 
 function adicionarQuantidade(quantidade) {

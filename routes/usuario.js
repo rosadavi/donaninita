@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
         const produtos = await Produtos.findAll();
         const parse = JSON.parse(localStorage.getItem('carrinho'));
 
-        res.render('public/index.handlebars', {produtos, parse});
+        res.render('public/index.handlebars', {produtos, parse, arrPedidos});
     }
 });
 
