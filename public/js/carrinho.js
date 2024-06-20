@@ -7,6 +7,56 @@ const rastrearBtn = document.querySelector('.rastrearBtn');
 const rastrear = document.querySelector('#rastrear');
 const rastrearFade = document.querySelector('#rastrearFade');
 const sairR = document.querySelector('.sairR');
+const burger = document.querySelectorAll('.burger');
+const fadeHide = document.querySelector('#fadeHide');
+const nav = document.querySelector('nav');
+const closeB = document.querySelectorAll('.close');
+
+const arr3 = [fadeHide, nav]
+
+burger.forEach(e => {
+    e.addEventListener('click', () => {
+        arr3.forEach(el => {
+            el.classList.toggle('hide');
+        });
+        e.classList.toggle('hide');
+        if(e.classList.contains('hide')) {
+            closeB.forEach(ele => {
+                ele.classList.toggle('hide');
+            });
+        } else {
+            closeB.forEach(ele => {
+                ele.classList.toggle('hide');
+            });
+        }
+    });
+});
+
+closeB.forEach(e => {
+    e.addEventListener('click', () => {
+        arr3.forEach(el => {
+            el.classList.toggle('hide');
+        });
+        e.classList.toggle('hide');
+        burger.forEach(e => {
+            e.classList.toggle('hide');
+        });
+    });
+});
+
+fadeHide.addEventListener('click', () => {
+    arr3.forEach( e => {
+        e.classList.toggle('hide');
+    });
+    burger.forEach(el => {
+        el.classList.toggle('hide');
+        if(!el.classList.contains('hide')) {
+            closeB.forEach(ele => {
+                ele.classList.toggle('hide');
+            });
+        }
+    })
+});
 
 const arr2 = [rastrear, rastrearFade];
 const arr = [carrinho, carrinhoFide];
