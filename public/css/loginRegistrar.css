@@ -19,7 +19,7 @@
     }
 
     h1, h2 {
-        margin-top: 20px;
+        margin-top: 80px;
         font-size: max(20px, 3vw);
         font-weight: bolder;
     }
@@ -256,4 +256,9 @@
         color: var(--corMarrom);
         border: 2px solid var(--corAzul);
     }
+}
+
+.input > div {
+    color: red;
+    font-weight: bolder;
 }

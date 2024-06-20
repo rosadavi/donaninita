@@ -10,18 +10,24 @@ formLogin.addEventListener('submit', async(e) => {
         data[chave] = valor;
     });
 
-    const input = formLogin.querySelectorAll('input');
-    input.forEach(e => {
-        e.parentElement.children[1].innerHTML = '';   
-        if(e.value == '') {
-            e.parentElement.children[1].innerHTML = '*Campo Obrigatorio';
-        } else {
-            // setTimeout(async () => {
-            //     await login('/login', data);
-            // }, 2000);
-            alert('ok');
+    const email = formLogin.querySelector('input[name="email"');
+    const senha = formLogin.querySelector('input[name="senha"');
+
+    email.parentElement.children[1].innerHTML = '';
+    senha.parentElement.children[1].innerHTML = '';
+
+    if(email.value == '' || senha.value == '') {
+        email.parentElement.children[1].innerHTML = '*Campo Obrigatorio.';
+        senha.parentElement.children[1].innerHTML = '*Campo Obrigatorio.';
+        if(email.value != '') {
+            email.parentElement.children[1].innerHTML = '';
+        } else if (senha.value != '') {
+            senha.parentElement.children[1].innerHTML = '';
         }
-    });
+    } else {
+        login('/login', data);
+    }
+
 });
 
 async function login(url, data) {

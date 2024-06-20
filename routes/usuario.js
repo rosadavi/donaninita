@@ -156,7 +156,7 @@ router.post('/cadastrado', (req, res) => {
             senha: req.body.senha,
             bolAtivo: 1
         });
-        res.redirect('/');
+        res.redirect('/login');
     } else {
         Clientes.create({
             nomeCliente: req.body.nome,
@@ -168,7 +168,7 @@ router.post('/cadastrado', (req, res) => {
             bolAtivo: 1,
             pontosFidelidade: 0
         });
-        res.redirect('/');
+        res.redirect('/login');
     }
 });
 
