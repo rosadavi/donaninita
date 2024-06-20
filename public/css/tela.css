@@ -1,4 +1,4 @@
-@media screen and (min-width: 640px) {
+
     .bemVindo {
         color: var(--corMarrom);
         margin-top: 100px;
@@ -27,7 +27,7 @@
         margin-bottom: 50px;
         width: 100%;
         text-align: center;
-        font-size: max(15px, 2.3vw);
+        font-size: max(3vw, 30px);
         color: var(--corMarrom);
         font-weight: bold;
     }
@@ -117,10 +117,71 @@
     .adicionarProduto.adicionadoCor {
         background-color: var(--corVerde2);
     }
-}
 
 @media screen and (max-width: 640px) {
 
+    nav img {
+        display: none;
+    }
+
+    #fadeHide {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.226);
+    }
+
+    .burger {
+        cursor: pointer;
+    }
+
+    nav {
+        position: fixed;
+        top: 13%;
+        z-index: 7;
+        background-color: var(--corAzul);
+        width: 100%;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    nav > * {
+        padding: 10px 20px;
+        color: var(--corBranco);
+        font-weight: bolder;
+        text-decoration: none;
+        transition: all .5s;
+        cursor: pointer;
+    }
+
+    nav > *:hover {
+        background-color: var(--corBranco);
+        color: var(--corAzul);
+    }
+
+    .carrinhoNav {
+        text-align: center;
+    }
+
+    .carrinhoNav i {
+        font-size: 35px;
+    }
+
+    .divCarrinho {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .qtd {
+        position: relative;
+        right: 21px;
+        bottom: 2px;
+    }
 }
 
 * {

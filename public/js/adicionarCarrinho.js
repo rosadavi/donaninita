@@ -1,6 +1,6 @@
 const arrCards = document.querySelectorAll('.card');
-const inputProdutos = document.querySelector('#produtos');
-let produtosNoCarrinho = [];
+// const inputProdutos = document.querySelector('#produtos');
+// let produtosNoCarrinho = [];
 
 window.addEventListener('load', ()=> {
     const carrinho = document.querySelector('.produtos');
@@ -53,16 +53,17 @@ window.addEventListener('load', ()=> {
                 });
             });
         });
-        let total = 0;
+        let totalCarregado = 0;
+        let totalAtual = 0;
         for(let i = 0; i < carrinho.children.length; i++) {
-            produtosNoCarrinho.push({produto: nomeProduto[i].textContent, qtdProduto: qtdProdutoN[i].value});
-            let dados = JSON.stringify(produtosNoCarrinho);
-            inputProdutos.value = dados;
+            if(carrinho.children[i].classList.contains('container')) {
+                totalCarregado += Number(carrinho.children[i].children[1].children[1].textContent.replace('R$', '')) * Number(carrinho.children[i].children[1].children[2].children[1].value);
+            } else {
+                totalAtual += Number(carrinho.children[i].children[3].children[1].children[1].textContent.replace('R$', '')) * Number(carrinho.children[i].children[3].children[1].children[2].children[1].value);
+            }
         }
-        for(let i = 0; i < carrinho.children.length; i++) {
-            total =+ Number(valorProduto[i].textContent.replace('R$', '')) * Number(qtdProdutoN[i].value) + total;
-        }
-        totalN.value = `R$ ${total.toFixed(2)}`;
+        let totalInput = totalCarregado + totalAtual;
+        totalN.value = `R$ ${totalInput.toFixed(2)}`;
     } 
 });
 
@@ -82,9 +83,9 @@ function adicionarCarrinho(data) {
     padrao.classList.remove('hide');
     pagamento.classList.remove('hide');
 
-    produtosNoCarrinho.push({produto: data.nome, qtdProduto: data.qtd});
-    const dados = JSON.stringify(produtosNoCarrinho);
-    inputProdutos.value = dados;
+    // produtosNoCarrinho.push({produto: data.nome, qtdProduto: data.qtd});
+    // const dados = JSON.stringify(produtosNoCarrinho);
+    // inputProdutos.value = dados;
 
     btn.textContent = 'Adicionado';
     btn.setAttribute('disabled', 'disabled');
@@ -100,6 +101,7 @@ function adicionarCarrinho(data) {
     });
     carrinho.innerHTML += `
 
+    <div>
     <input type="hidden" name="idProduto" value="${data.id}">
     <input type="hidden" name="qtd" value="${data.qtd}">
     <input type="hidden" name="valorProduto" value="${data.valor}">
@@ -120,11 +122,22 @@ function adicionarCarrinho(data) {
         <div class="removeItem">
             <i class="bi bi-trash3 lixo"></i>
         </div>
+    </div>    
     </div>
+
     
     `;
-    total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) + data.qtd * data.valor).toFixed(2)}`;
-
+    let totalCarregado = 0;
+    let totalAtual = 0;
+    for(let i = 0; i < carrinho.children.length; i++) {
+        if(carrinho.children[i].classList.contains('container')) {
+            totalCarregado += Number(carrinho.children[i].children[1].children[1].textContent.replace('R$', '')) * Number(carrinho.children[i].children[1].children[2].children[1].value);
+        } else {
+            totalAtual += Number(carrinho.children[i].children[3].children[1].children[1].textContent.replace('R$', '')) * Number(carrinho.children[i].children[3].children[1].children[2].children[1].value);
+        }
+    }
+    let totalInput = totalCarregado + totalAtual;
+    total.children[1].value = `R$ ${totalInput.toFixed(2)}`;
 }
 
 const frete = document.querySelectorAll('input[name="frete"]');
@@ -280,11 +293,11 @@ function remover(container) {
     const novoTot = valor * qtd;
     const total = document.querySelector('.totalN');
     const produto = container.children[1].children[0].textContent;
-    const produtosAtualizados = produtosNoCarrinho.filter(produtos => produtos.produto != produto);
-    produtosNoCarrinho = produtosAtualizados;
-    const dados = JSON.stringify(produtosNoCarrinho);
+    // const produtosAtualizados = produtosNoCarrinho.filter(produtos => produtos.produto != produto);
+    // produtosNoCarrinho = produtosAtualizados;
+    // const dados = JSON.stringify(produtosNoCarrinho);
 
-    inputProdutos.value = dados;
+    // inputProdutos.value = dados;
     total.value = `R$ ${(Number(total.value.replace('R$', '')) - novoTot).toFixed(2)}`;
     removerProduto(container);
 }
@@ -316,7 +329,11 @@ function removerProduto(container) {
             }
         });
     });
-    container.remove();
+    if(container.parentElement.classList.contains('produtos')) {
+        container.remove();
+    } else {
+        container.parentElement.remove();
+    }
     diminuirQuantidadeProduto();
     removerItem('/carrinho/remover', {nomeProduto});
 }

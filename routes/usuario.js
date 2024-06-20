@@ -3,6 +3,8 @@ const router = express.Router();
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const app = express();
+const { LocalStorage } = require('node-localstorage');
+const localStorage = new LocalStorage('./localStorage');
 
 const Produtos = require('../models/Produtos');
 const Clientes = require('../models/Clientes');
@@ -38,8 +40,9 @@ router.get('/', async (req, res) => {
         res.render('private/pedidos.handlebars', {pedidos});
     } else {
         const produtos = await Produtos.findAll();
+        const parse = JSON.parse(localStorage.getItem('carrinho'));
 
-        res.render('public/index.handlebars', {produtos, arrPedidos});
+        res.render('public/index.handlebars', {produtos, parse});
     }
 });
 
@@ -96,9 +99,9 @@ router.post('/carrinho/add', (req, res) => {
         qtd: qtd
     };
 
-    // let carrinho = JSON.parse(localstorage.getItem('carrinho')) || [];
-    // carrinho.push(produtosData);
-    // localstorage.setItem('carrinho', JSON.stringify(carrinho));
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    carrinho.push(produtosData);
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
 
     res.send('Produto adicionado com sucesso.');
 });
@@ -128,9 +131,9 @@ router.post('/carrinho/remover', asyncHandler(async (req, res) => {
     if(user) {
         Carrinhos.destroy({where: {nomeProduto: req.body.nomeProduto}}).then(() => console.log('Produto removido')).catch(e => console.log('Erro ao remover o produto' + e));
     } else {
-        // let novosProdutos = JSON.parse(localstorage.getItem('carrinho'));
-        // novosProdutos = novosProdutos.filter(obj => obj.nome !== req.body.nomeProduto);
-        // localstorage.setItem('carrinho', JSON.stringify(novosProdutos));
+        let novosProdutos = JSON.parse(localStorage.getItem('carrinho'));
+        novosProdutos = novosProdutos.filter(obj => obj.nome !== req.body.nomeProduto);
+        localStorage.setItem('carrinho', JSON.stringify(novosProdutos));
     }
     res.send('Produto removido.');
 }));

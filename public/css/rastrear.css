@@ -1,3 +1,7 @@
+#rastrear {
+    z-index: 20;
+}
+
 .title-rastrear {
     display: flex;
     justify-content: space-between;
