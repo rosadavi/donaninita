@@ -13,7 +13,7 @@ const PedidoStatus = require('../models/PedidoStatus');
 const Itens = require('../models/Itens');
 
 const asyncHandler = require('express-async-handler');
-const { where } = require('sequelize');
+const { where, Op } = require('sequelize');
 
 let arrPedidos = [];
 
@@ -28,7 +28,13 @@ app.use(session({
 router.get('/', async (req, res) => {
 
     if(req.session.dominio == 'donaninita.com') {
-        const pedidos = await Pedidos.findAll();
+        const pedidos = await Pedidos.findAll({
+            where: {
+                statusPedido: {
+                    [Op.ne]: 'Entregue'
+                }
+            }}
+        );
         res.render('private/pedidos.handlebars', {pedidos});
     } else {
         const produtos = await Produtos.findAll();
@@ -150,7 +156,7 @@ router.post('/cadastrado', (req, res) => {
             senha: req.body.senha,
             bolAtivo: 1
         });
-        res.redirect('/login');
+        res.redirect('/');
     } else {
         Clientes.create({
             nomeCliente: req.body.nome,
@@ -162,7 +168,7 @@ router.post('/cadastrado', (req, res) => {
             bolAtivo: 1,
             pontosFidelidade: 0
         });
-        res.redirect('/login');
+        res.redirect('/');
     }
 });
 

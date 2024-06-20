@@ -7,7 +7,8 @@ const app = express();
 const Pedidos = require('../models/Pedidos');
 const Produtos = require('../models/Produtos');
 const Itens = require('../models/Itens');
-const { where } = require('sequelize');
+const { sequelize, Sequelize } = require('../config/conexao');
+const { Op } = require('sequelize');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -44,7 +45,11 @@ router.get('/vendas', async(req, res) => {
     if(req.session.dominio == null || req.session.dominio !== 'donaninita.com') {
         res.render('log/login.handlebars');
     } else {
-        const vendas = await Pedidos.findAll({where: {statusPedido: 'Entregue'}});
+        const vendas = await Pedidos.findAll({
+            where: {
+                statusPedido: 'Entregue'
+            }}
+        );
         res.render('private/vendas.handlebars', {vendas});
     }
 });
@@ -53,7 +58,13 @@ router.get('/pedidos', async(req, res) => {
     if(req.session.dominio == null || req.session.dominio !== 'donaninita.com') {
         res.render('log/login.handlebars');
     } else {
-        const pedidos = await Pedidos.findAll();
+        const pedidos = await Pedidos.findAll({
+            where: {
+                statusPedido: {
+                    [Op.ne]: 'Entregue'
+                }
+            }}
+        );
         res.render('private/pedidos.handlebars', {pedidos});
     }
 });

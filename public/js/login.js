@@ -10,8 +10,18 @@ formLogin.addEventListener('submit', async(e) => {
         data[chave] = valor;
     });
 
-    await login('/login', data);
-
+    const input = formLogin.querySelectorAll('input');
+    input.forEach(e => {
+        e.parentElement.children[1].innerHTML = '';   
+        if(e.value == '') {
+            e.parentElement.children[1].innerHTML = '*Campo Obrigatorio';
+        } else {
+            // setTimeout(async () => {
+            //     await login('/login', data);
+            // }, 2000);
+            alert('ok');
+        }
+    });
 });
 
 async function login(url, data) {
