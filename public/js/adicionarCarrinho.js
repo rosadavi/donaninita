@@ -144,9 +144,38 @@ function adicionarCarrinho(data) {
 
 const frete = document.querySelectorAll('input[name="frete"]');
 const sairCarrinhoModal = document.querySelector('.sairB');
-sairCarrinhoModal.addEventListener('click', () => {
+const sairCarrinhoModalFade = document.querySelector('#carrinhoFide');
+sairCarrinhoModalFade.addEventListener('click', () => {
+    const total = document.querySelector('.total');
     frete.forEach(e => {
+        if(total.classList.contains('aplicado')) {
+            total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) - 10.50).toFixed(2)}`;
+            total.classList.remove('aplicado'); 
+        }
         e.checked = false;
+    });
+});
+sairCarrinhoModal.addEventListener('click', () => {
+    const total = document.querySelector('.total');
+    const endereco = document.querySelector('.endereco');
+
+    frete.forEach(e => {
+        if(total.classList.contains('aplicado')) {
+            total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) - 10.50).toFixed(2)}`;
+            total.classList.remove('aplicado'); 
+        }
+        e.checked = false;
+        if(e.checked == false) {
+            for(let i = 0; i < endereco.children.length; i++) {
+                endereco.children[i].remove();
+            }
+            for(let i = 0; i < endereco.children.length; i++) {
+                endereco.children[i].remove();
+            }
+            for(let i = 0; i < endereco.children.length; i++) {
+                endereco.children[i].remove();
+            }
+        }
     });
 });
 frete.forEach(e => {
@@ -154,7 +183,6 @@ frete.forEach(e => {
     if(!total.classList.contains('aplicado')) {
         total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) + 10.50).toFixed(2)}`;
         total.classList.add('aplicado');
-        total.children[1].value = 'ok';
     }
     if(total.classList.contains('aplicado')) {
         total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) - 10.50).toFixed(2)}`;
@@ -169,7 +197,7 @@ frete.forEach(e => {
                     total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) + 10.50).toFixed(2)}`;
                     total.classList.add('aplicado');
                 }
-                if(endereco.children.length == 0) {
+                if(e.checked == true) {
                     endereco.innerHTML = `  
                     <section>
                         <label for="cep">CEP: </label>
