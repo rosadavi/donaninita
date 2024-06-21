@@ -1,4 +1,8 @@
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 690px) {
+
+    .circle-nav, .close {
+        display: none;
+    }
 
     nav.posicao {
         position: fixed;
@@ -51,22 +55,25 @@
         display: none;
     }
 
+    .carrinhoNav {
+        width: 40px;
+    }
+
     nav .divCarrinho {
-        font-size: max(25px, 2vw);
+        font-size: max(30px, 2.2vw);
         display: flex;
         align-items: center;
         cursor: pointer;
     }
 
     nav .qtd {
-        position: relative;
         font-size: max(15px, 1.2vw);
+        position: relative;
         right: 50%;
-        padding-bottom: 2%;
     }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 690px) {
     header {
         width: 100%;
         padding: 20px;

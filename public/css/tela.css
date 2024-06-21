@@ -118,7 +118,7 @@
         background-color: var(--corVerde2);
     }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 690px) {
 
     nav img {
         display: none;
@@ -158,7 +158,11 @@
         cursor: pointer;
     }
 
-    nav > *:hover {
+    .bi-person-circle {
+        transition: all .5s;
+    }
+
+    nav > *:hover, nav > *:hover .bi-person-circle {
         background-color: var(--corBranco);
         color: var(--corAzul);
     }
