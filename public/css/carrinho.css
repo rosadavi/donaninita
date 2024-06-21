@@ -622,3 +622,7 @@
 #carrinho.hide, #carrinhoFide.hide, .frete.hide, .padrao.hide, .endereco.hide, .pagamento.hide, #rastrear.hide, #rastrearFade.hide {
     display: none;
 }
+
+.totalN {
+    width: 100%;
+}

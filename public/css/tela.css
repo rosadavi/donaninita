@@ -162,7 +162,7 @@
         transition: all .5s;
     }
 
-    nav > *:hover, nav > *:hover .bi-person-circle {
+    nav > *:hover, nav > *:hover .circle-nav {
         background-color: var(--corBranco);
         color: var(--corAzul);
     }

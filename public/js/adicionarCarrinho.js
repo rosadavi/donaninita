@@ -153,19 +153,19 @@ frete.forEach(e => {
                     endereco.innerHTML = `  
                     <section>
                         <label for="cep">CEP: </label>
-                        <input type="number" name="cep" id="cep" placeholder="Apenas numeros" autocomplete="off">
+                        <input type="number" name="cep" id="cep" placeholder="Apenas numeros" autocomplete="off" style="border: 2px solid black;">
                     </section>
                     <section>
                         <label for="cidade">Cidade: </label>
-                        <input required type="text" name="cidade" id="cidade" autocomplete="off">
+                        <input required type="text" name="cidade" id="cidade" autocomplete="off" style="border: 2px solid black;">
                     </section>
                     <section>
                         <label for="bairro">Bairro: </label>
-                        <input required type="text" name="bairro" id="bairro" autocomplete="off">
+                        <input required type="text" name="bairro" id="bairro" autocomplete="off" style="border: 2px solid black;">
                     </section>
                     <section>
                         <label for="rua">Rua: </label>
-                        <input required type="text" name="rua" id="rua" autocomplete="off">
+                        <input required type="text" name="rua" id="rua" autocomplete="off" style="border: 2px solid black;">
                     </section>
                 `;
     
