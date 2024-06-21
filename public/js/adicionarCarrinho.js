@@ -143,6 +143,12 @@ function adicionarCarrinho(data) {
 }
 
 const frete = document.querySelectorAll('input[name="frete"]');
+const sairCarrinhoModal = document.querySelector('.sairB');
+sairCarrinhoModal.addEventListener('click', () => {
+    frete.forEach(e => {
+        e.checked = false;
+    });
+});
 frete.forEach(e => {
     const total = document.querySelector('.total');
     if(!total.classList.contains('aplicado')) {
