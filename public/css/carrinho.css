@@ -288,8 +288,25 @@
         outline: none;
     }
 
+    .close.hide {
+        display: none;
+    }
+
 }
+
 @media screen and (max-width: 690px) {
+    .bi-person-circle, .bi-box-arrow-right {
+        margin-left: 100px;
+        color: var(--corBranco);
+    }
+    
+    .bi-box-arrow-right:hover {
+        color: var(--corAzul);
+    }
+
+    nav.hide, #fadeHide.hide, .close.hide, .burger.hide{
+        display: none;
+    }
     .titleCarrinho {
         display: flex;
         justify-content: center;
