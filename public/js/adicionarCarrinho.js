@@ -144,6 +144,105 @@ function adicionarCarrinho(data) {
 
 const frete = document.querySelectorAll('input[name="frete"]');
 frete.forEach(e => {
+    const total = document.querySelector('.total');
+    if(!total.classList.contains('aplicado')) {
+        total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) + 10.50).toFixed(2)}`;
+        total.classList.add('aplicado');
+        total.children[1].value = 'ok';
+    }
+    if(total.classList.contains('aplicado')) {
+        total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) - 10.50).toFixed(2)}`;
+        total.classList.remove('aplicado');
+    }
+    if(e.value == 'entregar') {
+        const total = document.querySelector('.total');
+        const endereco = document.querySelector('.endereco');
+        if(!endereco.classList.contains('logado')) {
+            if(e.value == 'entregar') {
+                if(!total.classList.contains('aplicado')) {
+                    total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) + 10.50).toFixed(2)}`;
+                    total.classList.add('aplicado');
+                }
+                if(endereco.children.length == 0) {
+                    endereco.innerHTML = `  
+                    <section>
+                        <label for="cep">CEP: </label>
+                        <input type="number" name="cep" id="cep" placeholder="Apenas numeros" autocomplete="off" style="border: 2px solid black;">
+                    </section>
+                    <section>
+                        <label for="cidade">Cidade: </label>
+                        <input required type="text" name="cidade" id="cidade" autocomplete="off" style="border: 2px solid black;">
+                    </section>
+                    <section>
+                        <label for="bairro">Bairro: </label>
+                        <input required type="text" name="bairro" id="bairro" autocomplete="off" style="border: 2px solid black;">
+                    </section>
+                    <section>
+                        <label for="rua">Rua: </label>
+                        <input required type="text" name="rua" id="rua" autocomplete="off" style="border: 2px solid black;">
+                    </section>
+                `;
+    
+                const cep = document.querySelector('#cep');
+                cep.addEventListener('focusout', async () => {
+                    if (cep.value.length == 0) {
+    
+                    } else if(cep.value.length < 8 ) {
+                        alert('CEP muito pequeno, verifique e tente novamente.');
+                    } else if(cep.value.length > 8){
+                        alert('CEP muito grande, verifique e tente novamente.');
+                    } else {
+                        const localidade = document.querySelector('#cidade');
+                        const bairro = document.querySelector('#bairro');
+                        const logradouro = document.querySelector('#rua');
+                  
+                        const url = `https://viacep.com.br/ws/${cep.value}/json/`;
+                    
+                        try {
+                        const response = await fetch(url);
+                
+                        if(!response.ok) {
+                            throw new Error(response.status);
+                        }
+                
+                        const dados = await response.json();
+                
+                        if(dados.erro) {
+                            alert('CEP nao encontrado.');
+                            logradouro.value = '';
+                            localidade.value = '';
+                            bairro.value = '';
+                        } else {
+                            logradouro.value = dados.logradouro;
+                            localidade.value = dados.localidade;
+                            bairro.value = dados.bairro;
+                        }
+                
+                        } catch(e) {
+                            if(TypeError == 'Failed to Fetch') {
+                                alert(e);
+                            }
+                        }
+                    }
+                });
+                }
+    
+            }
+            if(e.value == 'buscar') {
+                if(endereco.children.length != 0) {
+                    for(let i = 0; i < endereco.children.length; i++) {
+                        endereco.children[i].remove();
+                    }
+                    for(let i = 0; i < endereco.children.length; i++) {
+                        endereco.children[i].remove();
+                    }
+                    for(let i = 0; i < endereco.children.length; i++) {
+                        endereco.children[i].remove();
+                    }
+                }
+            }
+        }
+    }
     e.addEventListener('click', () => {
         const total = document.querySelector('.total');
         const endereco = document.querySelector('.endereco');

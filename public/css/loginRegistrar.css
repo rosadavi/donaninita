@@ -161,7 +161,7 @@
         font-weight: bolder;
     }
 
-    #nome, #sobrenome, #email, #senha, #confirmeSenha, #endereco, #telefone, #cpf, #cep, #cidade, #rua, #dataNasc {
+    #nome, #sobrenome, #email, #senha, #confirmeSenha, #endereco, #telefone, #bairro, #cpf, #cep, #cidade, #rua, #dataNasc {
         border: none;
         border-radius: 2px;
         outline: none;
@@ -172,7 +172,7 @@
         width: 100%;
     }
     
-    #nome:focus, #sobrenome:focus, #email:focus, #senha:focus, #confirmeSenha:focus, #endereco:focus, #telefone:focus, #cpf:focus, #cep:focus, #cidade:focus, #rua:focus, #dataNasc:focus {
+    #nome:focus, #sobrenome:focus, #email:focus, #senha:focus, #confirmeSenha:focus, #endereco:focus, #telefone:focus, #bairro:focus, #cpf:focus, #cep:focus, #cidade:focus, #rua:focus, #dataNasc:focus {
         border-radius: 15px;
     }
 
