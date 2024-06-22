@@ -39,10 +39,19 @@ router.get('/', async (req, res) => {
         );
         res.render('private/pedidos.handlebars', {pedidos});
     } else {
-        const produtos = await Produtos.findAll();
-        const parse = JSON.parse(localStorage.getItem('carrinho'));
+        // const produtos = await Produtos.findAll();
+        // const parse = JSON.parse(localStorage.getItem('carrinho'));
 
-        res.render('public/index.handlebars', {produtos, parse, arrPedidos});
+        // res.render('public/index.handlebars', {produtos, parse, arrPedidos});
+
+        const pedidos = await Pedidos.findAll({
+            where: {
+                statusPedido: {
+                    [Op.ne]: 'Entregue'
+                }
+            }}
+        );
+        res.render('private/pedidos.handlebars', {pedidos});
     }
 });
 

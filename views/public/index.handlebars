@@ -4,13 +4,15 @@
     <h1>Rastrear Pedido</h1>
     <i class="bi bi-x-lg sairR"></i>
   </div>
-  {{#if arrPedidos}}
-    <ul>
-      <li>{{arrPedidos}}</li>
-    </ul>
+  <ul>
+  {{#each arrPedidos}}
+    <br>
+    <li>{{this}}</li>
     {{else}}
     <h3>Voce ainda nao possui pedidos.</h3>
-  {{/if}}
+  </ul>
+  {{/each}}
+  <br>
   <form action="/query" method="POST" class="rastrearForm">
     <input type="number" name="cod" class="cod" placeholder="Digite o codigo do pedido" autocomplete="off">
     <button type="submit" class="pesquisarCod">Pesquisar</button>

@@ -4,7 +4,12 @@
 
 .title-rastrear {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+}
+
+.title-rastrear h1 {
+    margin: auto 0px;
 }
 
 .sairR {

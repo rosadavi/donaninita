@@ -1,23 +1,33 @@
 <div class="headerF">
     <h3>Pagina de funcionario</h3>
-    <a href="/logout">Logout</a>
-    <a href="/vendas">Vendas</a>
-    <a href="/funcionarios">Funcionarios</a>
+    <div class="links">
+        <a href="/logout">Logout</a>
+        <a href="/vendas">Vendas</a>
+        <a href="/funcionarios">Funcionarios</a>
+        <a href="#">Status</a>
+        <a href="#">Vizualizar</a>
+    </div>
 </div>
 
-<div class="pedidos">
-    <h3>Pedidos</h3>
+<div class="alterarPedido">
+    <h3>Alterar Pedido</h3>
     <form action="/alterarStatus" method="POST" id="alterarStatusForm">
-        <label for="idPedido">Digite o ID do pedido que deseja alterar os status do pedido:</label>
+        <label for="idPedido">Digite o ID do pedido</label>
         <input type="number" name="idPedido" required>
         <div class="inputs">
-            <strong class="sInput"><strong class="freteS">Confirmado</strong><input type="radio" name="status" value="Confirmado" required></strong>
-            <strong class="sInput"><strong class="freteS">Em Preparo</strong><input type="radio" name="status" value="Em Preparo"></strong>
-            <strong class="sInput"><strong class="freteS">Saiu para entrega</strong><input type="radio" name="status" value="Saiu para entrega"></strong>
-            <strong class="sInput"><strong class="freteS">Entregue</strong><input type="radio" name="status" value="Entregue"></strong>
+            <label for="status">Selecione novo status:</label>
+            <div>
+                <strong class="sInput"><strong class="freteS">Confirmado</strong><input type="radio" name="status" value="Confirmado" required></strong>
+                <strong class="sInput"><strong class="freteS">Em Preparo</strong><input type="radio" name="status" value="Em Preparo"></strong>
+                <strong class="sInput"><strong class="freteS">Saiu para entrega</strong><input type="radio" name="status" value="Saiu para entrega"></strong>
+                <strong class="sInput"><strong class="freteS">Entregue</strong><input type="radio" name="status" value="Entregue"></strong>
+            </div>
         </div>
         <button type="submit">Salvar</button>
     </form>
+</div>
+
+<div class="ver">
         <form action="/descpedido" method="POST" id="descpedido">
         <label for="idPedido">Digite o ID do pedido que deseja vizualizar o pedido</label>
         <input type="number" name="idPedido" required>
@@ -40,6 +50,10 @@
         {{/each}}
         </table>
     {{/if}}
+</div>
+
+<div class="pedidos">
+    <h3>Pedidos</h3>
 
     <table border="1">
         <tr>
