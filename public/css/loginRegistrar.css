@@ -262,3 +262,30 @@
     color: red;
     font-weight: bolder;
 }
+
+@media screen and (max-width: 1100px) {
+    .rastrearForm input {
+        width: 50%;
+    }
+
+    .rastrearForm button {
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 710px) {
+    .rastrearForm  input {
+        width: 100%;
+    }
+
+    .rastrearForm button {
+        width: 30%;
+        margin-top: -5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .rastrearForm button {
+        width: 70%;
+    }
+}
