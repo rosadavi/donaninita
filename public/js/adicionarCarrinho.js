@@ -154,7 +154,6 @@ frete.forEach(e => {
     if(!total.classList.contains('aplicado')) {
         total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) + 10.50).toFixed(2)}`;
         total.classList.add('aplicado');
-        total.children[1].value = 'ok';
     }
     if(total.classList.contains('aplicado')) {
         total.children[1].value = `R$ ${(Number(total.children[1].value.replace('R$', '')) - 10.50).toFixed(2)}`;
