@@ -1,7 +1,11 @@
-<h3>Pagina de funcionario</h3>
-<a href="/logout">Logout</a>
-<a href="/pedidos">Pedidos</a>
-<a href="/funcionarios">Funcionarios</a>
+<div class="headerF">
+    <h3>Pagina de funcionario</h3>
+    <div class="links">
+        <a href="/logout"><i class="bi bi-box-arrow-right"></i></a>
+        <a href="/pedidos">Pedidos</a>
+        <a href="/cadastrados">Cadastrados</a>
+    </div>
+</div>
 
 <div class="entregues">
     <h3>Pedidos Entregues</h3>
@@ -23,7 +27,7 @@
             <td>{{dataHoraCadastro}}</td>
             <td>{{dataHoraEntrega}}</td>
             <td>{{valorFrete}}</td>
-            <td>{{tipoPagamento}}</td>
+            {{#ifTipoPagamento tipoPagamento}}{{/ifTipoPagamento}}
             <td>{{valorPago}}</td>
             <td>{{statusPedido}}</td>
         </tr>

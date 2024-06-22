@@ -73,8 +73,29 @@ router.post('/descpedido', async(req, res) => {
     const id = req.body.idPedido;
     const pedidos = await Pedidos.findAll();
     const itens = await Itens.findAll({where: {idPedido: id}});
+    res.json({
+        itens
+    });
+});
 
-    res.render('private/pedidos.handlebars', {pedidos, itens});
+router.get('/cadastrados', async(req, res) => {
+    if(req.session.dominio == null || req.session.dominio !== 'donaninita.com') {
+        res.render('log/login.handlebars');
+    } else {
+        try {
+            const Clientes = require('../models/Clientes');
+            const cadastrados = await Clientes.findAll({
+                where: {
+                    cpf: {
+                        [Op.not]: null
+                    }
+                }}
+            );
+            res.render('private/cadastrados.handlebars', {cadastrados});
+        } catch(e) {
+            console.log('error' + e);
+        }
+    }
 });
 
 module.exports = router;

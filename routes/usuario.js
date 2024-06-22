@@ -39,19 +39,10 @@ router.get('/', async (req, res) => {
         );
         res.render('private/pedidos.handlebars', {pedidos});
     } else {
-        // const produtos = await Produtos.findAll();
-        // const parse = JSON.parse(localStorage.getItem('carrinho'));
+        const produtos = await Produtos.findAll();
+        const parse = JSON.parse(localStorage.getItem('carrinho'));
 
-        // res.render('public/index.handlebars', {produtos, parse, arrPedidos});
-
-        const pedidos = await Pedidos.findAll({
-            where: {
-                statusPedido: {
-                    [Op.ne]: 'Entregue'
-                }
-            }}
-        );
-        res.render('private/pedidos.handlebars', {pedidos});
+        res.render('public/index.handlebars', {produtos, parse, arrPedidos});
     }
 });
 
@@ -173,7 +164,7 @@ router.post('/cadastrado', (req, res) => {
         Clientes.create({
             nomeCliente: req.body.nome,
             telefoneCliente: req.body.telefone,
-            endereco: req.body.endereco,
+            endereco: req.body.rua,
             cpf: req.body.cpf,
             email: req.body.email,
             senha: req.body.senha,
