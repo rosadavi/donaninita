@@ -1,6 +1,8 @@
+require('dotenv').config();
+const pass = process.env.DB_PASS;
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('wanderso_davirosa', 'wanderso_davirosa_user', 'KmRO4nIxYEuo', {
-    host: '199.193.117.238',
+const sequelize = new Sequelize(process.env.DB_HOST, process.env.DB_USER, process.env.DB_PASS, {
+    host: process.env.DB_IP,
     dialect: 'mysql',
 });
 
