@@ -1,0 +1,64 @@
+<div id="fadeCadastrado" class="hide"></div>
+<div id="modalCadastrado" class="hide">
+    <h3>Cadastrado com sucesso. Voce sera redirecionado.</h3>
+</div>
+
+<div class="main">
+        <section class="sectionForm">
+        <div class="titleLogin">
+            <h1>Cadastre-se</h1>
+            <span class="span0"></span>
+        </div>
+        <form action="/cadastrado" method="POST" id="cadastrarForm">
+                <div class="input">
+                    <input type="text" name="nome" id="nome" placeholder="Nome" autocomplete="off">
+                    <div></div>
+                </div>
+                <div class="input">
+                    <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" autocomplete="off">
+                    <div></div>
+                </div>
+                <div class="input">
+                    <input type="text" name="cep" id="cep" placeholder="CEP" autocomplete="off">
+                    <div></div>
+                </div>
+                <div class="input">
+                    <input type="text" name="bairro" id="cidade" placeholder="Bairro" autocomplete="off">
+                    <div></div>
+                </div>
+                <div class="input">
+                    <input type="text" name="rua" id="rua" placeholder="Rua" autocomplete="off">
+                    <div></div>
+                </div>
+                <div class="input">
+                    <input type="text" name="telefone" id="telefone" placeholder="Telefone" autocomplete="off">
+                    <div></div>
+                </div>
+                <div class="input">
+                    <input type="text" name="cpf" id="cpf" placeholder="CPF" autocomplete="off">
+                    <div></div>
+                </div>
+                <div class="input">
+                    <input type="email" name="email" id="email" placeholder="Email" autocomplete="off">
+                    <div></div>
+                </div>
+                <div class="input">
+                    <input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="off">
+                    <div></div>
+                </div>
+                <div class="input">
+                    <input type="password" name="confirm" id="confirmeSenha" placeholder="Confirme sua senha" autocomplete="off">
+                    <div></div>
+                </div>
+                <p class="semConta">Ou entre sem cadastro clicando <a href="/">aqui!</a></p>
+                <button type="submit" id="entrar">Cadastrar</button>
+        </form>
+    </section>
+        <section class="sectionInfos">
+        <div class="titleInfos">
+            <h2>Já tem uma conta?</h2>
+        </div>
+        <p>Entre agora para aproveitar o melhor do nosso site.</p>
+        <a href="/login" id="cadastrar">Entrar</a>
+    </section>
+</div>

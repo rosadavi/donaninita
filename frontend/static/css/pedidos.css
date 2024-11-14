@@ -1,0 +1,322 @@
+
+.headerF {
+    background-color: var(--corAzul);
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.headerF h3 {
+    font-size: max(30px, 3.5vw);
+    font-family: var(--fontTitulo);
+    color: var(--corMarrom);
+    font-weight: bolder;
+}
+
+.headerF h3.hide {
+    display: none;
+}
+
+.links {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.links a {
+    display: flex;
+    width: 140px;
+    padding: 5px 0px;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: var(--corBranco);
+    font-weight: bolder;
+    color: var(--corMarrom);
+    transition: all .5s;
+    text-transform: uppercase;
+    color: var(--corMarrom);
+    text-decoration: none;
+}
+
+.links a:hover {
+    border-radius: 10px;
+    background-color: var(--corCinza);
+    color: var(--corBranco);
+}
+
+#alterarPedido {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--corBranco);
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    position: fixed;
+    z-index: 4;
+    width: 80%;
+    height: 60vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#alterarPedido h3 {
+    font-size: max(30px, 3vw);
+    margin-bottom: 20px;
+}
+
+#alterarPedido label {
+    font-weight: bolder;
+    font-size: max(20px, 1.2vw);
+}
+
+#alterarPedido input {
+    border: 2px solid var(--corAzul);
+    outline: none;
+    border-radius: 5px;
+    transition: all .5s;
+    padding: 0px 10px;
+}
+
+#alterarPedido input:focus {
+    border-radius: 10px;
+}
+
+.inputs {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputs div {
+    background-color: var(--corRosa);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    width: 50vw;
+    border-radius: 10px;
+    margin: auto;
+    max-width: 550px;
+}
+
+.sInput {
+    border-bottom: 2px solid var(--corMarrom);
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.sInput input {
+    width: 20px;
+    height: 20px;
+}
+
+.freteS {
+    width: 160px;
+    text-align: left;
+}
+
+#alterarStatusForm {
+    text-align: center;
+}
+
+#alterarStatusForm button {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    margin-top: 20px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 5px 0px;
+    font-weight: bolder;
+    background-color: var(--corAzul);
+    transition: all .5s;
+    cursor: pointer;
+}
+
+#alterarStatusForm button:hover {
+    background-color: var(--corMarrom);
+    border-radius: 10px;
+    color: var(--corBranco);
+}
+
+#fadeHidePedido {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.301);
+    z-index: 2;
+    position: fixed;
+    top: 0;
+}
+
+.sairP, .sairDesc {
+    position: absolute;
+    top: 30px;
+    font-size: max(30px, 2.2vw);
+    right: 40px;
+    cursor: pointer;
+}
+
+#fadeHideF {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.295);
+    top: 0;
+}
+
+#ver {
+    background-color: var(--corBranco);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80vh;
+    margin: auto;
+    border-radius: 10px;
+    position: fixed;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#ver h3 {
+    font-size: max(30px, 3vw);
+    margin-bottom: 20px;
+}
+
+#ver form {
+    max-width: 350px;
+    padding: 20px;
+}
+
+#ver label {
+    font-weight: bolder;
+    font-size: max(20px, 1vw);
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+#ver input {
+    border: 2px solid var(--corAzul);
+    padding: 0px 10px;
+    outline: none;
+    border-radius: 5px;
+    width: 100%;
+}
+
+
+
+#ver button {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    margin-top: 20px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 5px 0px;
+    font-weight: bolder;
+    background-color: var(--corAzul);
+    transition: all .5s;
+    cursor: pointer;
+}
+
+#ver table {
+    width: 80%;
+    text-align: center;
+    padding: 10px;
+    font-size: max(20px, 2vw);
+}
+
+#ver button:hover {
+    background-color: var(--corMarrom);
+    border-radius: 10px;
+    color: var(--corBranco);
+}
+
+.pedidos {
+    margin-top: 200px;
+}
+
+.pedidos h3 {
+    text-align: center;
+    font-size: max(30px, 3vw);
+    margin: 30px 0px;
+}
+
+.pedidos table {
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    font-size: max(20px, 1.5vw);
+}
+
+.pedidos table td, .pedidos table th {
+    padding: 10px;
+}
+
+.entregues {
+    margin-top: 200px;
+}
+
+.entregues h3 {
+    text-align: center;
+    font-size: max(30px, 3vw);
+    margin: 30px 0px;
+}
+
+.entregues table {
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    font-size: max(20px, 1.5vw);
+}
+
+.entregues table td, .entregues table th {
+    padding: 10px;
+}
+
+
+.cadastrados {
+    margin-top: 200px;
+}
+
+.cadastrados h3 {
+    text-align: center;
+    font-size: max(30px, 3vw);
+    margin: 30px 0px;
+}
+
+.cadastrados table {
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    font-size: max(20px, 1.5vw);
+}
+
+.cadastrados table td, .cadastrados table th {
+    padding: 10px;
+}
+
+#fadeHidePedido.hide, #alterarPedido.hide, #fadeHideF.hide, #ver.hide {
+    display: none;
+}

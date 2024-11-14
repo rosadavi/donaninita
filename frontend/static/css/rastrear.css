@@ -1,0 +1,53 @@
+#rastrear {
+    z-index: 20;
+}
+
+.title-rastrear {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title-rastrear h1 {
+    margin: auto 0px;
+}
+
+.sairR {
+    font-size: max(2vw, 20px);
+    cursor: pointer;
+}
+
+.rastrearForm {
+    display: flex;
+}
+
+.cod {
+    width: 30%;
+    border: 3px solid var(--corAzul);
+    padding: 10px;
+    outline: none;
+    transition: all .5s;
+}
+
+.cod:focus {
+    border-radius: 10px;
+}
+
+.pesquisarCod {
+    width: 10%;
+    border: none;
+    border-left: none;
+    padding: 10px;
+    outline: none;
+    transition: all .5s;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: var(--corVerde);
+    color: var(--corBranco);
+    transition: all .5s;
+}
+
+.pesquisarCod:hover {
+    background-color: var(--corVerde2);
+    border-radius: 10px;
+}

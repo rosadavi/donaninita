@@ -1,0 +1,197 @@
+<div id="rastrearFade" class="hide"></div>
+<div id="rastrear" class="hide">
+  <div class="title-rastrear">
+    <h1>Rastrear Pedido</h1>
+    <i class="bi bi-x-lg sairR"></i>
+  </div>
+  <ul>
+  {{#each arrPedidos}}
+    <br>
+    <li>{{this}}</li>
+    {{else}}
+    <h3>Voce ainda nao possui pedidos.</h3>
+  </ul>
+  {{/each}}
+  <br>
+  <form action="/query" method="POST" class="rastrearForm">
+    <input type="number" name="cod" class="cod" placeholder="Digite o codigo do pedido" autocomplete="off">
+    <button type="submit" class="pesquisarCod">Pesquisar</button>
+  </form>
+  <div class="descStatus"></div>
+</div>
+
+<div id="carrinhoFide" class="hide"></div>
+<div id="carrinho" class="hide">
+    <section class="secaoCarrinho">
+      <div class="title">
+        <div class="titleCarrinho">
+          <i class="bi bi-bag"></i>
+          <p>Meus Produtos</p>
+        </div>
+        <div class="sairCarrinho">
+          <i class="bi bi-x-lg sairB"></i>
+        </div>
+      </div>
+      <div class="mensagemCarrinho">
+        <h4>Seu carrinho ainda esta vazio</h4>
+        <i class="bi bi-cake2-fill"></i>
+      </div>
+      <form action="/comprar" method="POST" id="comprar">
+      <div>
+        {{#each parse}}
+          <input type="hidden" name="idProduto" value="{{id}}" id="{{id}}">
+          <input type="hidden" name="qtd" value="{{qtd}}" id="{{id}}">
+          <input type="hidden" name="valorProduto" value="{{valor}}" id="{{id}}">
+          {{else}}
+        {{/each}}
+      </div>
+      <input type="hidden" name="cadastro" value="false">
+        <div class="produtos">
+          {{#each parse}}
+            <div class="container">
+                <div class="imagemProduto">
+                    <img src="{{img}}" alt="{{nome}}">
+                </div>
+                <span class="descProduto">
+                    <p class="nomeProdutoCarrinho">{{nome}}</p>
+                    <p class="precoProduto">R$ {{valor}}</p>
+                    <div class="qtdProdutosCarrinho">
+                        <span><i class="bi bi-dash menos"></i></span>
+                        <input type="number" name="qtdN" class="qtdN" value="{{qtd}}" disabled id="{{id}}">
+                        <span><i class="bi bi-plus mais"></i></span>
+                    </div>
+                </span>
+                <div class="removeItem">
+                    <i class="bi bi-trash3 lixo"></i>
+                </div>
+            </div>
+          {{else}}
+            <!-- no index.js -->
+          {{/each}}
+        </div>
+        <section class="formRadios">
+          <div class="frete hide">
+            <h3>Como deseja receber seu pedido?</h3>
+            <br>
+            <div class="inputs">
+              <strong class="sInput">Entregue no meu endereco <strong class="freteS">(Frete de R$10,50)</strong> <input type="radio" name="frete" value="entregar" required> </strong>
+              <br>
+              <strong class="sInput">Eu irei buscar no establecimento <input type="radio" name="frete" value="buscar"></strong>
+            </div>
+          </div>
+          <div class="pagamento hide">
+            <h3>Qual sera a forma de pagamento?</h3>
+            <br>
+            <div class="inputs">
+              <strong class="sInput"><strong class="freteS">Debito</strong><input type="radio" name="tipoPagamento" value="1" required></strong>
+              <br>
+              <strong class="sInput"><strong class="freteS">Credito</strong><input type="radio" name="tipoPagamento" value="2"></strong>
+              <br>
+              <strong class="sInput"><strong class="freteS">PIX</strong><input type="radio" name="tipoPagamento" value="3"></strong>
+              <br>
+              <strong class="sInput"><strong class="freteS">DINHEIRO</strong><input type="radio" name="tipoPagamento" value="4"></strong>
+            </div>
+          </div>
+        </section>
+        <div class="padrao hide">
+          <section>
+              <label for="nome">Nome: </label>
+              <input required type="text" name="nome" id="nome" autocomplete="off" style="border: 2px solid black;">
+          </section>
+          <section>
+              <label for="telefone">Telefone: </label>
+              <input required type="number" name="telefone" id="telefone" placeholder="00 0 00000000" autocomplete="off" style="border: 2px solid black;">
+          </section>
+        </div>
+        <div class="endereco"></div>
+        <div class="total hide">
+          <p>Total:</p>
+          <input type="text" name="valorPago" class="totalN" readonly value="R$ 0.00">
+        </div>
+        <button id="fazerPedido" class="hide" type="submit">Finalizar</button>
+        {{!-- <input type="text" name="produtos" id="produtos"> --}}
+      </form>
+    </section>
+</div>
+
+<header>
+    <div class="logo">
+        <img src="/img/logos/logoHead.png" alt="Logo Dona Ninita">
+    </div>
+    <div class="nomeEmpresa">
+        <h3>Dona Ninita</h3>
+    </div>
+    <div class="funcoesHeader">
+        <a href="/login"><i class="bi bi-person-circle"></i></i></a>
+        <div class="divCarrinho">
+            <i class="bi bi-cart carrinhoIcon"></i>
+            <section class="qtd">0</section>
+        </div>
+    </div>
+    <div class="burger">
+        <i class="bi bi-list"></i>
+    </div>
+    <div class="close hide">
+      <i class="bi bi-x-lg"></i>
+    </div>
+</header>
+
+<section id="fadeHide" class="hide"></section>
+<nav class="hide">
+    <img src="/img/logos/logoHead.png" alt="Logo Dona Ninita" class="navImg navHide">
+    <a href="#maisVendidos" class="categoriaBtn">MAIS VENDIDOS</a>
+    <a href="#bolos" class="categoriaBtn">BOLOS</a>
+    <a href="#biscoitos" class="categoriaBtn">BISCOITOS</a>
+    <a href="#rabanadas" class="categoriaBtn">RABANADAS</a>
+    <a href="#" class="categoriaBtn rastrearBtn">RASTREAR</a>
+    <section class="carrinhoNav navHide">
+        <div class="divCarrinho">
+            <i class="bi bi-cart carrinhoIcon"></i>
+            <section class="qtd" id="quantidade">0</section>
+            <a href="/login"><i class="bi bi-person-circle circle-nav"></i></i></a>
+        </div>
+    </section>
+</nav>
+
+<div class="bemVindo">
+    <p>Um lugar onde os sentidos se encontram para experimentar uma variedade de doces e sobremesas deliciosas.</p>
+    <p>Faça seu pedido agora e descubra um <strong>outro mundo de sabor.</strong></p>
+</div>
+
+<section class="espaco1" id="maisVendidos"></section>
+
+<h3 class="categoria">Mais Vendidos</h3>
+<section class="cards">
+  {{#each produtos}}
+    {{#ifCond idCategoriaFK 1 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+  {{/each}}
+</section>
+
+<section class="espaco" id="bolos"></section>
+
+<h3 class="categoria">Bolos</h3>
+<section class="cards">
+  {{#each produtos}}
+    {{#ifCond idCategoriaFK 2 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+  {{/each}}
+</section>
+
+<section class="espaco" id="biscoitos"></section>
+
+<h3 class="categoria">Biscoitos</h3>
+<section class="cards">
+  {{#each produtos}}
+    {{#ifCond idCategoriaFK 3 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+  {{/each}}
+</section>
+
+<section class="espaco" id="rabanadas"></section>
+
+<h3 class="categoria">Rabanadas</h3>
+<section class="cards">
+  {{#each produtos}}
+    {{#ifCond idCategoriaFK 4 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+  {{/each}}
+</section>
+
+<a href="https://wa.me/+5561994300862" target="_blank" class="zapFloat"><i class="bi bi-whatsapp"></i></a>

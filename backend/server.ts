@@ -1,5 +1,5 @@
 import express, {Request, Response} from 'express';
-import handleabars from 'express-handlebars';
+import handleabars, { engine } from 'express-handlebars';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import flash from 'connect-flash';
@@ -7,6 +7,7 @@ import connectRedis from 'connect-redis'
 import path from 'path';
 import { createClient } from 'redis';
 import { databaseConfig } from './src/database/config';
+import usuario from './src/routes/usuario';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -34,41 +35,45 @@ app.use((req: Request, res: Response, next) => {
     next();
 });
 
+const __filename = path.join(process.cwd(), 'src', 'routes.ts');
+const __dirname = path.dirname(__filename);
+const viewsPath = path.join(__dirname, '../frontend/views');
+
+app.set('view engine', 'handlebars');
+app.set('views', viewsPath);
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.engine('handlebars', handleabars.engine({
     defaultLayout: 'main',
+    layoutsDir: path.join(__dirname, '../frontend/views/layouts'),
     runtimeOptions: {
         allowProtoPropertiesByDefault: true,
         allowProtoMethodsByDefault: true
     }
 }));
 
-app.set('view engine', 'handlebars');
-
-const __filename = path.join(process.cwd(), 'src', 'routes.ts');
-const __dirname = path.dirname(__filename);
-
-app.use(express.static(path.join(__dirname, '/public')));
+app.use('/static', express.static(path.join(__dirname, '../frontend/static')));
 app.use((req: Request, res: Response, next) => {
     next();
 });
 
-// app.use('/', index);
+app.use('/', usuario);
 // app.use('/', funcionario);
 
 app.get('/', (req, res) => {
-    res.send('Hello, world!');
+    res.render('public/index');
 });
 
 const PORT = process.env.PORT || 3333;
 
 databaseConfig.authenticate()
-    .then(() => {
-        console.log("Banco de dados conectado com suecesso!✅")
+    .then(async () => {
+        // await databaseConfig.sync( {force: true });
+        console.log("Banco de dados conectado com suecesso!✅");
 }).catch(e => {
-    console.error("Erro ao se conectar com o banco de dados!❌", e)
+    console.error("Erro ao se conectar com o banco de dados!❌", e);
 });
 
 app.listen(PORT, () => {

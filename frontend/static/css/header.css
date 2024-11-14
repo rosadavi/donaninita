@@ -1,0 +1,113 @@
+@media screen and (min-width: 690px) {
+    header {
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1%;
+        color: var(--corMarrom);
+    }
+
+    .logo, .funcoesHeader {
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        font-size: max(30px, 2vw);
+    }
+
+    .logo img {
+        width: 60%;
+    }
+
+    .nomeEmpresa {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nomeEmpresa h3 {
+        margin: auto;
+        font-family: var(--fontTitulo);
+        font-size: max(40px, 3vw);
+        font-weight: bolder;
+    }
+
+    .funcoesHeader a {
+        color: var(--corMarrom);
+    }
+
+    .funcoesHeader div {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .funcoesHeader .qtd {
+        position: relative;
+        right: 50%;
+        padding-bottom: 70%;
+        font-size: max(15px, 1.3vw);
+    }
+
+    .burger {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 690px) {
+    header {
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--corMarrom);
+        position: fixed;
+        background-color: var(--corRosa);
+        border-bottom: 4px solid rgba(0, 0, 0, 0.274);
+        z-index: 5;
+        top: 0;
+    }
+
+    .logo {
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        font-size: max(20px, 2vw);
+    }
+
+    .logo img {
+        max-width: 85%;
+    }
+
+    .nomeEmpresa {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nomeEmpresa h3 {
+        margin: auto;
+        font-family: var(--fontTitulo);
+        font-size: max(40px, 3vw);
+        font-weight: bolder;
+    }
+
+    .funcoesHeader {
+        display: none;
+    }
+
+    .burger {
+        padding-top: 3%;
+        font-size: 7vw;
+    }
+}
+

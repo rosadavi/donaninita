@@ -1,0 +1,166 @@
+<div class="headerF">
+    <h3>Pagina de funcionario</h3>
+    <div class="links">
+        <a href="/logout"><i class="bi bi-box-arrow-right"></i></a>
+        <a href="/vendas">Vendas</a>
+        <a href="/cadastrados">Cadastrados</a>
+        <a href="#" class="statusVer">Status</a>
+        <a href="#" class="verF">Vizualizar</a>
+    </div>
+</div>
+
+<div id="fadeHidePedido" class="hide"></div>
+<div id="alterarPedido" class="hide">
+    <i class="bi bi-x-lg sairP"></i>
+    <h3>Alterar Status do Pedido</h3>
+    <form action="/alterarStatus" method="POST" id="alterarStatusForm">
+        <label for="idPedido">Digite o ID do pedido</label>
+        <input type="number" name="idPedido" required>
+        <div class="inputs">
+            <label for="status">Selecione novo status:</label>
+            <div>
+                <strong class="sInput"><strong class="freteS">Confirmado</strong><input type="radio" name="status" value="Confirmado" required></strong>
+                <strong class="sInput"><strong class="freteS">Em Preparo</strong><input type="radio" name="status" value="Em Preparo"></strong>
+                <strong class="sInput"><strong class="freteS">Saiu para entrega</strong><input type="radio" name="status" value="Saiu para entrega"></strong>
+                <strong class="sInput"><strong class="freteS">Entregue</strong><input type="radio" name="status" value="Entregue"></strong>
+            </div>
+        </div>
+        <button type="submit">Salvar</button>
+    </form>
+</div>
+
+<div id="fadeHideF" class="hide"></div>
+<div id="ver" class="hide">
+    <i class="bi bi-x-lg sairDesc"></i>
+    <h3>Vizualizar Pedido</h3>
+    <form action="/descpedido" method="POST" class="descpedido" onsubmit="ver(event)">
+        <label for="idPedido">Digite o ID do pedido:</label>
+        <input type="number" name="idPedido" placeholder="ID Pedido" required>
+        <button type="submit">Pesquisar</button>
+    </form>
+</div>
+
+<div class="pedidos">
+    <h3>Pedidos</h3>
+
+    <table border="1">
+        <tr>
+            <th>ID Pedido</th>
+            <th>Data Hora Cadastrado</th>
+            <th>Valor Frete</th>
+            <th>Tipo de Pagamento</th>
+            <th>Valor Pago</th>
+            <th>Status Pedido</th>
+        </tr>
+        {{#each pedidos}}
+        <tr>
+            <td>{{idPedido}}</td>
+            <td>{{dataHoraCadastro}}</td>
+            <td>{{valorFrete}}</td>
+            {{#ifTipoPagamento tipoPagamento}}{{/ifTipoPagamento}}
+            <td>{{valorPago}}</td>
+            <td>{{statusPedido}}</td>
+        </tr>
+        {{else}}
+        <p>Sem Pedidos</p>
+        {{/each}}
+    </table>
+</div>
+
+<script>
+    async function ver(e) {
+        e.preventDefault();
+    const descPedido = document.querySelector('.descpedido');
+        const formData = new FormData(descPedido);
+        const data = {
+            idPedido: formData.get('idPedido')
+        };
+        try {
+            const response = await fetch('/descpedido', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            if(response.ok) {
+                const result = await response.json();
+                const verDiv = document.querySelector('#ver');
+                verDiv.innerHTML = `
+                    <h3>Vizualizar Pedido</h3>
+                    <i class="bi bi-x-lg sairDesc"></i>
+                    <form action="/descpedido" method="POST" class="descpedido" onsubmit="ver(event)">
+                        <label for="idPedido">Digite o ID do pedido:</label>
+                        <input type="number" name="idPedido" required placeholder="ID Pedido">
+                        <button type="submit">Pesquisar</button>
+                    </form>
+                    <table border="1">
+                        <tr>
+                            <th>Pedido</th>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        <tbody class="td">
+                        </tbody>
+                    </table>
+                `;
+
+                const td = document.querySelector('.td');
+                result.itens.forEach(pedido => {
+                    td.innerHTML += `
+                        <tr>
+                            <td>${pedido.idPedido}</td>
+                            ${produto(pedido.idProduto)}
+                            <td>${pedido.qtdItem}</td>
+                        </tr>
+                    `;
+                });
+                function produto(valor) {
+                    if(valor == 1) {
+                        return `<td>Bisoito de Polvilho 500G</td>`;
+                    } else if (valor == 2) {
+                        return `<td>Bolo de Chocolate com Ninho</td>`;
+                    } else if (valor == 3) {
+                        return `<td>Bolo de Banana</td>`;
+                    } else if (valor == 4) {
+                        return `<td>Rabanada de Nutella Unidade</td>`;
+                    } else if (valor == 5) {
+                        return `<td>Bolo de Cenoura</td>`;
+                    } else if (valor == 6) {
+                        return `<td>Bolo de Cenoura com Chocolate</td>`;
+                    } else if (valor == 7) {
+                        return `<td>Bolo de Chocolate</td>`;
+                    } else if (valor == 8) {
+                        return `<td>Bolo de Chocolate com Ninho</td>`;
+                    } else if (valor == 9) {
+                        return `<td>Bolo de Coco Gelado</td>`;
+                    } else if (valor == 10) {
+                        return `<td>Bolo de Laranja</td>`;
+                    } else if (valor == 11) {
+                        return `<td>Bolo de Limao com Cobertura</td>`;
+                    } else if (valor == 12) {
+                        return `<td>Bolo Napolitano</td>`;
+                    } else if (valor == 13) {
+                        return `<td>Biscoito de Polvilho 500G</td>`;
+                    } else if (valor == 14) {
+                        return `<td>Biscoito de Polvilho 1K</td>`;
+                    } else if (valor == 15) {
+                        return `<td>Rabanada Tradicional</td>`;
+                    } else if (valor == 16) {
+                        return `<td>Rabanada de Doce de Leite Unidade</td>`;
+                    } else if (valor == 17) {
+                        return `<td>Rabanada de Nutella Unidade</td>`;
+                    } else if (valor == 18) {
+                        return `<td>Rabanada de Leite Ninho</td>`;
+                    }
+                }
+            } else {
+                alert('Pedido invalido');
+                console.log('Erro', response.statusText);
+            }
+        } catch(err) {
+            alert('Erro ao rastrear pedido');
+            console.log('Erro', err);
+        }
+    }
+</script>

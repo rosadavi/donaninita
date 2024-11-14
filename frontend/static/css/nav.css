@@ -1,0 +1,125 @@
+@media screen and (min-width: 690px) {
+
+    .circle-nav, .close {
+        display: none;
+    }
+
+    nav.posicao {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+        box-shadow: 1px 10px 10px rgba(0, 0, 0, 0.315);
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 10px 1px;
+        background-color: var(--corAzul);
+    }
+
+    nav > * {
+        margin: auto;
+    }
+
+    nav img {
+        width: 5%;
+        max-width: 60px;
+    }
+
+    nav a {
+        font-size: max(15px, 1.1vw);
+        font-family: var(--fontTexto);
+        color: var(--corMarrom);
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        text-wrap: nowrap;
+        width: 10vw;
+        min-width: 125px;
+        border-radius: 10px;
+        background: linear-gradient(to bottom, var(--corBranco), var(--corBranco));
+        transition: background-color 0.5s ease;
+    }
+
+    nav a:hover {
+        text-decoration: none;
+        color: var(--corMarrom);
+        background: linear-gradient(to right bottom, var(--corCinza), var(--corBranco), var(--corBranco));
+    }
+
+    .navHide {
+        display: none;
+    }
+
+    .carrinhoNav {
+        width: 40px;
+    }
+
+    nav .divCarrinho {
+        font-size: max(30px, 2.2vw);
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    nav .qtd {
+        font-size: max(15px, 1.2vw);
+        position: relative;
+        right: 50%;
+    }
+}
+
+@media screen and (max-width: 690px) {
+    header {
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--corMarrom);
+    }
+
+    .logo {
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        font-size: max(20px, 2vw);
+    }
+
+    .logo img {
+        max-width: 85%;
+    }
+
+    .nomeEmpresa {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nomeEmpresa h3 {
+        margin: auto;
+        font-family: var(--fontTitulo);
+        font-size: max(40px, 3vw);
+        font-weight: bolder;
+    }
+
+    .funcoesHeader {
+        display: none;
+    }
+
+    .burger {
+        padding-top: 3%;
+        font-size: 7vw;
+    }
+}
+
+nav .hide {
+    display: none;
+}

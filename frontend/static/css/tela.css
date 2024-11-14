@@ -1,0 +1,214 @@
+
+    .bemVindo {
+        color: var(--corMarrom);
+        margin-top: 100px;
+        width: 100%;
+        font-size: max(18px, 1.3vw);
+        text-align: center;
+        padding: 0px 50px;
+    }
+
+    .bemVindo strong {
+        padding: 5px;
+        background-color: var(--corAzul);
+        color: var(--corBranco);
+        border-radius: 10px;
+    }
+
+    .espaco1 {
+        margin-bottom: 117px;
+    }
+
+    .espaco {
+        margin-bottom: 100px;
+    }
+
+    .categoria {
+        margin-bottom: 50px;
+        width: 100%;
+        text-align: center;
+        font-size: max(3vw, 30px);
+        color: var(--corMarrom);
+        font-weight: bold;
+    }
+
+    .cards {
+        padding: 0px 50px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 50px;
+        border-radius: 10px;
+    }
+
+    .card {
+        max-width: 20%;
+        min-width: 300px;
+        border-radius: 10px;
+    }
+
+    .descricaoProdutos {
+        height: 150px;
+    }
+
+    .imgProduto {
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .nomeProduto, .valorProduto {
+        font-size: max(20px, 1.2vw);
+        font-family: var(--fontTexto);
+        font-weight: bold;
+    }
+
+    .nomeProduto {
+        padding: 20px 10px 0px 10px;
+    }
+
+    .valorProduto {
+        padding-left: 10px;
+        color: var(--corMarrom);
+    }
+
+    .valorProduto::before {
+        content: 'R$';
+        margin-right: 5px;
+    }
+
+    .textQtd {
+        padding-left: 10px;
+        font-size: max(20px, 1vw);
+    }
+
+    .qtdCard {
+        width: 45px;
+        text-align: center;
+        border: none;
+        border-radius: 10px;
+        background-color: var(--corAzul);
+        font-size: max(20px, 1vw);
+        cursor: pointer;
+    }
+
+    .adicionarProduto {
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px auto;
+        border: none;
+        background-color: var(--corVerde);
+        padding: 5px;
+        font-size: max(20px, 1vw);
+        color: var(--corBranco);
+        font-family: var(--fontTexto);
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: all .4s;
+    }
+
+    .adicionarProduto:hover {
+        background-color: var(--corVerde2);
+    }
+
+    .adicionarProduto.adicionadoCor {
+        background-color: var(--corVerde2);
+    }
+
+@media screen and (max-width: 690px) {
+
+    nav img {
+        display: none;
+    }
+
+    #fadeHide {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.226);
+    }
+
+    .burger {
+        cursor: pointer;
+    }
+
+    nav {
+        position: fixed;
+        top: 13%;
+        z-index: 7;
+        background-color: var(--corAzul);
+        width: 100%;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    nav > * {
+        padding: 10px 20px;
+        color: var(--corBranco);
+        font-weight: bolder;
+        text-decoration: none;
+        transition: all .5s;
+        cursor: pointer;
+    }
+
+    .bi-person-circle {
+        transition: all .5s;
+    }
+
+    nav > *:hover, nav > *:hover .circle-nav {
+        background-color: var(--corBranco);
+        color: var(--corAzul);
+    }
+
+    .carrinhoNav {
+        text-align: center;
+    }
+
+    .carrinhoNav i {
+        font-size: 35px;
+    }
+
+    .divCarrinho {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .qtd {
+        position: relative;
+        right: 21px;
+        bottom: 2px;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    background-color: var(--corRosa);
+}
+
+.zapFloat {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    font-size: max(20px, 2.4vw);
+    color: var(--corVerde2);
+    transition: all .3s;
+    border-radius: 50%;
+}
+
+.zapFloat:hover {
+    color: var(--corVerde);
+}

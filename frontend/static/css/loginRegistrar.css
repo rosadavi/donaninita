@@ -1,0 +1,291 @@
+@media screen and (min-width: 690px) {
+    .main {
+        display: flex;
+        height: 100vh;
+    }
+
+    .sectionForm {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .titleLogin, .titleInfos {
+        text-align: center;
+        color: var(--corMarrom);
+        font-family: var(--fontTitulo);
+        font-weight: bold;
+    }
+
+    h1, h2 {
+        margin-top: 80px;
+        font-size: max(20px, 3vw);
+        font-weight: bolder;
+    }
+    
+    .sectionForm > form {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin: 20px auto;
+        gap: 10px;
+    }
+    
+    form > span, .span0 {
+        position: relative;
+        width: 100%;
+        font-size: max(1vw, 17px);
+        font-weight: bold;
+    }
+    
+    #cadastrarForm input, #formLogin input {
+        border: none;
+        border-radius: 2px;
+        outline: none;
+        padding: 7px 10px;
+        font-size: max(1.3vw, 15px);
+        font-weight: bold;
+        transition: all .3s ease-in-out;
+        width: 100%;
+    }
+    
+    #nome:focus, #sobrenome:focus, #email:focus, #senha:focus, #confirmeSenha:focus, #endereco:focus, #telefone:focus, #cpf:focus, #cep:focus, #cidade:focus, #rua:focus {
+        border-radius: 15px;
+    }
+    
+    .semConta {
+        text-align: center;
+        padding-bottom: 5px;
+        font-size: max(1.3vw, 17px);
+        font-weight: bold;
+    }
+    
+    .semConta > a {
+        color: var(--corPreto);
+        text-decoration: underline;
+    }
+    
+    #entrar {
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        border: 2px solid var(--corAzul);
+        color: var(--corBranco);
+        background-color: var(--corAzul);
+        text-decoration: none;
+        font-size: max(1.3vw, 17px);
+        padding: 5px 15px;
+        border-radius: 25px;
+        transition: all .3s ease-in-out;
+        font-weight: bold;
+        width: 30%;
+        cursor: pointer;
+    }
+    
+    #entrar:hover {
+        background-color: var(--corBranco);
+        color: var(--color2);
+        border: 2px solid var(--corRosa);
+    }
+    
+    .sectionInfos {
+        width: 40%;
+        background-color: var(--corAzul);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .sectionInfos > p {
+        color: var(--colorMarrom);
+        text-align: center;
+        padding: 10px 5px;
+        font-size: max(1.4vw, 17px);
+        font-weight: bold;
+    }
+    
+    #cadastrar {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        border: 2px solid var(--corMarrom);
+        background-color: var(--corMarrom);
+        color: var(--corBranco);
+        text-decoration: none;
+        font-size: max(1.3vw, 16px);
+        padding: 5px 15px;
+        border-radius: 25px;
+        transition: all .3s ease-in-out;
+    }
+    
+    #cadastrar:hover {
+        background-color: var(--corBranco);
+        color: var(--corMarrom);
+        border: 2px solid var(--corAzul);
+    }
+}
+
+@media screen and (max-width: 690px) {
+    .main {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sectionForm {
+        width: 80%;
+    }
+
+    .titleLogin {
+        margin: 30px 0px;
+    }
+
+    .titleInfos {
+        margin-top: 20px;
+    }
+
+    .titleLogin, .titleInfos {
+        text-align: center;
+        color: var(--corMarrom);
+        font-family: var(--fontTitulo);
+        font-weight: bold;
+    }
+
+    h1, h2 {
+        font-size: max(30px, 3vw);
+        font-weight: bolder;
+    }
+
+    #nome, #sobrenome, #email, #senha, #confirmeSenha, #endereco, #telefone, #bairro, #cpf, #cep, #cidade, #rua, #dataNasc {
+        border: none;
+        border-radius: 2px;
+        outline: none;
+        padding: 7px 10px;
+        font-size: max(1.3vw, 15px);
+        font-weight: bold;
+        transition: all .3s ease-in-out;
+        width: 100%;
+    }
+    
+    #nome:focus, #sobrenome:focus, #email:focus, #senha:focus, #confirmeSenha:focus, #endereco:focus, #telefone:focus, #bairro:focus, #cpf:focus, #cep:focus, #cidade:focus, #rua:focus, #dataNasc:focus {
+        border-radius: 15px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .semConta {
+        text-align: center;
+        padding-bottom: 5px;
+        font-size: max(1.3vw, 17px);
+        font-weight: bold;
+    }
+    
+    .semConta > a {
+        color: var(--corPreto);
+        text-decoration: underline;
+    }
+    
+    #entrar {
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        border: 2px solid var(--corAzul);
+        color: var(--corBranco);
+        background-color: var(--corAzul);
+        text-decoration: none;
+        font-size: max(1.3vw, 17px);
+        padding: 5px 15px;
+        border-radius: 25px;
+        transition: all .3s ease-in-out;
+        font-weight: bold;
+        width: 30%;
+        cursor: pointer;
+    }
+    
+    #entrar:hover {
+        background-color: var(--corBranco);
+        color: var(--color2);
+        border: 2px solid var(--corRosa);
+    }
+
+    .sectionInfos {
+        background-color: var(--corAzul);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 20px 0px -50px 0px;
+        margin-bottom: 50px;
+        padding-bottom: 20px;
+        width: 100%;
+    }
+    
+    .sectionInfos > p {
+        color: var(--colorMarrom);
+        text-align: center;
+        padding: 10px 5px;
+        font-size: max(1.4vw, 17px);
+        font-weight: bold;
+    }
+    
+    #cadastrar {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        border: 2px solid var(--corMarrom);
+        background-color: var(--corMarrom);
+        color: var(--corBranco);
+        text-decoration: none;
+        font-size: max(1.3vw, 16px);
+        padding: 5px 15px;
+        border-radius: 25px;
+        transition: all .3s ease-in-out;
+    }
+    
+    #cadastrar:hover {
+        background-color: var(--corBranco);
+        color: var(--corMarrom);
+        border: 2px solid var(--corAzul);
+    }
+}
+
+.input > div {
+    color: red;
+    font-weight: bolder;
+}
+
+@media screen and (max-width: 1100px) {
+    .rastrearForm input {
+        width: 50%;
+    }
+
+    .rastrearForm button {
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 710px) {
+    .rastrearForm  input {
+        width: 100%;
+    }
+
+    .rastrearForm button {
+        width: 30%;
+        margin-top: -5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .rastrearForm button {
+        width: 70%;
+    }
+}
