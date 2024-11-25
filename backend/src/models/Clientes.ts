@@ -2,16 +2,16 @@ import { databaseConfig } from "../database/config";
 import { DataTypes } from "sequelize";
 
 export const Clientes = databaseConfig.define('Clientes', {
-    idCliente: {
+    id_cliente: {
         type: DataTypes.INTEGER, 
         allowNull: false,
         primaryKey: true, 
         autoIncrement: true
     },
-    nomeCliente: {
+    nome_cliente: {
         type: DataTypes.STRING(100)
     },
-    telefoneCliente: {
+    telefone_cliente: {
         type: DataTypes.STRING(55)
     },
     endereco: {
@@ -26,10 +26,10 @@ export const Clientes = databaseConfig.define('Clientes', {
     senha: {
         type: DataTypes.STRING(100)
     },
-    bolAtivo: {
+    bol_ativo: {
         type: DataTypes.TINYINT
     },
-    pontosFidelidade: {
+    pontos_fidelidade: {
         type: DataTypes.INTEGER
     }
 }, {

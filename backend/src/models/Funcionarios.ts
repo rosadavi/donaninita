@@ -2,22 +2,22 @@ import { databaseConfig } from "../database/config";
 import { DataTypes } from "sequelize";
 
 export const Funcionarios = databaseConfig.define('Funcionarios', {
-    idFuncionario: {
+    id_funcionario: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
-    nomeFuncionario: {
+    nome_funcionario: {
         type: DataTypes.STRING(100)
     },
     cpf: {
         type: DataTypes.STRING(11)
     },
-    dataNasc: {
+    data_nasc: {
         type: DataTypes.STRING(13)
     },
-    telefoneFuncionario: {
+    telefone_funcionario: {
         type: DataTypes.STRING(20)
     },
     email: {
@@ -26,7 +26,7 @@ export const Funcionarios = databaseConfig.define('Funcionarios', {
     senha: {
         type: DataTypes.STRING
     },
-    bolAtivo: {
+    bol_ativo: {
         type: DataTypes.TINYINT
     }
 }, {

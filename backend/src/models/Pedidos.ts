@@ -2,48 +2,48 @@ import { databaseConfig } from "../database/config";
 import { DataTypes } from "sequelize";
 
 export const Pedidos = databaseConfig.define('Pedidos', {
-    idPedido: {
+    id_pedido: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
-    idPedidoStatus: {
+    id_pedidoStatus: {
         type: DataTypes.INTEGER,
         references: {
             model: 'PedidoStatus',
-            key: 'id'
+            key: 'id_pedido_status'
         }
     },
-    dataHoraCadastro: {
+    data_hora_cadastro: {
         type: DataTypes.STRING(20)
     },
-    dataHoraEntrega: {
+    data_hora_entrega: {
         type: DataTypes.STRING(20)
     },
-    valorFrete: {
+    valor_frete: {
         type: DataTypes.DECIMAL(10,2)
     },
-    valorDesconto: {
+    valor_desconto: {
         type: DataTypes.DECIMAL(10,2)
     },
-    valorAcrescimo: {
+    valor_acrescimo: {
         type: DataTypes.DECIMAL(10,2)
     },
-    valorPago: {
+    valor_pago: {
         type: DataTypes.DECIMAL(10,2)
     },
-    tipoPagamento: {
+    tipo_pagamento: {
         type: DataTypes.STRING(40)
     },
-    statusPedido: {
+    status_pedido: {
         type: DataTypes.STRING(40)
     },
-    idCliente: {
+    id_cliente: {
         type: DataTypes.INTEGER,
         references: {
             model: 'Clientes',
-            key: 'idCliente'
+            key: 'id_cliente'
         }
     }
 }, {

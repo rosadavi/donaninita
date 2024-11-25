@@ -2,17 +2,23 @@ import { databaseConfig } from "../database/config";
 import { DataTypes } from "sequelize";
 
 export const Contem = databaseConfig.define('Contem', {
-    idProduto: {
+    id_produto: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true
+        references: {
+            model: 'Produtos',
+            key: 'id_produto'
+        }
     },
-    idIgrediente: {
+    id_igrediente: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true
+        references: {
+            model: 'Igredientes',
+            key: 'id_igrediente'
+        }
     }
 }, {
     timestamps: false,

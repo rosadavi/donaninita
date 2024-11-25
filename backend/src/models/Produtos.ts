@@ -20,7 +20,7 @@ export const Produtos = databaseConfig.define('Produtos', {
         type: DataTypes.INTEGER,
         references: {
             model: 'Categorias',
-            key: 'idCategoria'
+            key: 'id_categoria'
         }
     },
     imagem_produto: {

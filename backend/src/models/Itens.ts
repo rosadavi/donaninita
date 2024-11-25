@@ -2,20 +2,24 @@ import { databaseConfig } from "../database/config";
 import { DataTypes } from "sequelize";
 
 export const Itens = databaseConfig.define('Itens', {
-    idProduto: {
+    id_produto: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+            model: 'Produtos',
+            key: 'id_produto'
+        }
+    },
+    id_pedido: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true
     },
-    idPedido: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true
-    },
-    qtdItem: {
+    qtd_item: {
         type: DataTypes.INTEGER
     },
-    valorItem: {
+    valor_item: {
         type: DataTypes.DECIMAL(10, 2)
     }
 },  {

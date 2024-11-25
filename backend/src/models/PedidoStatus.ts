@@ -2,22 +2,22 @@ import { databaseConfig } from "../database/config";
 import { DataTypes } from "sequelize";
 
 export const PedidoStatus = databaseConfig.define('PedidoStatus', {
-    idPedidoStatus: {
+    id_pedido_status: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
-    nomeStatus: {
+    nome_status: {
         type: DataTypes.STRING(20),
     },
-    descStatus: {
+    desc_status: {
         type: DataTypes.STRING
     },
-    bolAtivo: {
+    bol_ativo: {
         type: DataTypes.TINYINT
     },
-    idCliente: {
+    id_cliente: {
         type: DataTypes.INTEGER
     }
 }, {

@@ -116,7 +116,7 @@
 
 <header>
     <div class="logo">
-        <img src="/img/logos/logoHead.png" alt="Logo Dona Ninita">
+        <img src="/static/img/logos/logoHead.png" alt="Logo Dona Ninita">
     </div>
     <div class="nomeEmpresa">
         <h3>Dona Ninita</h3>
@@ -138,7 +138,7 @@
 
 <section id="fadeHide" class="hide"></section>
 <nav class="hide">
-    <img src="/img/logos/logoHead.png" alt="Logo Dona Ninita" class="navImg navHide">
+    <img src="/static/img/logos/logoHead.png" alt="Logo Dona Ninita" class="navImg navHide">
     <a href="#maisVendidos" class="categoriaBtn">MAIS VENDIDOS</a>
     <a href="#bolos" class="categoriaBtn">BOLOS</a>
     <a href="#biscoitos" class="categoriaBtn">BISCOITOS</a>
@@ -163,7 +163,7 @@
 <h3 class="categoria">Mais Vendidos</h3>
 <section class="cards">
   {{#each produtos}}
-    {{#ifCond idCategoriaFK 1 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+    {{#card id_categoria_fk 1 imagem_produto nome_produto id_produto valor_produto}}{{/card}}
   {{/each}}
 </section>
 
@@ -172,7 +172,7 @@
 <h3 class="categoria">Bolos</h3>
 <section class="cards">
   {{#each produtos}}
-    {{#ifCond idCategoriaFK 2 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+    {{#card id_categoria_fk 2 imagem_produto nome_produto id_produto valor_produto}}{{/card}}
   {{/each}}
 </section>
 
@@ -181,7 +181,7 @@
 <h3 class="categoria">Biscoitos</h3>
 <section class="cards">
   {{#each produtos}}
-    {{#ifCond idCategoriaFK 3 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+    {{#card id_categoria_fk 3 imagem_produto nome_produto id_produto valor_produto}}{{/card}}
   {{/each}}
 </section>
 
@@ -190,7 +190,7 @@
 <h3 class="categoria">Rabanadas</h3>
 <section class="cards">
   {{#each produtos}}
-    {{#ifCond idCategoriaFK 4 imagemProduto nomeProduto idProduto valorProduto}}{{/ifCond}}
+    {{#card id_categoria_fk 4 imagem_produto nome_produto id_produto valor_produto}}{{/card}}
   {{/each}}
 </section>
 

@@ -1,5 +1,6 @@
 import express, {Request, Response} from 'express';
-import handleabars, { engine } from 'express-handlebars';
+import handleabars from 'express-handlebars';
+import Handlebars, { HelperOptions} from 'handlebars';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import flash from 'connect-flash';
@@ -9,6 +10,7 @@ import { createClient } from 'redis';
 import { databaseConfig } from './src/database/config';
 import usuario from './src/routes/usuario';
 import dotenv from 'dotenv';
+import { card } from './src/helpers/card';
 
 dotenv.config();
 
@@ -51,6 +53,9 @@ app.engine('handlebars', handleabars.engine({
     runtimeOptions: {
         allowProtoPropertiesByDefault: true,
         allowProtoMethodsByDefault: true
+    },
+    helpers: {
+        card: card
     }
 }));
 
@@ -62,15 +67,10 @@ app.use((req: Request, res: Response, next) => {
 app.use('/', usuario);
 // app.use('/', funcionario);
 
-app.get('/', (req, res) => {
-    res.render('public/index');
-});
-
 const PORT = process.env.PORT || 3333;
 
 databaseConfig.authenticate()
     .then(async () => {
-        // await databaseConfig.sync( {force: true });
         console.log("Banco de dados conectado com suecesso!✅");
 }).catch(e => {
     console.error("Erro ao se conectar com o banco de dados!❌", e);

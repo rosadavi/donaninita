@@ -4,7 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch backend/server.ts"
+    "dev": "tsx watch backend/server.ts",
+    "db-create": "tsx backend/src/database/create-tables.ts",
+    "db-insert": "tsx backend/src/database/insert-values.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +18,7 @@
     "@types/express": "^5.0.0",
     "@types/express-handlebars": "^5.3.1",
     "@types/express-session": "^1.18.0",
+    "@types/handlebars": "^4.0.40",
     "@types/sequelize": "^4.28.20",
     "body-parser": "^1.20.3",
     "connect-flash": "^0.1.1",
@@ -24,6 +27,7 @@
     "express": "^4.21.1",
     "express-handlebars": "^8.0.1",
     "express-session": "^1.18.1",
+    "handlebars": "^4.7.8",
     "mysql2": "^3.11.4",
     "redis": "^4.7.0",
     "sequelize": "^6.37.5",

@@ -2,16 +2,16 @@ import { databaseConfig } from "../database/config";
 import { DataTypes } from "sequelize";
 
 export const Igredientes = databaseConfig.define('Igredientes', {
-    idIgrediente: {
+    id_igrediente: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true, 
         autoIncrement: true
     },
-    nomeIgrediente: {
+    nome_igrediente: {
         type: DataTypes.STRING(50)
     },
-    descIgrediente: {
+    desc_igrediente: {
         type: DataTypes.STRING(100)
     }
 }, {

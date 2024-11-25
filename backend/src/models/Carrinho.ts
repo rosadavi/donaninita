@@ -2,34 +2,34 @@ import { databaseConfig } from "../database/config";
 import { DataTypes } from "sequelize";
 
 export const Carrinhos = databaseConfig.define('Carrinho', {
-    idProduto: {
+    id_produto: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         references: {
             model: 'Produtos',
-            key: 'idProduto'
+            key: 'id_produto'
         }
     },
-    idCliente: {
+    id_cliente: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         references: {
             model: 'Clientes',
-            key: 'idCliente'
+            key: 'id_cliente'
         }
     },
-    imgProduto: {
+    img_produto: {
         type: DataTypes.STRING
     },
-    nomeProduto: {
+    nome_produto: {
         type: DataTypes.STRING
     },
-    valorProduto: {
+    valor_produto: {
         type: DataTypes.DECIMAL(10, 2)
     },
-    qtdProduto: {
+    qtd_produto: {
         type: DataTypes.INTEGER
     }
 }, {
