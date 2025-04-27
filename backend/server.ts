@@ -37,10 +37,13 @@ app.set('views', viewsPath);
 app.engine('handlebars', handlebars.engine({
     defaultLayout: 'main',
     layoutsDir: path.join(__dirname, '../frontend/views/layouts'),
-    runtimeOptions: {},
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true
+    },
     helpers: {
         card: card
-    }
+    },
 }));
 
 app.use(bodyParser.urlencoded({ extended: true }));

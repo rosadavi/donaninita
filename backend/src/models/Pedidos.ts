@@ -22,7 +22,7 @@ export const Pedidos = databaseConfig.define('Pedidos', {
         type: DataTypes.STRING(20)
     },
     valor_frete: {
-        type: DataTypes.DECIMAL(10,2)
+        type: DataTypes.STRING(100)
     },
     valor_desconto: {
         type: DataTypes.DECIMAL(10,2)

@@ -7,7 +7,7 @@ rastrearForm.addEventListener('submit', async(e)=>{
         cod: formData.get('cod')
     };
     try {
-        const response = await fetch('/query', {
+        const response = await fetch('/rastrear', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

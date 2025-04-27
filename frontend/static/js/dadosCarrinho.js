@@ -30,19 +30,20 @@ cardsCliente.forEach(form => {
 
 async function enviarDados(url, data) {
   try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
+    // const response = await fetch(url, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(data)
+    // });
 
-    if (response.ok) {
-      adicionarCarrinho(data);
-    } else {
-      throw new Error('Erro ao adicionar o produto ao carrinho.');
-    }
+    // if (response.ok) {
+    //   adicionarCarrinho(data);
+    // } else {
+    //   throw new Error('Erro ao adicionar o produto ao carrinho.');
+    // }
+    adicionarCarrinho(data);
   } catch (error) {
     console.error('Erro:', error.message);
   }
